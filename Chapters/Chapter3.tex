@@ -2,58 +2,642 @@
 
 \label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% parámetros para configurar el formato del código en los entornos lstlisting
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{ %
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
-  %escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-  %extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-  %frame=single,	                % adds a frame around the code
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{blue},       % keyword style
-  language=[ANSI]C,                % the language of the code
-  %otherkeywords={*,...},           % if you want to add more keywords to the set
-  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-  numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{mymauve},     % string literal style
-  tabsize=2,	                   % sets default tabsize to 2 spaces
-  title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
-  morecomment=[s]{/*}{*/}
-}
+
 
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{Análisis del software}
- 
+
+\section{Propuesta de solución}
+
+Este trabajo presenta una propuesta de solución con el desarrollo de un prototipo mínimo viable de un sistema IoT para integrar, centralizar y unificar resultados de una red de sensores y actuadores mediante un sistema web de monitoreo y control así como la construcción de módulos propios para dicha tarea, pero sin depender de la conexión a Internet para su funcionamiento. 
+
+Todos estos componentes trabajan en conjunto para brindar al público/cliente una solución tecnológica que sirva como herramienta visual amigable y pueda ser el soporte en las tareas de gestión de consumo eléctrico. Para lograrlo, se desarrolló módulos que integran software y hardware y que permiten la recolección de datos de sensores y actuadores ubicados en distintos puntos de una vivienda, conectados a una red local vía Wi-Fi. Cada lectura de los sensores son datos que se envían a un servidor central local mediante el protocolo MQTT por vía inalámbrica, siendo el modulo principal local (servidor local) el responsable de registrar los valores de los sensores ante cualquier corte de acceso a Internet. La figura \ref{fig:diagrama1} ilustra el diagrama de componentes y la forma lógica de conexión del sistema.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./Figures/diagrama1.png}
+	\caption{Diagrama de componentes.}
+
+	\label{fig:diagrama1}
+\end{figure}
+
+El sistema tiene la capacidad de permitir el acceso a usuarios dentro de la red local como a usuarios externo por medio de dispositivos con acceso a Internet. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo software que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. La figura \ref{fig:diagrama2}  Muestra la lógica de funcionamiento del módulo de replicación.
 
 
-\begin{lstlisting}[label=cod:vControl,caption=Pseudocódigo del lazo principal de control.]  % Start your code-block
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./Figures/diagrama2.png}
+	\caption{Diagrama funcional del replicador. }
 
-#define MAX_SENSOR_NUMBER 3
-#define MAX_ALARM_NUMBER  6
-#define MAX_ACTUATOR_NUMBER 6
-
-...
-\end{lstlisting}
+	\label{fig:diagrama2}
+\end{figure}
 
 
+En la tabla \ref{tab:tablamodulos} se detalla el desarrollo que incluyó cada uno de los módulos del sistema y que se describe en las secciones siguientes.
+
+\begin{table}[h]
+	\centering
+	\caption[Desarrollo integrado por módulo]{Desarrollo integrado por módulo}
+	\begin{tabular}{l c c }    
+		\toprule
+		\textbf{Módulo} 	 & \textbf{Desarrollo}  & \textbf{Tipo dispositivo}\\
+		\midrule
+		Módulo Principal & Hardware + Software & Físico\\		
+		Módulo Réplica & Software & Lógico \\
+		Módulo de Temperatura & Hardware + Firmware + Software & Físico\\		
+		Módulo Actuador & Hardware + Firmware + Software & Físico\\		
+		Módulo de Consumo	 & Hardware + Firmware + Software & Físico\\
+		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tablamodulos}
+\end{table}
+
+
+\section{Arquitectura IOT de la solución}
+
+Existen tres componentes claves dentro de nuestra solución y se mencionan en la arquitectura IoT diseñada durante el proceso de desarrollo: 
+
+
+\begin{itemize}
+\item Dispositivos IoT: los dispositivos son los módulos creados integrando software, firmware y hardware y se pueden conectar de forma inalámbrica a una red más amplia.
+\item Redes: los routers domésticos, puntos de acceso y las configuraciones de las redes o las puertas de enlace son los responsables de conectan varios dispositivos IoT a la nube.
+\item Nube: servidores remotos en centros de datos que consolidan y almacenan los datos con seguridad. Son servicios que se usó en el desarrollo para garantizar el acceso remoto de usuarios al sistema.
+\end{itemize}
+\vspace{0.5cm}
+Cada uno de estos componentes es adecuado para usos diferentes y depende de varios factores como, por ejemplo:
+
+\begin{itemize}
+\item Velocidad de transferencia de datos: ¿Cuánta información se enviará?
+\item Consumo de energía: ¿tienen una batería con una vida útil pequeña?, ¿se puede usar con un trasformador conectado al servicio eléctrico?
+\item Rango: ¿Necesita transmitir a unos pocos metros o a unos pocos kilómetros?
+\item Frecuencia: ¿Cuáles son las frecuencias disponibles en la región?
+\end{itemize}
+
+\vspace{0.5cm}
+Cada factor fue analizado generando como resultado una arquitectura que permitió la integración funcional del sistema según los requerimientos planteados. La figura \ref{fig:arquitectura} Ilustra la arquitectura resultado de la solución.
+
+\section{Servicios en la nube}
+
+Para el trabajo se consideró el servicio de \emph{cloud computing} tipo PaaS, porque nos permitió tener la creación y configuración del broker remoto, el servidor Apache para la aplicación web y el gestor de base de datos MySQL.
+
+El plan usado se divide en dos categorías, la primera está definido por el servicio del servidor web para alojar la aplicación web de monitoreo y control (réplica) y el segundo por el servicio del broker remoto que permite la comunicación directa con el broker local. 
+
+La comunicación entre ambos servicios se hace mediante el protocolo MQTT usando la librería  \emph{Eclipse Paho JavaScript Client} y se puede encontrar mayor información en la página oficial: \url{https://www.eclipse.org/paho/index.php} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.65\textwidth]{./Figures/arquitectura-listo.png}
+\caption{Arquitectura diseñada para el sistema IoT.}
+\label{fig:arquitectura}
+\end{figure}
+\end{landscape} % esto es para rotar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Las principales características  del servicio contratado para la implementación del prototipo mínimo viable se muestran en la tabla \ref{tab:serverweb}.
+
+
+\begin{table}[h]
+	\centering
+	\caption[Características del servicio en la nube]{Características del servicio en la nube}
+	\begin{tabular}{p{7cm} p{5cm} }    
+		\toprule
+		\textbf{Característica} 	 & \textbf{Detalle}  \\
+		\midrule
+		Sistema operativo  & GNU/Linux Centos\\		
+		Espacio de almacenamiento & 1000 MB \\
+		Transferencia mensual  & 10 GB\\		
+		Multidominio & 2 dominios\\		
+		Cantidad base de datos 	  & Ilimitados\\
+		Subdominios 	  & Ilimitados\\
+		Acceso FTP 	  & Si\\
+		Backup diario y semanal 	  & Si\\
+		Panel de control en español (CPanel) 	  & Si\\
+		Soporte 24/7 	  & Si\\
+		Seguridad - Firewall	  & Si\\
+		Certificados SSL/TLS	  & Si\\
+		PHP	  & V7 y V8\\
+		MySQL	  & Si\\
+		phpMyAdmin	  & Si\\
+		PostgreSQL	  & Si\\
+		phpPgadmin	  & Si\\
+		Cron Jobs	  & Si\\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:serverweb}
+\end{table}
+
+\vspace{0.5cm}
+Las características del servicio para broker remoto se muestran en la tabla  \ref{tab:brokerremoto}
+
+\begin{table}[h]
+	\centering
+	\caption[Características del broker remoto]{Características del broker remoto}
+	\begin{tabular}{p{5cm} p{7cm} }    
+		\toprule
+		\textbf{Característica} 	 & \textbf{Detalle}  \\
+		\midrule
+		Conexiones activas  & 200\\		
+		mensajes por segundo & 10 K \\
+		Interface  & MQTT Interface, HTTP interface\\		
+		Compatibilidad & Arduino, JavaScript, Processing, Ruby \\		
+		Deployment 	  & Por instancias\\
+		Envíos y recepción de datos & objetos codificados JSON\\
+		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:brokerremoto}
+\end{table}
+
+
+\section{Medidas de ciberseguridad}
+
+Los requerimientos de ciberseguridad dentro del proceso de desarrollo ocupan un lugar muy importante en cada una de las etapas ejecutadas en el proceso de implementación de sistema IoT, porque nos permite garantizar un grado mínimo de seguridad y confiabilidad funcional del producto. 
+
+Los requerimientos considerados durante el proceso, son los siguientes:
+
+\subsection{Requerimientos para la aplicación de monitoreo y control}
+
+\begin{itemize}
+\item Encriptación de claves de acceso, la longitud de cadena de las claves  deben ser mayor a 8 dígitos, considerando números, letras mayúsculas, letras minúsculas, números y símbolos especiales.
+\item Medidas de protección contra \emph{Injeccion SQL} y usar sentencias preparadas u objetos PDO para las conexiones hacia la base de datos.
+\item Control de acceso por CORS para recursos de la API REST.
+\item Configuración del archivo .htaccess para evitar listado de directorios o accesos no permitidos.
+\item Minificar los archivos CSS y JS de la aplicación web.
+\item Control de acceso al sistema según validación de roles y permisos.
+\item Uso de la programación orientados a objetos.
+\item Uso de peticiones POST como prioridad, si fuera necesario el uso de las peticiones GET, usarlas con el paso de parámetros encriptados.
+\end{itemize}
+
+\subsection{Requerimientos para el broker local y remoto}
+
+\begin{itemize}
+\item Configuración de usuario y contraseña para controlar el acceso a los canales de comunicación del broker local y remoto.
+\item Uso de canales separados, para el envió, sincronización y respuesta entre elementos del sistema IoT.
+\item Cada mensaje debe ir con destino a un tópico en específico, evitar envió de datos a la instancia general \#.
+\item Configurar permisos para la edición o ejecución a los archivos de configuración del broker.
+\end{itemize}
+
+\subsection{Requerimientos para los módulos IoT}
+
+\begin{itemize}
+\item Uso de programación basada en código modular para el desarrollo del firmware.
+\item Uso de la librería en su versión más actual para la comunicación MQTT.
+\item Los objetos de datos a transmitir serán del formato JSON.
+\item La comunicación el protocolo MQTT debe contener TLS.
+\end{itemize}
+
+\subsection{Requerimientos para la red WLAN}
+
+\begin{itemize}
+\item Uso de un AP (\emph{Access Point}) como elemento central para el servicio Wi-Fi independiente (dedicado solo para el sistema IoT) para garantizar una subred paralela al usado para la red doméstica.
+\item Configuración ideal del canal de comunicación inalámbrica, para evitar el uso de un canal con alto grado de solapamiento.
+\item Uso de dispositivos AP con la función de seguridad de clave WPA2-PSK (AES).
+\item Configurar el nombre la señal por defecto, la clave de acceso al AP y a la señal Wi-Fi, Considerando letras minúsculas, mayúsculas, números y símbolos especiales.
+\item Monitoreo continuo de la red Wi-Fi del AP, para supervisar la presencia de solo dispositivos validos en la red dedicada.
+\end{itemize}
+
+
+\subsection{Requerimientos para el servidor local}
+
+\begin{itemize}
+\item Sistema operativo GNU/Linux oficial Raspberry Pi OS.
+\item Acceso al sistema operativo mediante usuario y contraseña.
+\item Accesos remotos por ssh y FTP desactivados.
+\item Cifrado de las unidades del sistema operativo.
+\end{itemize}
+
+\section{Diseño e implementación de módulos}
+
+En esta sección se describe el proceso y consideraciones técnicas para la construcción de cada uno de los módulos del sistema IoT propuesto.
+
+\subsection{Módulo principal (servidor local)}
+
+El modulo principal representa el elemento central dentro de la solución IoT planteada y para construcción e instalación se usaron recursos que permitieron presentarlo como una versión de fácil uso para el público o usuario que lo requiera.
+
+La placa madre del módulo es una placa Raspberry Pi 4 modelo B con 8 GB de memoria Ram y su fuente de alimentación oficial de 3 A como se aprecia en la figura \ref{fig:placarpi4}.
+
+La unidad de almacenamiento contiene una unidad de memoria extraíble microSD de 64 GB y de clase 10 para garantizar alta velocidad de lectura y escritura durante el procesamiento.
+% La figura \ref{fig:microsd} muestra la microSD del módulo.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/placa.png}
+\caption{Mainboard y fuente de alimentación del servidor local.}
+\label{fig:placarpi4}
+\end{figure}
+
+
+
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=0.7\textwidth]{./Figures/card.png}
+%\caption{Tarjeta de almacenamiento del servidor local.}
+%\label{fig:microsd}
+%\end{figure}
+
+Para el case o caja de integración se consideró una cubierta de aluminio con diseño elegante y moderno. La figura \ref{fig:argon} muestra la forma de ensamblado de la placa y el case Argon One Pi4 V2.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+%\includegraphics[width=1.7\textwidth]{./Figures/argon.png}
+\includegraphics[width=1.0\textwidth]{./Figures/armadoactuador.png}
+\caption{Ensamblado y partes del case Argon One Pi4 V2 }
+\label{fig:argon}
+\end{figure}
+%\end{landscape} % esto es para rotar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{0.5cm}
+Características del case Argon One Pi4 V2 \citep{WEBSITE:16}:
+
+\begin{itemize}
+\item La placa Raspberry Pi Sata está diseñada para maximizar las transferencias de datos de alta velocidad para el uso de SSD Raspberry Pi 4; lo que la hace perfecta para el uso multimedia y otras aplicaciones. 
+\item La funda SSD Raspberry Pi solo es compatible con SSD M.2 SATA con llave B-Key o B+M. El SSD se conecta al Raspberry Pi 4 a través del puente USB en un puerto USB 3.0. 
+\item El case Argon fue rediseñado para incluir dos puertos HDMI de tamaño completo e IR integrado para la funcionalidad remota. También se incluyen los puentes para el arranque automático. 
+\item El case Argon Raspberry Pi 4 tiene todos los pines GPIO accesibles en la parte superior de la funda mientras están protegidos por una cubierta magnética extraíble cuando no están en uso. 
+\item El case Argon ONE Raspberry Pi 4 obtiene la mejor experiencia de refrigeración gracias al software Pi Fan mientras que la funda actúa como un disipador de calor conectado a la CPU.
+\end{itemize}
+
+El dispositivo final creado para ser el modulo principal (servidor local) tiene la capacidad de conectarse vía Wi-Fi o vía Ethernet. La integración y ensamblado se visualiza en la figura \ref{fig:armado}.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/m1-2.jpg}
+\caption{Componentes y ensamblado del módulo principal.}
+\label{fig:armado}
+\end{figure}
+
+\subsection{Módulo de replicación a la nube}
+
+Para el desarrollo de este módulo se diseñó una estructura interna compuesta por sub procesos, que al trabajar en conjunto forman el módulo completo de replicación.
+
+La replicación solo se da mientras exista conexión a internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por ser un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:flujoreplicador} ilustra la forma de trabajo de cada subproceso interno implementado dentro del replicador.
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.15\textwidth]{./Figures/replicador.png}
+\caption{Flujo funcional del módulo replicador}
+\label{fig:flujoreplicador}
+\end{figure}
+
+
+Las descripciones de cada subproceso desarrollado y que forma parte del módulo replicador se detalla a continuación: 
+
+\begin{itemize}
+\item \keyword{mqtt\_envia\_nube\_poo (P1)}: es el responsable de enviar todos los datos que llegan de los canales hacia el broker remoto usando el formato JSON.
+
+\item \keyword{mqtt\_recibe\_nube\_poo (P2)}: es el responsable de recibir los datos JSON que fueron generados en la aplicación web remota y que llegan desde el broker remoto para luego transmitirlo.
+
+\item \keyword{actuador\_registros\_bd (P3)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de actuadores capturadas dentro de una hora en las tablas auxiliares de actuadores y consumo para luego sumar el consumo y hacer un solo registro en la tabla de historial de consumo. Este subproceso realiza un borrado de registros de las tablas auxiliares de actuadores por cada registro en la tabla historial.
+
+\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores capturadas dentro de una hora en las tablas auxiliares de sensores para luego promediarlos y hacer un solo registro en la tabla de historial. Este subproceso realiza un borrado de registros de las tablas auxiliares de sensores por cada registro en la tabla historial.
+
+\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar, si existiera Internet y registros marcados como no replicados, este procederá a enviar los últimos registros hacia la nube, para luego limpiar la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria para el sistema local y remoto.
+
+\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador) para posteriormente comprobar si existe conexión a Internet y poder registrar en la base de datos local y remoto. En caso que no existiera conexión a Internet, solo registra en la tabla correspondiente al sensor o actuador de la base de datos local y a su vez realiza una copia hacia la tabla de registros\_no\_enviados, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
+
+\item \keyword{mqtt\_gestionDispositivosConectados (P7)}: es el responsable de recibir todos los mensajes que llegan al broker, verificar la pertenencia del JSON capturado (sensor o actuador) para registrar temporalmente el tiempo de llegada del mensaje del dispositivo. 
+
+Este subproceso usa hilos en Python para estar constantemente registrando los tiempos de llegada de mensajes de cada sensor o actuador, y si los intervalos de tiempo de llegada de mensajes para un dispositivo activo son mayores a un minuto, el subpoceso actualiza el estado del dispositivo con el estado de ``DESCONECTADO'' en la base de datos.
+\end{itemize}
+
+
+\subsection{Módulo de medición de temperatura}
+
+Este módulo permite recoger lecturas del valor de la temperatura y humedad en ambientes de un hogar, oficina o edificio. Los valores son enviados y procesados en el sistema IoT de control y monitoreo que se encuentra en el servidor web del módulo principal. Las lecturas de temperatura son usadas para conocer la curva de cambios de temperatura según el horario registrado, así como su relación directa con el consumo eléctrico por el uso de ventiladores y equipos de aire acondicionado. Para su construcción se usó la placa NodeMCU8266 V3, por las características tales como: capacidad de conexión inalámbrica, bajo costo y tamaño reducido. 
+
+Este módulo integra una pantalla SSD1306 OLED para visualizar el valor de la temperatura en tiempo real. Para el encapsulado y construcción se usó un tablero adosable de montaje de interruptores térmicos y diferenciales tipo RIEL-DIN, de material de poliestireno y cubierta trasparente de policarbonato con apertura vertical \citep{WEBSITE:17}, como se aprecia en la figura \ref{fig:casetemp}.
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/casetemp.png}
+\caption{Case del módulo de temperatura \protect\footnotemark.}
+\label{fig:casetemp}
+\end{figure}
+
+\footnotetext{Imagen tomada de \url{https://www.promart.pe/tablero-2-polos-adosable-c-puerta/p}}
+
+El diseño de integración de componentes electrónicos se realizó en una Placa PCB perforada siguiendo el esquemático de la figura \ref{fig:citemp}.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.75\textwidth]{./Figures/ci-temp.png}
+\caption{Esquemático electrónico del módulo de temperatura. }
+\label{fig:citemp}
+\end{figure}
+
+El proceso de integración total lo podemos ver en las fotografías que se visualizan en la figura \ref{fig:entemp}.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/temperatura.jpg}
+\caption{Ensamblado del módulo de temperatura. }
+\label{fig:entemp}
+\end{figure}
+
+\subsection{Módulo actuador}
+
+Este módulo permite activar o desactivar el paso de la corriente eléctrica dentro de un tomacorriente, la acción de cambio de estados (activado o desactivado) se realiza mediante desde un switch en la interfaz de la aplicación web de monitoreo y control.
+
+Para la construcción del módulo se usó una caja (case) de tomacorriente de 32 mm, resistente al impacto. De gran durabilidad y fácil de instalar, autoextinguible e Ideal para conductos de cables \citep{WEBSITE:18}, categoría 12 y 14. Para fijar el tomacorriente se usó una placa modular de soporte. En figura \ref{fig:caseactuador} se ilustra los componentes mencionados.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/actuador.jpg}
+\caption{Case del módulo actuador.}
+\label{fig:caseactuador}
+\end{figure}
+
+
+
+Una de las dificultades encontradas dentro del proceso de construcción del módulo, fue respecto al tensión de activación del relé, porque la placa NodeMCU8266 entrega en sus salidas 3.3 V y la activación del relé necesita 5 v para funcionar. La solución fue integrar un convertidor de tensión DC-DC Step-Up 2 A MT3608, este componente tiene como función entregar un tensión de salida constante superior al tensión de entrada frente a variaciones del tensión de entrada o de carga. Soporta como tensión de entrada entre 2 V a 24 V y tensión de salida entre 2 V a 28 V. El tensión de salida se puede regular mediante un potenciómetro multivuelta \citep{WEBSITE:19}. La figura \ref{fig:esquemaactuador} ilustra el relé de 30 A y el convertidor de tensión, usados para la solución a este problema.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.057\textwidth]{./Figures/esquemaactuador.png}
+\caption{Uso del Step-Up DC-DC para activación del relé. }
+\label{fig:esquemaactuador}
+\end{figure}
+
+
+El proceso de ensamblado se ilustra en las fotografías de la figura \ref{fig:armadoactuador}.
+
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/armadoactuador.jpg}
+\caption{Ensamblado del módulo de actuador. }
+\label{fig:armadoactuador}
+\end{figure}
+
+
+\subsection{Módulo de consumo eléctrico}
+
+Este módulo es el responsable de medir el consumo de energía eléctrica dentro de un hogar, oficina o edificio. La integración de los componentes representó un gran reto dentro del proceso de construcción y desarrollo por ser un módulo que permite comunicación bidireccional con el servidor local y a su vez tener sincronización con todos los clientes conectados al sistema.
+
+\vspace{2cm}
+
+¿Cómo se mide el consumo de energía eléctrica?
+
+La energía eléctrica que consume un artefacto eléctrico, se determina multiplicando la potencia de dicho artefacto por la cantidad de horas que esta prendido \citep{BOOK:3}. Por ejemplo ver la ecuación \ref{eq:consumoform}.
+
+\begin{equation}
+	\label{eq:consumoform}
+	EC = \left( T x PE \right)
+\end{equation}
+
+\vspace{0.2cm}
+Siendo las variables y unidades:
+\begin{itemize}
+\item EC: energía consumida (KWh)
+\item T: tiempo que esta encendido (h)
+\item PE: potencia eléctrica del artefacto (KW)
+\end{itemize}
+
+\vspace{0.2cm}
+¿Cómo se calcula la potencia eléctrica?
+
+El cálculo de la potencia eléctrica se obtiene al tener en cuenta la carga eléctrica, también conocida como tensión eléctrica, que pasa en un tiempo limitado a través de una diferencia de potencia, denominada intensidad. El resultado, cuya unidad es el vatio(en inglés, watt)su símbolo es la W , se obtiene al multiplicar la tensión por la intensidad. La tensión se pone en Voltios (V) y la Intensidad en Amperios (A). La fórmula de la potencia eléctrica se ilustra en la ecuación \ref{eq:potenciaform} \citep{WEBSITE:20}.
+
+\begin{equation}
+	\label{eq:potenciaform}
+	PE = \left( TE x IE \right)
+\end{equation}
+
+Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la Tensión (V) y la intensidad (I) eléctrica y para dicha tarea se usó dos sensores, el sensor SCT-013-030 para medir intensidad de corriente alterna y el sensor AC - ZMPT101B para medir tensión alterna.
+
+Las consideraciones necesarias para el diseño, desarrollo y construcción del módulo, se describen los aspectos más importantes que permitió alcanzar el objetivo trazado, empezando por enumerar los componentes electrónicos, estudio necesario para su aplicación y culminando con la estrategia usada para guardar los consumos obtenidos mediante la aplicación.
+
+
+\begin{enumerate}
+\item \keyword{Componentes para la construcción del módulo}
+\begin{itemize}
+\item Case de protección
+\item Sensor de tensión eléctrica AC - ZMPT101B
+\item Sensor de corriente eléctrica SCT-013-030
+\item Convertidor ADC ADS1115
+\item Cable de calibre 14:
+\item Fusible de 30 A
+\item Pantalla gráfica LCD
+\item Fuente embebida input 220 V, output 5 V
+\item Leds ultra brillantes:
+\end{itemize}
+\item  \keyword{Aplicación del sensor SCT-013-030}
+
+La familia SCT-013 son sensores de corrientes no invasivos que permiten medir la intensidad de corriente que atraviesa un conductor sin necesidad de cortar o modificar el conductor. Podemos emplear estos sensores con un procesador Arduino o derivados para medir la intensidad o potencia consumida por una carga. Los sensores SCT-013 son transformadores de corriente, dispositivos de instrumentación que proporcionan una medición proporcional a la intensidad que atraviesa un circuito. La medición se realiza por inducción electromagnética \citep{WEBSITE:9}.
+
+Los sensores SCT-013 disponen de un núcleo ferromagnético partido (como une pinza) que permite abrirlo para arrollar un conductor de una instalación eléctrica sin necesidad de cortarlo. Dentro de la familia SCT-013 existen modelos que proporcionan la medición como una salida de intensidad o de tensión. Para este trabajo usamos el sensor de salida por tensión, el SCT-013-030 para corrientes máximas de 30 A (30 A /1 V) y salida en tensión de 1 V.A. Es importante disponer un rango amplio de medición, pero hay que tener en cuenta que un modelo de mayor intensidad se traducirá en una menor precisión. Una intensidad de 30 A a 230 V corresponde con una carga de 6.900 W, lo cual es suficiente para la mayoría de usuarios domésticos. En la figura \ref{fig:consumo1} ilustra el esquema lógico a usar y la pinza del sensor.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/consumo1.png}
+\caption{Circuito y pinza del sensor de corriente. }
+\label{fig:consumo1}
+\end{figure}
+
+La precisión del sensor puede ser de 1\% - 2\%, pero para ello es muy importante que el núcleo ferromagnético se cierre adecuadamente. Hasta un pequeño hueco de aire puede introducir desviaciones del 10\%. (referencia a Luis llamas) Como desventaja, al ser una carga inductiva, el SCT-013 introduce una variación del ángulo de fase cuyo valor es función de la carga que lo atraviesa, pudiendo llegar a ser de hasta 3º \citep{WEBSITE:9}.
+
+Los sensores SCT-013 son pequeños transformadores de corriente o CT (\emph{Current transformartor}) instrumentos ampliamente empleados como elementos de medición. Un transformador de corriente es similar a un transformador de tensión y está basado en los mismos principios de funcionamiento. Sin embargo, persiguen objetivos diferentes \citep{WEBSITE:9}.
+
+Los sensores de la serie SCT-013 son sensores que trabajan como transformadores, la corriente que circula por el cable que deseamos medir actúa como el devanado primario (1 espira) e internamente tiene un devanado secundario que dependiendo del modelo pueden tener hasta más de 2000 espiras. La cantidad de espiras representa la relación entre corriente que circula por el cable y la que el sensor nos entrega, esta relación o proporción es la que diferencia entre los diferentes modelos de sensores SCT-013, adicionalmente pueden tener una resistencia de carga en la salida y de esta forma en lugar de corriente se trabaja con una salida de tensión \citep{WEBSITE:21}. La figura \ref{fig:espiras} ilustra los devanados mencionados.
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/espiras.jpg}
+\caption{Partes del núcleo ferromagnético del sensor de corriente.}
+\label{fig:espiras}
+\end{figure}
+
+La relación de transformación de intensidad se expresa entre el número de espiras, como se muestra en ecuación \ref{eq:proporcionform}.
+
+\begin{equation}
+	\label{eq:proporcionform}
+	\left( \frac{Is}{Ip} \right)=\left( \frac{Vp}{Vs} \right)=\left( \frac{Np}{Ns} \right)
+\end{equation}
+
+A esto se le llama relación de transformación. Relaciona el número de espiras del primario (Np), del secundario (Ns), las intensidades del primario (Ip), del secundario (Is), el tensión del primario (Vp) y del secundario (Vs). 
+
+
+Para usar el sensor SCT-013 no necesitamos interrumpir (cortar o desempalmar) el cable que vamos a medir, esto porque al igual que una pinza amperimétrica tiene el núcleo partido. Si pasamos por ejemplo los dos cables de una conexión monofásica, nuestra lectura será 0, puesto que los cables tienen corrientes opuestas \citep{WEBSITE:21}. La figura \ref{fig:conectacorrecto} ilustra la forma correcta de uso del sensor.
+\vspace{0.5cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/correcto.jpg}
+\caption{Forma de uso del sensor de corriente \protect\footnotemark.}
+\label{fig:conectacorrecto}
+\end{figure}
+
+\footnotetext{Imagen de \url{https://programarfacil.com/blog/arduino-blog/sct-013-consumo-electrico-arduino/}}
+
+
+Un aspecto importante a menciones es que a diferencia de los transformadores de tensión, en un transformador de intensidad el circuito secundario nunca debería estar abierto, porque las corrientes inducidas podrían llegar a dañar el componente. Por ese motivo, los sensores de SCT-013 disponen de protecciones (resistencia burden en los sensores de salida por tensión, o diodos de protección en los sensores de salida por corriente)\citep{WEBSITE:9}.
+
+
+\item  \keyword{Aplicación del sensor de tensión eléctrica AC - ZMPT101B}
+
+El sensor transformador de tensión alterno ZMPT101B permite medir tensión alterno como el que tenemos en nuestros hogares (en Perú: 220 VAC - 60 Hz), este tensión AC no puede ser medido directamente por el ADC de nuestro circuito o placa pues escapa al rango de entrada (0 V a 5 V). El módulo ZMPT101B soluciona el problema reduciendo el tensión AC de entrada a un tensión menor que pueda ser leído por el Arduino, NodeMCU o cualquier otro microcontrolador. La figura \ref{fig:sensortension} ilustra la forma de conexión del modulo sensor a la linea eléctrica domestica.
+
+El sensor está integrado por un transformador que cumple la función de aislamiento galvánico para mayor seguridad en el uso. El lado primario del transformador se conecta al tensión alterno que deseamos medir, por ejemplo: la red eléctrica de nuestro hogar de 220 VAC. En el lado secundario del transformador se encuentra un divisor de tensión y un circuito con amplificador operacional (OPAMP LM358) para adicionar un desplazamiento (\emph{offset}) a la salida análoga \citep{WEBSITE:22}. 
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.85\textwidth]{./Figures/sensortension.png}
+\caption{Conexión y partes del sensor de tension.}
+\label{fig:sensortension}
+\end{figure}
+
+
+Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que la onda no tenga tensiones negativas y así poder leer la onda completamente con el ADC. El desplazamiento depende del tensión con el que alimentemos el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2.5 V y si alimentamos el módulo con 3.3 V el desplazamiento será de 1.65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC), de esta forma es posible leer el tensión instantáneo y realizar cálculos de energía, como: tensión pico a pico (Vpp) y tensión eficaz (Vrms). Debido a la naturaleza de los transformadores solo puede medir tensión AC \citep{WEBSITE:22} \citep{ARTICLE:1}. Para su uso con la tarjeta NodeMCU ESP8266, los extremos son 0 y 3.3V con una compensación de 1.65 V. La figura \ref{fig:ondas} muestra el desplazamiento de onda senoidal
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.02\textwidth]{./Figures/ondas.png}
+\caption{Señal del ZMPT101B con el NodeMCU ESP8266 \protect\footnotemark.}
+\label{fig:ondas}
+\end{figure}
+
+\footnotetext{Imagen tomada de \url{https://surtrtech.com/2020/04/08/}}
+
+\item \keyword{medición del consumo eléctrico}
+
+Aún por redactar…
+
+\end{enumerate}
+
+
+
+
+\section{Configuración de la red WLAN}
+
+El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación más seguro si interferir la red doméstica.
+
+\subsection{Diseño de la red física}
+
+Para dicha tarea se usó un Router inalámbrico como puntos de acceso para los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura …. ilustra el diseño físico de la red usada.
+
+
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.455\textwidth]{./Figures/rediot.png}
+\caption{..... .}
+\label{fig:diagramared}
+\end{figure}
+\end{landscape} % 
+
+\subsection{Configuración del Router inalámbrico}
+Los principales criterios de configuración del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi.
+Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina. Su alta capacidad de cobertura garantiza el acceso sin interrupciones a contenidos en HD (\emph{High Definition}), transferencias de archivos de un dispositivo a otro, entre otros. Es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos. 
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/router.jpg}
+\caption{..... .}
+\label{fig:router}
+\end{figure}
+
+Este router tiene tres formas de funcionamiento: access point, router y repetidor. Para nuestro uso se seleccionó la configuración para un access point (AP) o punto de acceso. La figura… muestra la configuración del modo de funcionamiento.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/funcionamientorouter.png}
+\caption{..... .}
+\label{fig:funcionamientorouter}
+\end{figure}
+
+Uno de los problemas más comunes con las redes WiFi es el solapamiento de canales debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La configuración de red puede ser un motivo para problemas de Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
+
+Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas..........
+
+El siguiente gráfico muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.99\textwidth]{./Figures/canales.png}
+\caption{..... .}
+\label{fig:canales}
+\end{figure}
+
+\subsubsection{Elección del canal}
+En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre elija Canales 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. Se consideró lo siguiente: .....
+
+\begin{itemize}
+\item El canal 1 interferirá y recibirá interferencias de los canales 1-5 de  2,4 GHz.
+\item El canal 6 interferirá y recibirá interferencias de los canales 2-10 de  2,4 GHz.
+\item El canal 11 interferirá y recibirá interferencias de los canales 7-11 de 2,4 GHz.
+\end{itemize}
+
+Utilizando la información anterior, se puede ver por qué siempre se debe elegir los canales 1, 11 o 6. Si hace lo contrario, invita a la interferencia de más de un canal inalámbrico principal de 2,4 GHz ...., ocasionando solapamiento e interferencia en el canal de comunicación de la red IoT a usar. Sin embargo, es posible que no se pueda acceder en la zona a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes que utilicen canales que se solapen parcialmente, en este caso, se debe buscar uno donde el impacto de ese solapamiento sea mínimo. ....
+
+Pare este trabajo la elección del número de canal se fundamentó en la investigación mencionada y en la exploración de las redes Wi-Fi existentes en el entorno donde se implantó el sistema IoT.
+
+\subsubsection{Elección del ancho de banda}
+
+Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz. ...
+
+La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth. ....
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/configuracioncanal.png}
+\caption{..... .}
+\label{fig:configuracioncanal}
+\end{figure}
+
+Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no dañar a los vecinos. ....
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/configuracionancho.png}
+\caption{..... .}
+\label{fig:configuracionancho}
+\end{figure}
+
+
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.5\textwidth]{./Figures/wifi/01-doc.png}
+\caption{..... .}
+\label{fig:solapamiento}
+\end{figure}
+\end{landscape} % 
+
+
+
+Dentro de los parámetros de seguridad se configuró: el canal y la opción de \emph{auth. and encryption}. La figura… ilustra el antes y después de la elección del canal (la elección del número de canal ideal se tratará en el capítulo de pruebas y resultados), en la figura…. ilustra la elección de encriptación y autenticación para el acceso al access point y en la figura…. Ilustra los resultados finales de la configuración del access point
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/encriptacion.png}
+\caption{..... .}
+\label{fig:encriptacion}
+\end{figure}
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/configuracionfinal.png}
+\caption{..... .}
+\label{fig:configuracionfinal}
+\end{figure}
+
+\section{Software a medida de monitoreo y control}
+
+Aún  por redactar…
 
