@@ -17,7 +17,7 @@ Los servicios en la nube se clasifican en:
 \begin{itemize}
 \item Infraestructura como Servicio (IaaS)
 \item Plataforma como Servicio (PaaS)
-\item Software como Servicio (SaaS)
+\item \emph{software} como Servicio (SaaS)
 \end{itemize}
 
 En la figura \ref{fig:servicios}, se puede ver una representación gráfica para diferenciar las capas y su orientación para cada modelo de servicio.
@@ -55,7 +55,7 @@ Ejemplo de IaaS:
 
 \item \keyword{PaaS} (\emph{Plataform as a Service}):
 
-Este servicio ofrece plataformas de desarrollo sin necesidad de adquirir tecnología con costo muy elevado. El hardware y el software en este modelo es administrado por el proveedor del servicio, además de que los desarrolladores no se preocupan por el rendimiento del hardware ni mucho menos por las actualizaciones del sistema operativo, ya que todo lo realiza el proveedor del servicio \citep{BOOK:2}.
+Este servicio ofrece plataformas de desarrollo sin necesidad de adquirir tecnología con costo muy elevado. El hardware y el \emph{software} en este modelo es administrado por el proveedor del servicio, además de que los desarrolladores no se preocupan por el rendimiento del hardware ni mucho menos por las actualizaciones del sistema operativo, ya que todo lo realiza el proveedor del servicio \citep{BOOK:2}.
  
 Ejemplos de PaaS:
 
@@ -70,7 +70,7 @@ Ejemplos de PaaS:
 
 \item \keyword{SaaS} (\emph{Software as a Service}): 
 
-Constituye el modelo más utilizado porque, además de brindar servicio de software, ofrece también el almacenamiento de la información que se genera desde el software. Las ventajas notorias de este modelo son la simplicidad de integración, costo y escalabilidad. Se pueden indicar como desventajas la percepción de incidentes de seguridad y que la información se encuentra alojada en un espacio físico que no sea el de la propia empresa \citep{BOOK:2}. 
+Constituye el modelo más utilizado porque, además de brindar servicio de \emph{software}, ofrece también el almacenamiento de la información que se genera desde el \emph{software}. Las ventajas notorias de este modelo son la simplicidad de integración, costo y escalabilidad. Se pueden indicar como desventajas la percepción de incidentes de seguridad y que la información se encuentra alojada en un espacio físico que no sea el de la propia empresa \citep{BOOK:2}. 
 
 Ejemplos de SaaS:
 
@@ -127,14 +127,14 @@ MQTT (\textit{Message Queue Telemetry Transport}) es un protocolo de red ligero 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.9\textwidth]{./Figures/mqtt.png}
-	\caption{Ejemplo de funcionamiento del procologo Mqtt \protect\footnotemark.}
+	\caption{Ejemplo de funcionamiento del protocolo MQTT \protect\footnotemark.}
 	\label{fig:mqtt}
 \end{figure}
 
 \footnotetext{Imagen tomada de \url{https://mqtt.org/}}
 
 
-MQTT es un protocolo de mensajería estándar para Internet de las cosas (IoT). Está diseñado como un transporte de mensajería de extremadamente liviano y se utiliza en una amplia variedad de industrias, como la automotriz, la fabricación, las telecomunicaciones, el petróleo y el gas, etc \citep{WEBSITE:4}. 
+MQTT es un protocolo de mensajería estándar para IoT. Está diseñado como un transporte de mensajería de extremadamente liviano y se utiliza en una amplia variedad de industrias, como la automotriz, la fabricación, las telecomunicaciones, el petróleo y el gas, etc \citep{WEBSITE:4}. 
 \end{itemize}
 
 \section{Elementos del broker MQTT}
@@ -149,7 +149,7 @@ Antes de construir una red MQTT, es necesario entender los conceptos que se util
 
 El broker MQTT usado en el proyecto es Eclipse Mosquitto, por ser de código abierto.
 
-\section{Eclipse mosquitto} 
+\section{Eclipse Mosquitto} 
 Eclipse Mosquitto es un agente de mensajes de código abierto (con licencia EPL / EDL) que implementa las versiones 5.0, 3.1.1 y 3.1 del protocolo MQTT. Mosquitto es liviano y adecuado para su uso en todos los dispositivos, desde computadoras de placa única de baja potencia hasta servidores completos \citep{WEBSITE:5}.
 
 El protocolo MQTT proporciona un método ligero para realizar mensajes mediante un modelo de publicación / suscripción. Esto lo hace adecuado para la mensajería de Internet de las cosas, como con sensores de baja potencia o dispositivos móviles como teléfonos, computadoras integradas o microcontroladores \citep{WEBSITE:5}.
@@ -166,15 +166,17 @@ La placa Raspberry Pi 4 es una pequeña computadora de escritorio de doble panta
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.95\textwidth]{./Figures/rpi4.png}
-	\caption{Especificaciones de Raspberry Pi 4 \protect\footnotemark. \citep{WEBSITE:7}}
+	\includegraphics[width=1.0\textwidth]{./Figures/rpi4.png}
+	\caption{Computadora Raspberry Pi 4 \protect\footnotemark. \citep{WEBSITE:7}}
 
 	\label{fig:rpi4}
 \end{figure}
 
 \footnotetext{Imagen de \url{https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/}}
 
-Especificaciones técnicas del Raspberry Pi 4 \citep{WEBSITE:7}:
+\vspace{1cm}
+
+Especificaciones técnicas de la computadora Raspberry Pi 4 \citep{WEBSITE:7}:
 
 \begin{itemize}
 \item Broadcom BCM2711, SoC de 64 bits Cortex-A72 de cuatro núcleos (ARM V8) a 1,5 GHz
@@ -210,7 +212,7 @@ La web oficial ofrece diversas versiones a las cuales se puede acceder con desca
 
 \footnotetext{Imagen tomada de \url{https://www.raspberrypi.com/software/operating-systems/}}
 
-\section{Hardware y software utilizados para los módulos}
+\section{Hardware y \emph{software} utilizados para los módulos}
 
 Los componentes principales usados en el desarrollo de cada módulo están formados por una placa base NodeMCU, sensores y actuadores.
 
@@ -256,7 +258,7 @@ Especificaciones técnicas del NodeMCU:
 
 El DHT11 es un sensor de humedad relativa y temperatura de media precisión a un bajo precio. La salida suministrada es de tipo digital utilizando solamente un pin de datos (no posee salida analógica). Es utilizado en aplicaciones académicas relacionadas al control automático de temperatura, aire acondicionado, monitoreo ambiental en agricultura y más. El sensor se muestra en la figura \ref{fig:dht11}.
 
-Utilizar el sensor DHT11 con las plataformas Arduino, Raspberry Pi y Nodemcu es muy sencillo tanto a nivel de software como hardware. A nivel de software se dispone de librerías para Arduino con soporte para el protocolo "Single bus". En cuanto al hardware, solo es necesario conectar el pin VCC de alimentación a 3 V - 5 V, el pin GND a Tierra y el pin de datos a un pin digital de Arduino \citep{WEBSITE:8}. 
+Utilizar el sensor DHT11 con las plataformas Arduino, Raspberry Pi y Nodemcu es muy sencillo tanto a nivel de \emph{software} como hardware. A nivel de \emph{software} se dispone de librerías para Arduino con soporte para el protocolo \emph{Single bus}. En cuanto al hardware, solo es necesario conectar el pin VCC de alimentación a 3 V - 5 V, el pin GND a Tierra y el pin de datos a un pin digital de Arduino \citep{WEBSITE:8}. 
 
 \begin{figure}[htbp]
 	\centering
@@ -285,7 +287,7 @@ Especificaciones técnicas del sensor:
 
 \subsection{Sensor de Corriente AC SCT-013-030}
 
-La familia SCT-013 son sensores de corrientes no invasivos que permiten medir la intensidad que atraviesa un conductor sin necesidad de cortar o modificar el conductor. Podemos emplear estos sensores con un procesador como Arduino para medir la intensidad o potencia consumida por una carga. Los sensores SCT-013 son transformadores de corriente, dispositivos de instrumentación que proporcionan una medición proporcional a la intensidad que atraviesa un circuito. La medición se realiza por inducción electromagnética \citep{WEBSITE:9}. 
+La familia SCT-013 son sensores de corrientes no invasivos que permiten medir la intensidad que atraviesa un conductor sin necesidad de cortar o modificar el conductor. Podemos emplear estos sensores con un procesador como Arduino para medir la intensidad o potencia consumida por una carga. Los sensores SCT-013 son transformadores de corriente, dispositivos de instrumentación que hacen posible una medición proporcional a la intensidad que atraviesa un circuito. La medición se realiza por inducción electromagnética \citep{WEBSITE:9}. 
 
 Los sensores SCT-013 disponen de un núcleo ferromagnético partido (como una pinza) que permite abrirlo para arrollar un conductor de una instalación eléctrica sin necesidad de cortarlo, como se ilustra con la figura \ref{fig:sensorCorriente}. Dentro de la familia SCT-013 existen modelos que proporcionan la medición como una salida de intensidad o de tensión. Se recomienda usar sensores de salida por tensión porque la conexión es más sencilla \citep{WEBSITE:9}. 
 
@@ -337,18 +339,18 @@ Para el trabajo se consideró el módulo relé de activación 5 V y con soporte 
 
 \subsection{Lenguajes de programación}
 
-La elaboración de este trabajo involucró el usó de distintos softwares como herramientas para facilitar el desarrollo, así como el uso de diversos lenguajes de programación que se describen a continuación:
+La elaboración de este trabajo involucró el usó de distintos \emph{software}s como herramientas para facilitar el desarrollo, así como el uso de diversos lenguajes de programación que se describen a continuación:
 \begin{itemize}
 \item Python: es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código. Se trata de un lenguaje de programación multiparadigma, ya que soporta parcialmente la orientación a objetos, programación imperativa y, en menor medida, programación funcional.
 
-Se usó para la creación de procesos internos en el módulo principal. 
-\item Php: es un lenguaje de programación de usó general que se adapta especialmente al desarrollo web del lado \emph{backend}.
+Se utilizó para la creación de procesos internos en el módulo principal. 
+\item PHP: es un lenguaje de programación de usó general que se adapta especialmente al desarrollo web del lado \emph{backend}.
 
-Se usó como lenguaje \emph{backend} del software de monitoreo y control.
+Se utilizó como lenguaje \emph{backend} del \emph{software} de monitoreo y control.
 \item JavaScript: lenguaje de programación interpretado utilizado en el lado del cliente, es el único lenguaje de programación que funciona en los navegadores de forma nativa (lenguaje interpretado sin necesidad de compilación).
 
-Se usó como lenguaje frontend del software de monitoreo y control.
+Se utilizó como lenguaje frontend del \emph{software} de monitoreo y control.
 \item Arduino: lenguaje de programación que está basado en C++.
 
-Se usó como lenguaje para programar el firmware de los módulos de sensores y actuadores.
+Se utilizó como lenguaje para programar el firmware de los módulos de sensores y actuadores.
 \end{itemize}
