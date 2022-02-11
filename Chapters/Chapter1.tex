@@ -21,8 +21,7 @@ Para entender este trabajo es necesario describir ciertos conceptos, explicarlos
 
 %----------------------------------------------------------------------------------------
 \section{Motivación}
-
-Al encender la plancha o cualquier otro eléctrico y electrónico se produce un consumo de energía eléctrica que normalmente se desconoce. Simplemente a final de mes, se recibe la factura de consumo eléctrico, donde se indica el consumo mensual y el monto a pagar. A muchas de las empresas que tienen procesos industriales les ocurre lo mismo y es que el control del consumo de manera precisa no está normalizado en el ámbito doméstico (\emph{smart home}) y sigue siendo un aspecto aun por mejorar. Este control es muy importante ya que gracias a él podemos mejorar la eficiencia energética, ahorrando dinero para una familia o una empresa y a la vez siendo respetuosos con el medio ambiente.
+Al encender cualquier dispositivo eléctrico u electrónico se produce un consumo de energía eléctrica que normalmente se desconoce. Simplemente a final de mes, se recibe la factura de consumo eléctrico, donde se indica el consumo mensual y el monto a pagar. A muchas de las empresas que tienen procesos industriales les ocurre lo mismo y es que el control del consumo de manera precisa no está normalizado en el ámbito doméstico (\emph{smart home}) y sigue siendo un aspecto aun por mejorar. Este control es muy importante ya que gracias a él podemos mejorar la eficiencia energética, ahorrando dinero para una familia o una empresa y a la vez siendo respetuosos con el medio ambiente.
 
 Bajo ese contexto antes y durante la pandemia por el Covid-19, se registraron miles de quejas por montos excesivos en los recibos de energía eléctrica en muchos departamentos en el país de Perú. Antes de la pandemia, una usuaria de Luz del Sur pagaba 80 soles al mes (\$20 USD al cambio actual) por el servicio de energía eléctrica en su vivienda en la ciudad de Lima. Ahora, pretenden cobrarle 180 soles por mes (\$45 USD al cambio actual). Cuando el usuario quiso reclamar, la empresa responsable de brindar el servicio no le contestaba. Algo parecido le pasó a una asociación de comerciantes a la que, a pesar de que su establecimiento estaba cerrado desde el 16 de marzo del 2020, La empresa EDELNOR pretende cobrarle 250 soles (\$ 62 USD al cambio actual) por consumos no realizados durante el mes. Estos son algunos de los miles de denuncias de consumidores que se han hecho públicas en el país de Perú  \citep{WEBSITE:1}.
 
@@ -69,7 +68,7 @@ El proyecto incluye los siguientes ítems:
 \begin{itemize}
 \item Diseñar y desarrollar un sistema IoT para medir el consumo eléctrico.
 \item Diseñar y desarrollar un sistema que no dependa de una conexión a Internet para su funcionamiento.
-\item Diseñar y desarrollar un software a medida para la gestión de control y monitoreo de una vivienda o edificio.
+\item Diseñar y desarrollar un \emph{software} a medida para la gestión de control y monitoreo de una vivienda o edificio.
 \item Diseñar e implementar módulos con comunicación Wi-Fi para el control y monitoreo de energía eléctrica.
 \end{itemize}
 %----------------------------------------------------------------------------------------
@@ -86,28 +85,27 @@ Para una mejor comprensión se los clasifica en dos categorías:
 \end{itemize} 
 
 \subsection{Sistemas de monitoreo para gestión de energía eléctrica}
-Los sistemas de monitoreo son sistemas integradores automatizados compuestos por un software de control y monitoreo, sensores y actuadores, por ejemplo:
+Los sistemas de monitoreo son sistemas integradores automatizados compuestos por un \emph{software} de control y monitoreo, sensores y actuadores, por ejemplo:
 
 \begin{itemize}
-\item \keyword{Energy Vision}: solución de software para gestión del consumo de energía.
-
-Energy vision - Centraline es una nueva herramienta de software de gestión energética profesional con el fin de lograr un ahorro importante y maximizar la eficiencia energética. El software permite recopilar y analizar todas las formas de uso de energía para una gestión energética profesional y constituye un componente esencial en la automatización de edificios eficientes desde el punto de vista energético \citep{WEBSITE:13}.
-
+\item \keyword{Energy Vision}: solución de \emph{software} para gestión del consumo de energía. Energy vision - Centraline es una nueva herramienta de \emph{software} de gestión energética profesional con el fin de lograr un ahorro importante y maximizar la eficiencia energética. El sistemas se ilustra con la figura \ref{fig:energy-vision} 
+%\vspace{0.5cm}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.8\textwidth]{./Figures/energy-vision.jpg}
+\includegraphics[width=.9\textwidth]{./Figures/energy-vision.jpg}
 \caption{Sistema y productos Energy Vision \protect\footnotemark}
 \label{fig:energy-vision}
 \end{figure}
 
 \footnotetext{Imagen tomada de \url{https://www.centraline.com/itIT/prodotti-e-documentazione/special/energy-vision-nx.html}}
 
-Esta herramienta de software contiene gráficos y diagramas visualmente atractivos y proporcionan una presentación ordenada y fácil de comprender de la información que se necesita. Recopila, archiva, evalúa y consulta todos los datos de un edificio. El sistemas se ilustra con la figura \ref{fig:energy-vision}
+
+El \emph{software} permite recopilar y analizar todas las formas de uso de energía para una gestión energética profesional y constituye un componente esencial en la automatización de edificios eficientes desde el punto de vista energético \citep{WEBSITE:13}. Esta herramienta de \emph{software} contiene gráficos y diagramas visualmente atractivos y proporcionan una presentación ordenada y fácil de comprender de la información que se necesita. Recopila, archiva, evalúa y consulta todos los datos de un edificio. 
 
 Se puede acceder al sistema desde todo tipo de dispositivos mediante un navegador con Internet.
 
-\vspace{1cm}
-\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
 
 \item \keyword{Iammeter}: sistema de monitoreo de energía.
 
@@ -115,30 +113,42 @@ Iammeter es un sistema de monitoreo de energía dedicado, al que se puede conect
 
 El sistema Iammeter puede generar un análisis integral del consumo de energía por usuarios, ofreciendo gráficos de datos y algunos detalles en el panel de información general. Ofrece el cálculo de la factura de la luz diaria/mensual y monitoreo en tiempo real del uso de electricidad \citep{WEBSITE:12}. El sistema se ilustra con la figura \ref{fig:iammeter}.
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.65\textwidth]{./Figures/iammeter.png}
+	\includegraphics[width=.9\textwidth]{./Figures/iammeter.png}
 	\caption{Sistema y productos Iammeter \protect\footnotemark.}
 	\label{fig:iammeter}
 \end{figure}
+\vspace{0.5cm}
 
 \footnotetext{Imagen tomada de \url{https://es.iammeter.com/}}
 
 Se puede acceder sistema desde todo tipo de dispositivos mediante un navegador con Internet o mediante su aplicación móvil.
-%\vspace{1cm}
+\vspace{1cm}
+\vspace{1cm}
+
 \item \keyword{Bee2energy}: gestión de eficiencia energética.
 
-El sistema Bee2energy de la empresa Compta ofrece un servicio integral de software que permite a las empresas e instituciones lograr mejoras significativas en el uso de la eficiencia energética a la vez que minimiza los impactos ambientales, reduciendo los consumos y los costos operativos \citep{WEBSITE:14}. El sistema se ilustra con la figura \ref{fig:bee2energy}. 
-
-Bee2energy es una solución IoT basada en la nube a la que se puede acceder en cualquier momento y en cualquier lugar a través de Internet. Brinda operaciones en tiempo real con un modelo de negocio SaaS (\emph{Software as a service}) flexible y con capacidad multicanal \citep{WEBSITE:14}.
+El sistema Bee2energy de la empresa Compta ofrece un servicio integral de \emph{software} que permite a las empresas e instituciones lograr mejoras significativas en el uso de la eficiencia energética a la vez que minimiza los impactos ambientales, reduciendo los consumos y los costos operativos \citep{WEBSITE:14}. El sistema se ilustra con la figura \ref{fig:bee2energy}. 
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.8\textwidth]{./Figures/bee2energy.jpg}
 	\caption{Sistema y productos Bee2energy \protect\footnotemark.}
 	\label{fig:bee2energy}
+\end{figure}
+
+\footnotetext{Imagen tomada de \url{https://www.ceb-solutions.com/es/productos/bee2energy/}}
+
+Bee2energy es una solución IoT basada en la nube a la que se puede acceder en cualquier momento y en cualquier lugar a través de Internet. Brinda operaciones en tiempo real con un modelo de negocio SaaS (\emph{\emph{software} as a service}) flexible y con capacidad multicanal \citep{WEBSITE:14}. Las funciones de control en edificios se ilustra con la figura \ref{fig:bee2energy2}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.85\textwidth]{./Figures/bee2energy2.jpg}
+	\caption{Monitoreo y control en tiempo real en edificios \protect\footnotemark.}
+	\label{fig:bee2energy2}
 \end{figure}
 
 \footnotetext{Imagen tomada de \url{https://www.ceb-solutions.com/es/productos/bee2energy/}}
@@ -154,21 +164,21 @@ Los módulos independientes son sensores o actuadores  que se comercializan de f
 
 \begin{figure}[htbp]
 	\centering
-\includegraphics[width=0.7\textwidth]{./Figures/tomacorriente.png}
+\includegraphics[width=0.8\textwidth]{./Figures/tomacorriente.png}
 	\caption{Tomacorriente inteligente de facil uso \protect\footnotemark.}
 	\label{fig:tomacorriente}
 \end{figure}
 
 \footnotetext{Imagen tomada de \url{https://www.promart.pe/electricidad/interruptores-y-tomacorrientes/}}
 
-\vspace{1cm}
-\vspace{1cm}
-\vspace{1cm}
-\vspace{1cm}
-\vspace{1cm}
-\vspace{1cm}
-\vspace{1cm}
-\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
 
 
 
@@ -176,7 +186,7 @@ Los módulos independientes son sensores o actuadores  que se comercializan de f
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./Figures/medidor.png}
+	\includegraphics[width=0.9\textwidth]{./Figures/medidor.png}
 	\caption{Medidor digital monofásico \protect\footnotemark.}
 	\label{fig:medidor}
 \end{figure}
@@ -230,8 +240,8 @@ La comparación entre las distintas soluciones mencionadas se muestran en las ta
 	\label{tab:tabla2}
 \end{table}
 
-\vspace{1cm}
-\vspace{1cm}
+%\vspace{1cm}
+%\vspace{1cm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -292,11 +302,11 @@ Internet de las Cosas (IoT) y la computación en la nube (\emph{Cloud Computing}
 
 IoT es un conjunto de tecnologías que facilita la integración de sensores y actuadores que nos informan del estado de elementos cotidianos, como electrodomésticos, vehículos, herramientas o incluso seres vivos. Nos permite interactuar con ellos, habilitando su conectividad con plataformas en la nube que reciben y procesan la información para, tras su análisis, poder tomar decisiones.
 
-\item Cloud Computing: la computación en la nube como paradigma proporciona a las empresas y usuarios necesidades informáticas (como software, almacenamiento de datos, capacidad de procesamiento, etc.) a través de internet que son fácilmente escalables bajo demanda. Los documentos, correos electrónicos y otros datos, así como las aplicaciones informáticas, se almacenarán ``en la nube'', es decir, en línea, de modo que se puede acceder a los mismos desde cualquier ordenador o dispositivo móvil \citep{BOOK:1}.
+\item Cloud Computing: la computación en la nube como paradigma proporciona a las empresas y usuarios necesidades informáticas (como \emph{software}, almacenamiento de datos, capacidad de procesamiento, etc.) a través de internet que son fácilmente escalables bajo demanda. Los documentos, correos electrónicos y otros datos, así como las aplicaciones informáticas, se almacenarán ``en la nube'', es decir, en línea, de modo que se puede acceder a los mismos desde cualquier ordenador o dispositivo móvil \citep{BOOK:1}.
 
 La generalización del \emph{Cloud Computing} en la infraestructura TIC (tecnologías de información y comunicación) habilita la viabilidad de ejecutar aplicaciones completamente en Internet. En particular, permite flexibilidad de acceso \citep{BOOK:1}.
 
-La computación en la nube es una tecnología que permite acceso a software, almacenaje de ficheros y procesamiento de datos a través de Internet, siendo una opción alternativa a la ejecución en un servidor local. 
+La computación en la nube es una tecnología que permite acceso a \emph{software}, almacenaje de ficheros y procesamiento de datos a través de Internet, siendo una opción alternativa a la ejecución en un servidor local. 
 
 En el modelo de nube, no es necesario instalar aplicaciones de forma local en computadoras.
 
