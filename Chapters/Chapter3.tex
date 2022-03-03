@@ -417,7 +417,16 @@ El cálculo de la potencia eléctrica se obtiene al tener en cuenta la carga el�
 	PE = \left( TE x IE \right)
 \end{equation}
 
-Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (I) eléctrica y para dicha tarea se utilizaron dos sensores, el sensor SCT-013-030 para medir intensidad de corriente alterna y el sensor AC - ZMPT101B para medir tensión alterna.
+\vspace{0.2cm}
+Siendo las variables y unidades:
+\begin{itemize}
+\item TE: tension eléctrica(V)
+\item IE: intensidad eléctrica (I)
+\item PE: potencia eléctrica del artefacto (kW)
+\end{itemize}
+
+
+Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (I) eléctrica y para dicha tarea se utilizaron dos sensores, el sensor SCT-013-030 para medir intensidad de corriente alterna y el sensor AC - ZMPT101B para medir tensión eléctrica alterna.
 
 Los aspectos más importantes para el diseño, desarrollo y construcción del módulo se describen  a continuación, así como conceptos técnicos específicos necesario para la programación del firmware y el proceso que permite almacenar los consumos electrónicos en la base de datos.
 
@@ -514,13 +523,44 @@ Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda 
 
 \footnotetext{Imagen tomada de \url{https://surtrtech.com/2020/04/08/}}
 
-\item \keyword{medición del consumo eléctrico}
+\item \keyword{Medición del consumo eléctrico}
 
-Aún por redactar…
+Para determinar la potencia eléctrica consumida el sistema recolecta mediciones del sensor de consumo,que son valores del resultado de la formula.... 3.2... y los almacena de forma periódica, dichos datos son agrupados según la hora de lectura junto a su respectiva fecha.
+La tabla .... muestra la lógica de registros.
+
+\begin{table}[h]
+	\centering
+	\caption[Registros de consumos]{Registros de consumos}
+	\begin{tabular}{l c c c}    
+		\toprule
+		\textbf{Potencia electrodoméstico} 	 & \textbf{formato}  & \textbf{respaldo} &\textbf{fecha} \\
+		\midrule
+		P. consumo ventilador (pcv) & agrupacion (a1) & 10:00 am & 01/02/2022\\		
+		P. consumo ventilador (pcv)& agrupacion (a2) & 11:00 am &01/02/2022 \\
+		P. consumo ventilador (pcv)& agrupacion (a3) & 2:00 pm & 01/02/2022\\		
+		P. consumo ventilador (pcv)& agrupacion (a4) & 3:00 pm & 01/02/2022\\		
+		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tablaconsumos}
+\end{table}
+
+Considerando como ejemplo los datos de la tabla ...., el consumo del ventilador en el día 01/02/2022 será la sumatoria de las agrupaciones. La formula .... muestra la operación.
+\begin{equation}
+	\label{eq:potenciaformejemplo}
+	Consumo Total = \left( pcv(a1) + pcv(a2)+ pcv(a3)+ pcv(a4) \right)
+\end{equation}
+Siendo equivalente a la formula .... por las horas de uso, para el ejemplo citado.
+\begin{equation}
+	\label{eq:potenciaformejemplo2}
+	Consumo Total = \left(Potencia Consumida Ventilador X 4 Horas Uso \right)
+\end{equation}
+
+Los valores del consumo total serán usados para generar la facturación mensual por consumo eléctrico. 
+
 
 \end{enumerate}
-
-
 
 
 \section{Configuración de la red WLAN}
