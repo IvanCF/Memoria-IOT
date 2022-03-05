@@ -14,26 +14,21 @@
 
 Este trabajo presenta una propuesta de solución a partir del desarrollo de un prototipo mínimo viable de un sistema IoT, para integrar, centralizar y unificar resultados de una red de sensores y actuadores, mediante un sistema web de monitoreo y control así como la construcción de módulos propios para dicha tarea, sin la necesidad de una conexión a Internet para su funcionamiento. 
 
-Todos estos componentes trabajan en conjunto para brindar al público/cliente una solución tecnológica que sirva como herramienta amigable visualmente y pueda ser el soporte en las tareas de gestión de consumo eléctrico. Para lograrlo, se desarrollaron módulos que integran \emph{software} y \emph{hardware}, estos hacen posible la adquisición de datos de sensores y actuadores ubicados en distintos puntos de una vivienda, conectados a una red local vía Wi-Fi. Cada lectura de los sensores permite el envío de datos, que se envían a un servidor central local mediante el protocolo MQTT por vía inalámbrica, siendo el módulo principal local (servidor local) el responsable de registrar los valores de los sensores ante cualquier corte de acceso a Internet. La figura \ref{fig:diagrama1} ilustra el diagrama de componentes y la forma lógica de conexión del sistema.
+Todos estos componentes trabajan en conjunto para brindar al público/cliente una solución tecnológica que sirva como herramienta amigable visualmente y pueda ser el soporte en las tareas de gestión de consumo eléctrico. Para lograrlo, se desarrollaron módulos que integran \emph{software} y \emph{hardware}, estos hacen posible la adquisición de datos de sensores y actuadores ubicados en distintos puntos de una vivienda, conectados a una red local vía Wi-Fi. Cada lectura de los sensores permite el envío de datos, que se envían a un servidor central local mediante el protocolo MQTT por vía inalámbrica, siendo el módulo principal local el responsable de registrar los valores de los sensores ante cualquier corte de Internet. La figura \ref{fig:diagrama1} ilustra el diagrama de componentes del sistema y la lógica de conexión del sistema.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1.0\textwidth]{./Figures/diagrama1.png}
-	\caption{Diagrama de componentes.}
+	\includegraphics[width=0.92\textwidth]{./Figures/diagrama1.png}
+	\caption{Diagrama de componentes del sistema.}
 
 	\label{fig:diagrama1}
 \end{figure}
 
-El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispositivo con conectividad a Internet a cualquier usuario, ya sea dentro de la red local o un usuario externo. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo \emph{software} que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. La figura \ref{fig:diagrama2}  Muestra la lógica de funcionamiento del módulo de replicación.
+El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispositivo con conectividad a Internet a cualquier usuario, ya sea dentro de la red local o un usuario externo. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo \emph{software} que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. 
+% La figura \ref{fig:diagrama2}  Muestra la lógica de funcionamiento del módulo de replicación.
 
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=1.0\textwidth]{./Figures/diagrama2.png}
-	\caption{Diagrama funcional del replicador. }
 
-	\label{fig:diagrama2}
-\end{figure}
 
 
 En la tabla \ref{tab:tablamodulos} se detalla el desarrollo de cada uno de los módulos del sistema y que se describe en las secciones siguientes.
@@ -90,17 +85,6 @@ El plan utilizado se divide en dos categorías, la primera está definida por el
 
 La comunicación entre ambos servicios se hace mediante el protocolo MQTT utilizando la biblioteca  \emph{Eclipse Paho JavaScript Client}, se puede encontrar mayor información en la página oficial: \url{https://www.eclipse.org/paho/index.php} 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.65\textwidth]{./Figures/arquitectura-listo.png}
-\caption{Arquitectura diseñada para el sistema IoT.}
-\label{fig:arquitectura}
-\end{figure}
-\end{landscape} % esto es para rotar
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Las principales características  del servicio contratado para la implementación del prototipo mínimo viable se muestran en la tabla \ref{tab:serverweb}.
 
 
@@ -136,6 +120,17 @@ Las principales características  del servicio contratado para la implementació
 \end{table}
 
 \vspace{0.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.65\textwidth]{./Figures/arquitectura-listo.png}
+\caption{Arquitectura diseñada para el sistema IoT.}
+\label{fig:arquitectura}
+\end{figure}
+\end{landscape} % esto es para rotar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Las características del servicio para broker remoto se muestran en la tabla  \ref{tab:brokerremoto}
 
 \begin{table}[h]
@@ -157,7 +152,6 @@ Las características del servicio para broker remoto se muestran en la tabla  \r
 	\end{tabular}
 	\label{tab:brokerremoto}
 \end{table}
-
 
 \section{Medidas de ciberseguridad}
 
@@ -235,42 +229,13 @@ La unidad de almacenamiento contiene una unidad de memoria extraíble microSD de
 \caption{Mainboard y fuente de alimentación del servidor local.}
 \label{fig:placarpi4}
 \end{figure}
-
-
-
 %\begin{figure}[htpb]
 %\centering 
 %\includegraphics[width=0.7\textwidth]{./Figures/card.png}
 %\caption{Tarjeta de almacenamiento del servidor local.}
 %\label{fig:microsd}
 %\end{figure}
-
-Para el gabinete o caja de integración se consideró una cubierta de aluminio. La figura \ref{fig:argon} muestra el ensamblado de la placa y el case Argon One Pi4 V2.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-%\includegraphics[width=1.7\textwidth]{./Figures/argon.png}
-\includegraphics[width=1.0\textwidth]{./Figures/armadoactuador.png}
-\caption{Ensamblado y partes del case Argon One Pi4 V2. }
-\label{fig:argon}
-\end{figure}
-%\end{landscape} % esto es para rotar
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{0.5cm}
-Características del case Argon One Pi4 V2 \citep{WEBSITE:16}:
-
-\begin{itemize}
-\item La placa Raspberry Pi Sata está diseñada para maximizar las transferencias de datos de alta velocidad para el uso de SSD Raspberry Pi 4; lo que la hace perfecta para el uso multimedia y otras aplicaciones. 
-\item La funda SSD Raspberry Pi solo es compatible con SSD M.2 SATA con llave B-Key o B+M. El SSD se conecta al Raspberry Pi 4 a través del puente USB en un puerto USB 3.0. 
-\item El case Argon fue rediseñado para incluir dos puertos HDMI de tamaño completo e IR integrado para la funcionalidad remota. También se incluyen los puentes para el arranque automático. 
-\item El case Argon Raspberry Pi 4 tiene todos los pines GPIO accesibles en la parte superior de la funda mientras están protegidos por una cubierta magnética extraíble cuando no están en uso. 
-\item El case Argon ONE Raspberry Pi 4 obtiene la mejor experiencia de refrigeración gracias al \emph{software} Pi Fan mientras que la funda actúa como un disipador de calor conectado a la CPU.
-\end{itemize}
-
-El modulo principal (servidor local) tiene la capacidad de conectarse vía Wi-Fi o vía Ethernet. La integración y ensamblado se visualiza en la figura \ref{fig:armado}.
+Para el gabinete de integración se consideró una cubierta de aluminio. La figura \ref{fig:armado} muestra el ensamblado de la placa y el case Argon One Pi4 V2 del módulo principal.
 
 \begin{figure}[htpb]
 \centering 
@@ -279,6 +244,35 @@ El modulo principal (servidor local) tiene la capacidad de conectarse vía Wi-Fi
 \label{fig:armado}
 \end{figure}
 
+\vspace{0.5cm}
+Características del case Argon One Pi4 V2 \citep{WEBSITE:16}:
+
+\begin{itemize}
+\item Tiene una placa Raspberry Pi Sata, que está diseñada para maximizar las transferencias de datos de alta velocidad para el uso de SSD Raspberry Pi 4; lo que la hace perfecta para el uso multimedia y otras aplicaciones. 
+\item La funda SSD Raspberry Pi solo es compatible con SSD M.2 SATA con llave B-Key o B+M.
+\item El SSD se conecta al Raspberry Pi 4 a través del puente USB en un puerto USB 3.0. 
+\item El case Argon incluye dos puertos HDMI de tamaño completo e IR integrado para la funcionalidad remota y también posee arranque automático. 
+\item El case Argon Raspberry Pi 4 tiene todos los pines GPIO accesibles en la parte superior de la funda mientras están protegidos por una cubierta magnética extraíble cuando no están en uso. 
+\item El case Argon ONE Raspberry Pi 4 obtiene la mejor experiencia de refrigeración gracias al \emph{software} Pi Fan mientras que la funda actúa como un disipador de calor conectado a la CPU.
+\end{itemize}
+
+El modulo principal (servidor local) tiene la capacidad de conectarse a la red vía Wi-Fi o vía Ethernet. La integración se visualiza en la figura \ref{fig:argon}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+%\includegraphics[width=1.7\textwidth]{./Figures/argon.png}
+\includegraphics[width=0.94\textwidth]{./Figures/armadoactuador.png}
+\caption{Ensamblado y partes del módulo principal. }
+\label{fig:argon}
+\end{figure}
+%\end{landscape} % esto es para rotar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \subsection{Módulo de replicación a la nube}
 
 Para el desarrollo de este módulo se diseñó una estructura interna compuesta por subprocesos, que al trabajar en conjunto forman el sistema completo de replicación.
@@ -286,12 +280,13 @@ Para el desarrollo de este módulo se diseñó una estructura interna compuesta 
 La replicación solo se da mientras exista conexión a internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:flujoreplicador} ilustra la forma de trabajo de cada subproceso interno implementado dentro del replicador.
 
 
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.15\textwidth]{./Figures/replicador.png}
-\caption{Flujo funcional del módulo replicador.}
-\label{fig:flujoreplicador}
-\end{figure}
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.15\textwidth]{./Figures/replicador.png}
+%\caption{Flujo funcional del módulo replicador.}
+%\label{fig:flujoreplicador}
+%\end{figure}
+
 
 
 Las descripciones de cada subproceso desarrollado se detallan a continuación: 
@@ -314,6 +309,17 @@ Las descripciones de cada subproceso desarrollado se detallan a continuación:
 Este subproceso usa hilos en Python para estar constantemente registrando los tiempos de llegada de mensajes de cada sensor o actuador, y si los intervalos de tiempo de llegada de mensajes para un dispositivo activo son mayores a un minuto, el subpoceso actualiza el estado del dispositivo con el estado de ``DESCONECTADO'' en la base de datos.
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./Figures/diagrama2.png}
+	\caption{Diagrama funcional del replicador. }
+
+	\label{fig:diagrama2}
+\end{figure}
+%\end{landscape} % esto es para rotar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Módulo de medición de temperatura}
 
@@ -335,7 +341,7 @@ El diseño de integración de componentes electrónicos se realizó en una Placa
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.75\textwidth]{./Figures/ci-temp.png}
+\includegraphics[width=1.0\textwidth]{./Figures/ci-temp.png}
 \caption{Esquemático electrónico del módulo de temperatura. }
 \label{fig:citemp}
 \end{figure}
@@ -344,7 +350,7 @@ El proceso de integración total lo podemos ver en las fotografías que se visua
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.9\textwidth]{./Figures/temperatura.jpg}
+\includegraphics[width=0.95\textwidth]{./Figures/temperatura.jpg}
 \caption{Ensamblado del módulo de temperatura. }
 \label{fig:entemp}
 \end{figure}
@@ -371,18 +377,8 @@ Para la activación del relé de 5 V mediante una salida de la placa NodeMCU8266
 \label{fig:esquemaactuador}
 \end{figure}
 
-\vspace{1cm}
-\vspace{1cm}
-
-El proceso de ensamblado se ilustra en las fotografías de la figura \ref{fig:armadoactuador}.
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.9\textwidth]{./Figures/armadoactuador.jpg}
-\caption{Ensamblado del módulo de actuador. }
-\label{fig:armadoactuador}
-\end{figure}
-
+%\vspace{1cm}
+%\vspace{1cm}
 
 \subsection{Módulo de consumo eléctrico}
 
@@ -496,6 +492,14 @@ Para utilizar el sensor SCT-013 no es necesario interrumpir (cortar o desempalma
 
 A diferencia de los transformadores de tensión, en un transformador de intensidad el circuito secundario nunca debería estar abierto, porque las corrientes inducidas podrían llegar a dañar el componente. Por ese motivo, los sensores de SCT-013 disponen de protecciones (resistencia de Burden en los sensores de salida por tensión, o diodos de protección en los sensores de salida por corriente)\citep{WEBSITE:9}.
 
+El proceso de ensamblado se ilustra en las fotografías de la figura \ref{fig:armadoactuador}.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.85\textwidth]{./Figures/armadoactuador.jpg}
+\caption{Ensamblado del módulo de actuador. }
+\label{fig:armadoactuador}
+\end{figure}
 
 \item  \keyword{Aplicación del sensor de tensión eléctrica AC - ZMPT101B}
 
