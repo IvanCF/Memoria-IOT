@@ -256,7 +256,7 @@ Características del case Argon One Pi4 V2 \citep{WEBSITE:16}:
 \item El case Argon ONE Raspberry Pi 4 obtiene la mejor experiencia de refrigeración gracias al \emph{software} Pi Fan mientras que la funda actúa como un disipador de calor conectado a la CPU.
 \end{itemize}
 
-El modulo principal (servidor local) tiene la capacidad de conectarse a la red vía Wi-Fi o vía Ethernet. La integración se visualiza en la figura \ref{fig:argon}.
+El modulo principal tiene la capacidad de conectarse a la red vía Wi-Fi o vía Ethernet. La integración y partes del módulo se muestra en la figura \ref{fig:argon}.
 
 
 
@@ -277,7 +277,7 @@ El modulo principal (servidor local) tiene la capacidad de conectarse a la red v
 
 Para el desarrollo de este módulo se diseñó una estructura interna compuesta por subprocesos, que al trabajar en conjunto forman el sistema completo de replicación.
 
-La replicación solo se da mientras exista conexión a internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:flujoreplicador} ilustra la forma de trabajo de cada subproceso interno implementado dentro del replicador.
+La replicación solo se da mientras exista conexión a internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:logicareplicador} ilustra la lógica de trabajo del replicador.
 
 
 %\begin{figure}[htpb]
@@ -289,7 +289,7 @@ La replicación solo se da mientras exista conexión a internet. El desarrollo d
 
 
 
-Las descripciones de cada subproceso desarrollado se detallan a continuación: 
+Las descripciones de cada subproceso interno que contiene el módulo replicador, se detallan a continuación: 
 
 \begin{itemize}
 \item \keyword{mqtt\_envia\_nube\_poo (P1)}: es el responsable de enviar todos los datos que llegan de los canales hacia el broker remoto usando el formato JSON.
@@ -308,7 +308,7 @@ Las descripciones de cada subproceso desarrollado se detallan a continuación:
 
 Este subproceso usa hilos en Python para estar constantemente registrando los tiempos de llegada de mensajes de cada sensor o actuador, y si los intervalos de tiempo de llegada de mensajes para un dispositivo activo son mayores a un minuto, el subpoceso actualiza el estado del dispositivo con el estado de ``DESCONECTADO'' en la base de datos.
 \end{itemize}
-
+%\vspace{0.05cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htbp]
@@ -316,7 +316,7 @@ Este subproceso usa hilos en Python para estar constantemente registrando los ti
 	\includegraphics[width=1.0\textwidth]{./Figures/diagrama2.png}
 	\caption{Diagrama funcional del replicador. }
 
-	\label{fig:diagrama2}
+	\label{fig:logicareplicador}
 \end{figure}
 %\end{landscape} % esto es para rotar
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -497,7 +497,7 @@ El proceso de ensamblado se ilustra en las fotografías de la figura \ref{fig:ar
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.85\textwidth]{./Figures/armadoactuador.jpg}
-\caption{Ensamblado del módulo de actuador. }
+\caption{Ensamblado del módulo actuador. }
 \label{fig:armadoactuador}
 \end{figure}
 
@@ -576,22 +576,12 @@ El diseño y la configuración de la red WLAN tiene un rol fundamental dentro de
 Para dicha tarea se usó un Router inalámbrico como puntos de acceso para los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura ... ilustra el diseño físico de la red usada.
 
 
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.455\textwidth]{./Figures/rediot.png}
-\caption{..... .}
-\label{fig:diagramared}
-\end{figure}
-\end{landscape} % 
-
 \subsection{Configuración del Router inalámbrico}
-Los principales criterios de configuración del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi.
-Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina. Su alta capacidad de cobertura garantiza el acceso sin interrupciones a contenidos en HD (\emph{High Definition}), transferencias de archivos de un dispositivo a otro, entre otros. Es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos. 
+Los principales criterios de configuración del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos. 
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.7\textwidth]{./Figures/router.jpg}
+\includegraphics[width=0.75\textwidth]{./Figures/router.jpg}
 \caption{..... .}
 \label{fig:router}
 \end{figure}
@@ -600,10 +590,21 @@ Este router tiene tres formas de funcionamiento: access point, router y repetido
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/funcionamientorouter.png}
+\includegraphics[width=0.85\textwidth]{./Figures/funcionamientorouter.png}
 \caption{..... .}
 \label{fig:funcionamientorouter}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.3\textwidth]{./Figures/rediot.png}
+\caption{..... .}
+\label{fig:diagramared}
+\end{figure}
+\end{landscape} % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Uno de los problemas más comunes con las redes WiFi es el solapamiento de canales debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La configuración de red puede ser un motivo para problemas de Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
 
@@ -619,7 +620,7 @@ El siguiente gráfico muestra el ancho de banda utilizado por cada canal y el so
 \end{figure}
 
 \subsubsection{Elección del canal}
-En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre elija Canales 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. Se consideró lo siguiente: .....
+En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre se elije el canal 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. Para la mejor  elección del canal se tomo en cuenta las siguientes consideraciones: .....
 
 \begin{itemize}
 \item El canal 1 interferirá y recibirá interferencias de los canales 1-5 de  2,4 GHz.
@@ -627,15 +628,13 @@ En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre elija C
 \item El canal 11 interferirá y recibirá interferencias de los canales 7-11 de 2,4 GHz.
 \end{itemize}
 
-Utilizando la información anterior, se puede ver por qué siempre se debe elegir los canales 1, 11 o 6. Si hace lo contrario, invita a la interferencia de más de un canal inalámbrico principal de 2,4 GHz ...., ocasionando solapamiento e interferencia en el canal de comunicación de la red IoT a usar. Sin embargo, es posible que no se pueda acceder en la zona a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes que utilicen canales que se solapen parcialmente, en este caso, se debe buscar uno donde el impacto de ese solapamiento sea mínimo. ....
+Utilizando la información anterior, se puede ver por qué siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, invita a la interferencia de más de un canal inalámbrico principal de 2,4 GHz ...., ocasionando solapamiento e interferencia en el canal de comunicación de la red IoT a usar. Sin embargo, es posible que no se pueda acceder en la zona a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes que utilicen canales que se solapen parcialmente y para estos casos, se debe buscar uno donde el impacto de ese solapamiento sea mínimo. ....
 
 Pare este trabajo la elección del número de canal se fundamentó en la investigación mencionada y en la exploración de las redes Wi-Fi existentes en el entorno donde se implantó el sistema IoT.
 
 \subsubsection{Elección del ancho de banda}
 
-Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz. ...
-
-La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth. ....
+Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz. ... La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth. ....
 
 \begin{figure}[htpb]
 \centering 
@@ -665,23 +664,36 @@ Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las in
 
 
 
-Dentro de los parámetros de seguridad se configuró: el canal y la opción de \emph{auth. and encryption}. La figura… ilustra el antes y después de la elección del canal (la elección del número de canal ideal se tratará en el capítulo de pruebas y resultados), en la figura…. ilustra la elección de encriptación y autenticación para el acceso al access point y en la figura…. Ilustra los resultados finales de la configuración del access point
-
+Dentro de los parámetros de seguridad se configuró: el canal y la opción de \emph{auth. and encryption}. La figura… ilustra el antes y después de la elección del canal (la elección del número de canal ideal se tratará en el capítulo de pruebas y resultados), en la figura…. ilustra la elección de encriptación y autenticación para el acceso al access point y en la figura…. Ilustra los resultados finales de la configuración del access point.
+\vspace{0.2cm}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/encriptacion.png}
+\includegraphics[width=0.91\textwidth]{./Figures/encriptacion.png}
 \caption{..... .}
 \label{fig:encriptacion}
 \end{figure}
-
+\vspace{0.2cm}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.9\textwidth]{./Figures/configuracionfinal.png}
+\includegraphics[width=0.91\textwidth]{./Figures/configuracionfinal.png}
 \caption{..... .}
 \label{fig:configuracionfinal}
 \end{figure}
 
-\section{\emph{Software} a medida de monitoreo y control}
+\section{Software a medida de monitoreo y control}
 
-Aún  por redactar…
+El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro del objetivo inicial planteado como emprendimiento personal. El software cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos actuales.
 
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.65\textwidth]{./Figures/responsive1.png}
+\caption{Vista del software en equipos desktop y laptop.}
+\label{fig:software1}
+\end{figure}
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.6\textwidth]{./Figures/responsive2.png}
+\caption{Vista del software en tableta y celular.}
+\label{fig:software2}
+\end{figure}
