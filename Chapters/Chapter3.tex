@@ -515,7 +515,9 @@ El sensor está integrado por un transformador que cumple la función de aislado
 \end{figure}
 
 
-Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que la onda no tenga tensiones negativas y así poder leer la onda completamente con el ADC. El desplazamiento depende de la tensión con la que alimentemos el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2.5 V y si se alimenta el módulo con 3.3 V el desplazamiento será de 1.65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC), de esta forma es posible leer la tensión instantánea y realizar cálculos de energía, como: tensión pico a pico (Vpp) y tensión eficaz (Vrms). Debido a la naturaleza de los transformadores solo puede medir tensión AC \citep{WEBSITE:22} \citep{ARTICLE:1}. Para su uso con la tarjeta NodeMCU ESP8266, los extremos son 0 y 3.3 V con una compensación de 1.65 V. La figura \ref{fig:ondas} muestra el desplazamiento de onda senoidal
+Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que la onda no tenga tensiones negativas y así poder leer la onda completamente con el ADC. El desplazamiento depende de la tensión con la que alimentemos el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2.5 V y si se alimenta el módulo con 3.3 V el desplazamiento será de 1.65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC), de esta forma es posible leer la tensión instantánea y realizar cálculos de energía, como: tensión pico a pico (Vpp) y tensión eficaz (Vrms). 
+
+Debido a la naturaleza de los transformadores solo puede medir tensión AC \citep{WEBSITE:22} \citep{ARTICLE:1}. Para su uso con la tarjeta NodeMCU ESP8266, los extremos son 0 y 3.3 V con una compensación de 1.65 V. La figura \ref{fig:ondas} muestra el desplazamiento de onda senoidal.
 
 
 \begin{figure}[htpb]
@@ -526,7 +528,7 @@ Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda 
 \end{figure}
 
 \footnotetext{Imagen tomada de \url{https://surtrtech.com/2020/04/08/}}
-
+\vspace{1.0cm}
 \item \keyword{Medición del consumo eléctrico}
 
 Para determinar la potencia eléctrica consumida el sistema recolecta mediciones del sensor de consumo,que son valores del resultado de la formula.... 3.2... y los almacena de forma periódica, dichos datos son agrupados según la hora de lectura junto a su respectiva fecha.
@@ -567,9 +569,22 @@ Los valores del consumo total serán usados para generar la facturación mensual
 \end{enumerate}
 
 
+
 \section{Configuración de la red WLAN}
 
 El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación más seguro si interferir la red doméstica.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.5\textwidth]{./Figures/moduloconsumo.png}
+\caption{Creación del módulo de consumo.}
+\label{fig:modconsumo}
+\end{figure}
+\end{landscape} % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection{Diseño de la red física}
 
@@ -680,7 +695,7 @@ Dentro de los parámetros de seguridad se configuró: el canal y la opción de \
 \label{fig:configuracionfinal}
 \end{figure}
 
-\section{Software a medida de monitoreo y control}
+\section{Software a medida para monitoreo y control}
 
 El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro del objetivo inicial planteado como emprendimiento personal. El software cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos actuales.
 
