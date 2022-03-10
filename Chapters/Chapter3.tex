@@ -41,7 +41,8 @@ En la tabla \ref{tab:tablamodulos} se detalla el desarrollo de cada uno de los m
 		\textbf{Módulo} 	 & \textbf{Desarrollo}  & \textbf{Tipo dispositivo}\\
 		\midrule
 		Módulo principal & Hardware + Software & Físico\\		
-		Módulo réplica & Software & Lógico \\
+		Módulo replicador & Software (procesos internos)& Lógico \\
+		Módulo réplica & Software - remoto & Lógico \\
 		Módulo de temperatura & Hardware + Firmware + Software & Físico\\		
 		Módulo actuador & Hardware + Firmware + Software & Físico\\		
 		Módulo de consumo	 & Hardware + Firmware + Software & Físico\\
@@ -245,7 +246,7 @@ Para el gabinete de integración se consideró una cubierta de aluminio. La figu
 \end{figure}
 
 \vspace{0.5cm}
-Características del case Argon One Pi4 V2 \citep{WEBSITE:16}:
+Características del case de integración Argon One Pi4 V2 \citep{WEBSITE:16}:
 
 \begin{itemize}
 \item Tiene una placa Raspberry Pi Sata, que está diseñada para maximizar las transferencias de datos de alta velocidad para el uso de SSD Raspberry Pi 4; lo que la hace perfecta para el uso multimedia y otras aplicaciones. 
@@ -273,9 +274,9 @@ El modulo principal tiene la capacidad de conectarse a la red vía Wi-Fi o vía 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Módulo de replicación a la nube}
+\subsection{Módulo replicador a la nube}
 
-Para el desarrollo de este módulo se diseñó una estructura interna compuesta por subprocesos, que al trabajar en conjunto forman el sistema completo de replicación.
+Este módulo esta dentro del módulo principal y para su desarrollo de se diseñó una estructura interna compuesta por subprocesos, que al trabajar en conjunto forman el sistema completo de replicación.
 
 La replicación solo se da mientras exista conexión a internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:logicareplicador} ilustra la lógica de trabajo del replicador.
 
@@ -567,12 +568,8 @@ Los valores del consumo total serán usados para generar la facturación mensual
 
 
 \end{enumerate}
-
-
-
-\section{Configuración de la red WLAN}
-
-El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación más seguro si interferir la red doméstica.
+\subsection{Módulo réplica}
+Este módulo contiene una copia del software de monitoreo y control pero con la diferencia que esta siendo ejecutado en la nube, usando los servicios de un servidor y un broker remoto.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -585,8 +582,11 @@ El diseño y la configuración de la red WLAN tiene un rol fundamental dentro de
 \end{landscape} % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Configuración de la red WLAN}
 
-\subsection{Diseño de la red física}
+El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación más seguro si interferir la red doméstica.
+
+\subsection{Diseño de la red física local}
 
 Para dicha tarea se usó un Router inalámbrico como puntos de acceso para los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura ... ilustra el diseño físico de la red usada.
 
@@ -596,19 +596,16 @@ Los principales criterios de configuración del router inalámbrico son la segur
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.75\textwidth]{./Figures/router.jpg}
+\includegraphics[width=0.7\textwidth]{./Figures/router.jpg}
 \caption{..... .}
 \label{fig:router}
 \end{figure}
 
 Este router tiene tres formas de funcionamiento: access point, router y repetidor. Para nuestro uso se seleccionó la configuración para un access point (AP) o punto de acceso. La figura… muestra la configuración del modo de funcionamiento.
 
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.85\textwidth]{./Figures/funcionamientorouter.png}
-\caption{..... .}
-\label{fig:funcionamientorouter}
-\end{figure}
+Uno de los problemas más comunes con las redes WiFi es el solapamiento de canales debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La configuración de red puede ser un motivo para problemas de Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
+
+Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas..........
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -621,9 +618,12 @@ Este router tiene tres formas de funcionamiento: access point, router y repetido
 \end{landscape} % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Uno de los problemas más comunes con las redes WiFi es el solapamiento de canales debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La configuración de red puede ser un motivo para problemas de Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
-
-Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas..........
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/funcionamientorouter.png}
+\caption{..... .}
+\label{fig:funcionamientorouter}
+\end{figure}
 
 El siguiente gráfico muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos.
 
@@ -653,7 +653,7 @@ Para la elección de la anchura del canal se establece en 20 MHz para la banda d
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/configuracioncanal.png}
+\includegraphics[width=0.72\textwidth]{./Figures/configuracioncanal.png}
 \caption{..... .}
 \label{fig:configuracioncanal}
 \end{figure}
@@ -662,7 +662,7 @@ Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las in
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/configuracionancho.png}
+\includegraphics[width=0.72\textwidth]{./Figures/configuracionancho.png}
 \caption{..... .}
 \label{fig:configuracionancho}
 \end{figure}
