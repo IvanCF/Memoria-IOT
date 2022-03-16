@@ -12,9 +12,9 @@
 
 \section{Propuesta de solución}
 
-Este trabajo presenta una propuesta de solución a partir del desarrollo de un prototipo mínimo viable de un sistema IoT, para integrar, centralizar y unificar resultados de una red de sensores y actuadores, mediante un sistema web de monitoreo y control así como la construcción de módulos propios para dicha tarea, sin la necesidad de una conexión a Internet para su funcionamiento. 
+Este trabajo presenta una propuesta de solución a partir del desarrollo de un prototipo mínimo viable de un sistema IoT para integrar, centralizar y unificar resultados de una red de sensores y actuadores, mediante un sistema web de monitoreo y control, así como la construcción de módulos propios para dicha tarea, sin la necesidad de una conexión a Internet para su funcionamiento. 
 
-Todos estos componentes trabajan en conjunto para brindar al público/cliente una solución tecnológica que sirva como herramienta amigable visualmente y pueda ser el soporte en las tareas de gestión de consumo eléctrico. Para lograrlo, se desarrollaron módulos que integran \emph{software} y \emph{hardware}, estos hacen posible la adquisición de datos de sensores y actuadores ubicados en distintos puntos de una vivienda, conectados a una red local vía Wi-Fi. Cada lectura de los sensores permite el envío de datos, que se envían a un servidor central local mediante el protocolo MQTT por vía inalámbrica, siendo el módulo principal local el responsable de registrar los valores de los sensores ante cualquier corte de Internet. La figura \ref{fig:diagrama1} ilustra el diagrama de componentes del sistema y la lógica de conexión del sistema.
+Todos estos componentes trabajan en conjunto para brindar al cliente una solución tecnológica que sirva como herramienta visualmente amigable y que pueda ser el soporte en las tareas de gestión de consumo eléctrico. Para lograrlo, se desarrollaron módulos que integran \emph{software} y \emph{hardware}, estos hacen posible la adquisición de datos de sensores y actuadores ubicados en distintos puntos de una vivienda, conectados a una red local vía Wi-Fi. Cada lectura de los sensores permite el envío de datos a un servidor central local mediante el protocolo MQTT por vía inalámbrica, siendo el módulo principal local el responsable de registrar los valores de los sensores ante cualquier corte de Internet. La figura \ref{fig:diagrama1} ilustra el diagrama de componentes del sistema y la lógica de conexión.
 
 \begin{figure}[htbp]
 	\centering
@@ -24,14 +24,7 @@ Todos estos componentes trabajan en conjunto para brindar al público/cliente un
 	\label{fig:diagrama1}
 \end{figure}
 
-El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispositivo con conectividad a Internet a cualquier usuario, ya sea dentro de la red local o un usuario externo. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo \emph{software} que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. 
-% La figura \ref{fig:diagrama2}  Muestra la lógica de funcionamiento del módulo de replicación.
-
-
-
-
-
-En la tabla \ref{tab:tablamodulos} se detalla el desarrollo de cada uno de los módulos del sistema y que se describe en las secciones siguientes.
+El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispositivo que cuente con un navegador web y con conectividad a Internet a cualquier usuario, ya sea desde dentro de la red local o desde fuera. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo \emph{software} que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. Para los casos de corte de Internet, el módulo replicador enviará los datos de forma automática la próxima vez que detecte el servicio de conexión a Internet. En la tabla \ref{tab:tablamodulos} se detalla el tipo de desarrollo para cada uno de los módulos del sistema  que se describe en las secciones siguientes.
 
 \begin{table}[h]
 	\centering
@@ -60,12 +53,12 @@ Existen tres componentes claves dentro de la solución propuesta y se mencionan 
 
 
 \begin{itemize}
-\item Dispositivos IoT: son los módulos diseñados, a partir de la integración de software, firmware y hardware; es posible conectarlos de forma inalámbrica a una red más amplia.
-\item Redes: los routers domésticos, puntos de acceso y las configuraciones de las redes o las puertas de enlace son los responsables de conectar varios dispositivos IoT a la nube.
-\item Nube: servidores remotos en centros de datos que consolidan y almacenan la información con seguridad. Son servicios utilizados en el desarrollo para garantizar el acceso remoto de usuarios al sistema.
+\item Dispositivos IoT: son los módulos diseñados a partir de la integración de software, firmware y hardware; es posible conectarlos de forma inalámbrica a una red más amplia.
+\item Redes: los routers domésticos, puntos de acceso y las configuraciones de las redes o las puertas de enlaces son los responsables de conectar varios dispositivos IoT a la nube.
+\item Nube: servidores remotos en centros de datos que consolidan y almacenan la información con seguridad. Son servicios utilizados en el trabajo para garantizar el acceso remoto de usuarios al sistema.
 \end{itemize}
 \vspace{0.5cm}
-Cada uno de estos componentes será adecuado para diferentes usos y va a depender de varios factores como, por ejemplo:
+Cada uno de estos componentes son adecuados para diferentes usos y va a depender de varios factores como, por ejemplo:
 
 \begin{itemize}
 \item Velocidad de transferencia de datos: ¿Cuánta información se enviará?
@@ -76,7 +69,7 @@ Cada uno de estos componentes será adecuado para diferentes usos y va a depende
 
 \vspace{0.5cm}
 
-Se realizó un análisis para cada interrogante dando como resultado el diseño de una arquitectura de integración funcional según los requerimientos  planteados. La figura \ref{fig:arquitectura} Ilustra la arquitectura resultado de la solución.
+Para este trabajo se realizó un análisis para cada interrogante dando como resultado el diseño de una arquitectura de integración funcional según los requerimientos  planteados al inicio. La figura \ref{fig:arquitectura} Ilustra la arquitectura resultado de la solución.
 
 \section{Servicios en la nube}
 
@@ -532,8 +525,7 @@ Debido a la naturaleza de los transformadores solo puede medir tensión AC \cite
 \vspace{1.0cm}
 \item \keyword{Medición del consumo eléctrico}
 
-Para determinar la potencia eléctrica consumida el sistema recolecta mediciones del sensor de consumo,que son valores del resultado de la formula.... 3.2... y los almacena de forma periódica, dichos datos son agrupados según la hora de lectura junto a su respectiva fecha.
-La tabla .... muestra la lógica de registros.
+Para determinar la potencia eléctrica consumida, el sistema recolecta mediciones del sensor de consumo y realiza la operación matemática de la formula \ref{eq:potenciaform} y los resultados los almacena de forma periódica en la base de datos local y remota. Los datos son agrupados según la hora de lectura junto a su respectiva fecha. La tabla \ref{tab:tablaconsumos} muestra la lógica de registros.
 
 \begin{table}[h]
 	\centering
@@ -553,23 +545,23 @@ La tabla .... muestra la lógica de registros.
 	\label{tab:tablaconsumos}
 \end{table}
 
-Considerando como ejemplo los datos de la tabla ...., el consumo del ventilador en el día 01/02/2022 será la sumatoria de las agrupaciones. La formula .... muestra la operación.
+Considerando como ejemplo los datos de la tabla \ref{tab:tablaconsumos}, el consumo del ventilador en el día 01/02/2022 será la sumatoria de las agrupaciones. La formula \ref{eq:potenciaformejemplo} muestra la operación.
 \begin{equation}
 	\label{eq:potenciaformejemplo}
 	Consumo Total = \left( pcv(a1) + pcv(a2)+ pcv(a3)+ pcv(a4) \right)
 \end{equation}
-Siendo equivalente a la formula .... por las horas de uso, para el ejemplo citado.
+La formula \ref{eq:potenciaformejemplo} es equivalente a la formula \ref{eq:potenciaformejemplo2} para las horas de uso, según el ejemplo citado.
 \begin{equation}
 	\label{eq:potenciaformejemplo2}
 	Consumo Total = \left(Potencia Consumida Ventilador X 4 Horas Uso \right)
 \end{equation}
 
-Los valores del consumo total serán usados para generar la facturación mensual por consumo eléctrico. 
+Los valores del consumo total serán usados para generar la facturación mensual por consumo eléctrico. La figura \ref{fig:modconsumo} muestra la construcción del módulo de consumo.
 
 
 \end{enumerate}
 \subsection{Módulo réplica}
-Este módulo contiene una copia del software de monitoreo y control pero con la diferencia que esta siendo ejecutado en la nube, usando los servicios de un servidor y un broker remoto.
+Este módulo contiene una copia del software de monitoreo y control pero con la diferencia que se ejecuta en la nube usando los servicios de un servidor y un broker remoto.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -588,22 +580,24 @@ El diseño y la configuración de la red WLAN tiene un rol fundamental dentro de
 
 \subsection{Diseño de la red física local}
 
-Para dicha tarea se usó un Router inalámbrico como puntos de acceso para los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura ... ilustra el diseño físico de la red usada.
+Para esta tarea se agregó un Router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. 
+
+La figura \ref{fig:diagramared} ilustra el diseño física de la red utilizada.
 
 
 \subsection{Configuración del Router inalámbrico}
-Los principales criterios de configuración del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos. 
+Los principales criterios de configuración a considerar del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA, porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos en un nivel mas alto. La figura \ref{fig:router} muestra el modelo del router SATRA.
 
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.7\textwidth]{./Figures/router.jpg}
-\caption{..... .}
+\caption{Modelo del router utilizado para el diseño de red.}
 \label{fig:router}
 \end{figure}
 
-Este router tiene tres formas de funcionamiento: access point, router y repetidor. Para nuestro uso se seleccionó la configuración para un access point (AP) o punto de acceso. La figura… muestra la configuración del modo de funcionamiento.
+Este router tiene tres formas de funcionamiento: access point, router y repetidor. Para nuestro trabajo se seleccionó la configuración Access Point (AP) o punto de acceso. La figura \ref{fig:funcionamientorouter} muestra la configuración del modo de funcionamiento.
 
-Uno de los problemas más comunes con las redes WiFi es el solapamiento de canales debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La configuración de red puede ser un motivo para problemas de Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
+Al crear y configurar una red inalámbrica WLAN, nos encontramos con uno de los problemas más comunes con las redes WiFi, el solapamiento de canales, debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La mala configuración de red puede ser un motivo para problemas de comunicación Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
 
 Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas..........
 
@@ -612,7 +606,7 @@ Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 ca
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.3\textwidth]{./Figures/rediot.png}
-\caption{..... .}
+\caption{Diseño físico de la red WLAN para el sistema IoT.}
 \label{fig:diagramared}
 \end{figure}
 \end{landscape} % 
@@ -621,83 +615,89 @@ Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 ca
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.7\textwidth]{./Figures/funcionamientorouter.png}
-\caption{..... .}
+\caption{Elección del modo de funcionamiento del router.}
 \label{fig:funcionamientorouter}
 \end{figure}
 
-El siguiente gráfico muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos.
+El figura \ref{fig:canales} muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos.
 
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.99\textwidth]{./Figures/canales.png}
-\caption{..... .}
+\caption{Diagrama de los canales de 2.4 GHz.}
 \label{fig:canales}
 \end{figure}
 
-\subsubsection{Elección del canal}
-En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre se elije el canal 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. Para la mejor  elección del canal se tomo en cuenta las siguientes consideraciones: .....
+\subsubsection{Elección del canal de comunicación}
+En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre se elije el canal 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. 
+
+Para la elección del canal se tomo en cuenta la figura  \ref{fig:canales} y las siguientes consideraciones: .....
 
 \begin{itemize}
 \item El canal 1 interferirá y recibirá interferencias de los canales 1-5 de  2,4 GHz.
 \item El canal 6 interferirá y recibirá interferencias de los canales 2-10 de  2,4 GHz.
-\item El canal 11 interferirá y recibirá interferencias de los canales 7-11 de 2,4 GHz.
+\item El canal 11 interferirá y recibirá interferencias de los canales 7-13 de 2,4 GHz.
 \end{itemize}
 
-Utilizando la información anterior, se puede ver por qué siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, invita a la interferencia de más de un canal inalámbrico principal de 2,4 GHz ...., ocasionando solapamiento e interferencia en el canal de comunicación de la red IoT a usar. Sin embargo, es posible que no se pueda acceder en la zona a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes que utilicen canales que se solapen parcialmente y para estos casos, se debe buscar uno donde el impacto de ese solapamiento sea mínimo. ....
+Utilizando la información anterior, se puede observar que siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, se tendrá la interferencia de más de un canal inalámbrico principal de 2,4 GHz ...., ocasionando solapamiento o interferencia en el canal de comunicación de la red IoT a utilizar. Sin embargo, es posible que no se pueda acceder a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes vecinas que utilicen canales que se solapen parcialmente y para estos casos, se debe buscar un canal donde el impacto de ese solapamiento sea mínimo. ....
 
-Pare este trabajo la elección del número de canal se fundamentó en la investigación mencionada y en la exploración de las redes Wi-Fi existentes en el entorno donde se implantó el sistema IoT.
+Pare este trabajo la elección del número de canal se fundamentó en la investigación antes mencionada y en la exploración de las redes Wi-Fi vecinas existentes en el entorno donde se implantó el sistema IoT.
 
-\subsubsection{Elección del ancho de banda}
+\subsubsection{Elección del ancho de banda del canal}
 
-Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz. ... La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth. ....
+Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz. ... La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth. .... La figura \ref{fig:configuracioncanal} muestra los valores por defecto que tiene el router utilizado y la figura \ref{fig:solapamiento} muestra el solapamiento de las redes inalámbricas locales y vecinas donde se probó el sistema IoT.
 
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.72\textwidth]{./Figures/configuracioncanal.png}
-\caption{..... .}
+\caption{Configuración por defecto del router SATRA.}
 \label{fig:configuracioncanal}
 \end{figure}
 
-Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no dañar a los vecinos. ....
+Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no solapar las redes vecinas. ....
+
+La figura \ref{fig:configuracionancho} muestra la configuración final elegida para este trabajo. Las pruebas y análisis de canales así como la justificación para su elección se describen en el capitulo 4 de este documento.
 
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.72\textwidth]{./Figures/configuracionancho.png}
-\caption{..... .}
+\caption{Configuración para la red WLAN del sistema IoT.}
 \label{fig:configuracionancho}
 \end{figure}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/01-doc.png}
-\caption{..... .}
+\caption{Solapamiento de canales de las redes inalámbricas locales y vecinas.}
 \label{fig:solapamiento}
 \end{figure}
 \end{landscape} % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Configuración de seguridad inalámbrica}
+Dentro de los parámetros de seguridad se configuró la opción de autenticación (\emph{auth. and encryption}). La figura \ref{fig:encriptacion} ilustra la elección de encriptación y autenticación para el acceso a la señal del access point y en la figura \ref{fig:configuracionfinal} Ilustra los resultados finales de la configuración del access point.
 
-
-Dentro de los parámetros de seguridad se configuró: el canal y la opción de \emph{auth. and encryption}. La figura… ilustra el antes y después de la elección del canal (la elección del número de canal ideal se tratará en el capítulo de pruebas y resultados), en la figura…. ilustra la elección de encriptación y autenticación para el acceso al access point y en la figura…. Ilustra los resultados finales de la configuración del access point.
 \vspace{0.2cm}
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.91\textwidth]{./Figures/encriptacion.png}
-\caption{..... .}
+\caption{Configuración de autenticación para la señal Wi-Fi.}
 \label{fig:encriptacion}
 \end{figure}
+
 \vspace{0.2cm}
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.91\textwidth]{./Figures/configuracionfinal.png}
-\caption{..... .}
+\caption{Resumen de la configuración resultante del router.}
 \label{fig:configuracionfinal}
 \end{figure}
 
 \section{Software a medida para monitoreo y control}
 
-El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro del objetivo inicial planteado como emprendimiento personal. El software cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos actuales.
+El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro de los objetivos planteados al inicio, como emprendimiento personal. El software es de tipo web y cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos del mercado actual. La figura \ref{fig:software1} y \ref{fig:software2} muestran los resultados responsivos para cada tipo de dispositivo considerado en el desarrollo.
 
 \begin{figure}[htpb]
 \centering 
