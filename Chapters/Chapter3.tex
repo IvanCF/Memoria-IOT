@@ -389,7 +389,7 @@ La energía eléctrica que consume un artefacto eléctrico, se determina multipl
 	EC = \left( T x PE \right)
 \end{equation}
 
-\vspace{0.2cm}
+\vspace{0.1cm}
 Siendo las variables y unidades:
 \begin{itemize}
 \item EC: energía consumida (kWh)
@@ -397,7 +397,7 @@ Siendo las variables y unidades:
 \item PE: potencia eléctrica del artefacto (kW)
 \end{itemize}
 
-\vspace{0.2cm}
+\vspace{0.1cm}
 \keyword{¿Cómo se calcula la potencia eléctrica?}
 
 El cálculo de la potencia eléctrica se obtiene al tener en cuenta la carga eléctrica, también conocida como tensión eléctrica, que pasa en un tiempo limitado a través de una diferencia de potencia, denominada intensidad. El resultado, cuya unidad es el vatio (en inglés, watt) su símbolo es la W , se obtiene al multiplicar la tensión por la intensidad. La tensión se pone en Voltios (V) y la Intensidad en amperios (A). La fórmula de la potencia eléctrica se ilustra en la ecuación \ref{eq:potenciaform} \citep{WEBSITE:20}.
@@ -580,13 +580,11 @@ El diseño y la configuración de la red WLAN tiene un rol fundamental dentro de
 
 \subsection{Diseño de la red física local}
 
-Para esta tarea se agregó un Router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. 
-
-La figura \ref{fig:diagramared} ilustra el diseño física de la red utilizada.
+Para esta tarea se agregó un Router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura \ref{fig:diagramared} ilustra el diseño física de la red utilizada.
 
 
 \subsection{Configuración del Router inalámbrico}
-Los principales criterios de configuración a considerar del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA, porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos en un nivel mas alto. La figura \ref{fig:router} muestra el modelo del router SATRA.
+Los principales criterios de configuración a considerar del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA, porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos en un nivel mas alto \citep{WEBSITE:25}. La figura \ref{fig:router} muestra el modelo del router SATRA.
 
 \begin{figure}[htpb]
 \centering 
@@ -597,9 +595,7 @@ Los principales criterios de configuración a considerar del router inalámbrico
 
 Este router tiene tres formas de funcionamiento: access point, router y repetidor. Para nuestro trabajo se seleccionó la configuración Access Point (AP) o punto de acceso. La figura \ref{fig:funcionamientorouter} muestra la configuración del modo de funcionamiento.
 
-Al crear y configurar una red inalámbrica WLAN, nos encontramos con uno de los problemas más comunes con las redes WiFi, el solapamiento de canales, debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La mala configuración de red puede ser un motivo para problemas de comunicación Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. 
-
-Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas..........
+Al crear y configurar una red inalámbrica WLAN, nos encontramos con uno de los problemas más comunes con las redes WiFi, el solapamiento de canales, debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La mala configuración de red puede ser un motivo para problemas de comunicación Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -612,6 +608,8 @@ Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 ca
 \end{landscape} % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas \citep{WEBSITE:26}.
+
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.7\textwidth]{./Figures/funcionamientorouter.png}
@@ -619,7 +617,7 @@ Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 ca
 \label{fig:funcionamientorouter}
 \end{figure}
 
-El figura \ref{fig:canales} muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos.
+El figura \ref{fig:canales} muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos \citep{WEBSITE:27}.
 
 \begin{figure}[htpb]
 \centering 
@@ -631,7 +629,7 @@ El figura \ref{fig:canales} muestra el ancho de banda utilizado por cada canal y
 \subsubsection{Elección del canal de comunicación}
 En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre se elije el canal 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. 
 
-Para la elección del canal se tomo en cuenta la figura  \ref{fig:canales} y las siguientes consideraciones: .....
+Para la elección del canal se tomo en cuenta la figura  \ref{fig:canales} y las siguientes consideraciones \citep{WEBSITE:28}:
 
 \begin{itemize}
 \item El canal 1 interferirá y recibirá interferencias de los canales 1-5 de  2,4 GHz.
@@ -639,13 +637,13 @@ Para la elección del canal se tomo en cuenta la figura  \ref{fig:canales} y las
 \item El canal 11 interferirá y recibirá interferencias de los canales 7-13 de 2,4 GHz.
 \end{itemize}
 
-Utilizando la información anterior, se puede observar que siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, se tendrá la interferencia de más de un canal inalámbrico principal de 2,4 GHz ...., ocasionando solapamiento o interferencia en el canal de comunicación de la red IoT a utilizar. Sin embargo, es posible que no se pueda acceder a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes vecinas que utilicen canales que se solapen parcialmente y para estos casos, se debe buscar un canal donde el impacto de ese solapamiento sea mínimo. ....
+Utilizando la información anterior, se puede observar que siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, se tendrá la interferencia de más de un canal inalámbrico principal de 2,4 GHz \citep{WEBSITE:28}, ocasionando solapamiento o interferencia en el canal de comunicación de la red IoT a utilizar. Sin embargo, es posible que no se pueda acceder a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes vecinas que utilicen canales que se solapen parcialmente y para estos casos, se debe buscar un canal donde el impacto de ese solapamiento sea mínimo \citep{WEBSITE:27}.
 
 Pare este trabajo la elección del número de canal se fundamentó en la investigación antes mencionada y en la exploración de las redes Wi-Fi vecinas existentes en el entorno donde se implantó el sistema IoT.
 
 \subsubsection{Elección del ancho de banda del canal}
 
-Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz. ... La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth. .... La figura \ref{fig:configuracioncanal} muestra los valores por defecto que tiene el router utilizado y la figura \ref{fig:solapamiento} muestra el solapamiento de las redes inalámbricas locales y vecinas donde se probó el sistema IoT.
+Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en Automático o en todos los anchos (20 MHz, 40 Mhz y 80 MHz) para la banda de 5 GHz \citep{WEBSITE:29}. La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth \citep{WEBSITE:29}. La figura \ref{fig:configuracioncanal} muestra los valores por defecto que tiene el router utilizado y la figura \ref{fig:solapamiento} muestra el solapamiento de las redes inalámbricas locales y vecinas donde se probó el sistema IoT.
 
 \begin{figure}[htpb]
 \centering 
@@ -654,16 +652,12 @@ Para la elección de la anchura del canal se establece en 20 MHz para la banda d
 \label{fig:configuracioncanal}
 \end{figure}
 
-Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no solapar las redes vecinas. ....
+Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no solapar las redes vecinas \citep{WEBSITE:30}.
 
 La figura \ref{fig:configuracionancho} muestra la configuración final elegida para este trabajo. Las pruebas y análisis de canales así como la justificación para su elección se describen en el capitulo 4 de este documento.
 
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.72\textwidth]{./Figures/configuracionancho.png}
-\caption{Configuración para la red WLAN del sistema IoT.}
-\label{fig:configuracionancho}
-\end{figure}
+\subsubsection{Configuración de seguridad inalámbrica}
+Dentro de los parámetros de seguridad se configuró la opción de autenticación (\emph{auth. and encryption}). La figura \ref{fig:encriptacion} ilustra la elección de encriptación y autenticación para el acceso a la señal del access point y en la figura \ref{fig:configuracionfinal} Ilustra los resultados finales de la configuración del access point.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -676,24 +670,40 @@ La figura \ref{fig:configuracionancho} muestra la configuración final elegida p
 \end{landscape} % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Configuración de seguridad inalámbrica}
-Dentro de los parámetros de seguridad se configuró la opción de autenticación (\emph{auth. and encryption}). La figura \ref{fig:encriptacion} ilustra la elección de encriptación y autenticación para el acceso a la señal del access point y en la figura \ref{fig:configuracionfinal} Ilustra los resultados finales de la configuración del access point.
-
-\vspace{0.2cm}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.91\textwidth]{./Figures/encriptacion.png}
+\includegraphics[width=0.72\textwidth]{./Figures/configuracionancho.png}
+\caption{Configuración para la red WLAN del sistema IoT.}
+\label{fig:configuracionancho}
+\end{figure}
+%------------------------------------------------
+
+%\vspace{0.1cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/encriptacion.png}
 \caption{Configuración de autenticación para la señal Wi-Fi.}
 \label{fig:encriptacion}
 \end{figure}
-
-\vspace{0.2cm}
+%------------------------------------------------------
+%\vspace{0.1cm}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.91\textwidth]{./Figures/configuracionfinal.png}
+\includegraphics[width=0.8\textwidth]{./Figures/configuracionfinal.png}
 \caption{Resumen de la configuración resultante del router.}
 \label{fig:configuracionfinal}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.5\textwidth]{./Figures/wifi/01-doc.png}
+\caption{img de pruebas}
+\label{fig:separador}
+\end{figure}
+\end{landscape} % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Software a medida para monitoreo y control}
 

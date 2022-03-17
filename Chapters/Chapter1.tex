@@ -20,6 +20,85 @@ Para entender este trabajo es necesario describir ciertos conceptos, explicarlos
 %\section{Introducción}
 
 %----------------------------------------------------------------------------------------
+
+\section{Conceptos generales}
+
+En esta sección se describen aspectos esenciales para poder conocer y entender las tecnologías y servicios usados en el trabajo.
+
+\subsection{IoT y computación en la nube}
+
+Internet de las Cosas (IoT) y la computación en la nube (\emph{Cloud Computing}) son dos conceptos y soluciones que cada día ocupan una mayor importancia en el desarrollo tecnológico industrial y empresarial, pero antes de abordar su rol e importancia es importante definirlas:
+
+
+
+\begin{itemize}
+\item Internet de las Cosas (IoT): hace referencia a una tecnología basada en la conexión de objetos cotidianos a Internet que intercambian, agregan y procesan información sobre su entorno físico para proporcionar servicios de valor añadido a los usuarios finales. También reconoce eventos o cambios, y tales sistemas pueden reaccionar de forma autónoma y adecuada \citep{BOOK:1}.
+
+IoT es un conjunto de tecnologías que facilita la integración de sensores y actuadores que nos informan del estado de elementos cotidianos, como electrodomésticos, vehículos, herramientas o incluso seres vivos. Nos permite interactuar con ellos, habilitando su conectividad con plataformas en la nube que reciben y procesan la información para, tras su análisis, poder tomar decisiones.
+
+\item Cloud Computing: la computación en la nube como paradigma proporciona a las empresas y usuarios necesidades informáticas (como \emph{software}, almacenamiento de datos, capacidad de procesamiento, etc.) a través de internet que son fácilmente escalables bajo demanda. Los documentos, correos electrónicos y otros datos, así como las aplicaciones informáticas, se almacenarán ``en la nube'', es decir, en línea, de modo que se puede acceder a los mismos desde cualquier ordenador o dispositivo móvil \citep{BOOK:1}.
+
+La generalización del \emph{Cloud Computing} en la infraestructura TIC (tecnologías de información y comunicación) habilita la viabilidad de ejecutar aplicaciones completamente en Internet. En particular, permite flexibilidad de acceso \citep{BOOK:1}.
+
+La computación en la nube es una tecnología que permite acceso a \emph{software}, almacenaje de ficheros y procesamiento de datos a través de Internet, siendo una opción alternativa a la ejecución en un servidor local. 
+
+En el modelo de nube, no es necesario instalar aplicaciones de forma local en computadoras.
+
+\end{itemize}
+
+\subsection{Sensores y redes inalámbricas}
+
+En la revolución de la industria conectada (Industria 4.0) cada vez existe una mayor oferta de sensores inteligentes que, además de medir la magnitud en cuestión, llevan integrado un circuito electrónico compatible con los estándares de comunicaciones más habituales en el mundo de IoT. Capturar datos y métricas siempre ha sido una necesidad en el mundo de los procesos y operaciones industriales.
+
+\begin{itemize}
+\item Sensores: son dispositivos capaces de convertir el mundo real (físico/químico) en el mundo digital (electrónico), nos permiten llevar la realidad a una dimensión que podemos gestionar para finalmente tomar decisiones e, incluso, actuar sobre el propio entorno. Son equipos que convierten la magnitud de entrada (temperatura, humedad, nivel, presión, etc.) en una señal eléctrica medible e interpretable por los dispositivos electrónicos.
+
+\item Redes inalámbricas: las redes inalámbricas (\emph{Wireless}) logran propagar la conexión entre dispositivos a través de medios no físicos, usan diferentes tecnologías como las ondas electromagnéticas, radiación y medios ópticos para su transferencia. Existen varios tipos de redes inalámbricas con diferentes alcances y funcionalidades.
+
+\end{itemize}
+
+\subsection{Tipos de redes de IoT}
+
+Podemos clasificarlas en dos categorías:
+\begin{enumerate}
+\item Redes de corto alcance y bajo consumo 
+
+Las redes de baja potencia y corto alcance están indicadas para hogares, oficinas y otros entornos de reducido tamaño. Normalmente, necesitan baterías pequeñas y su usó suele resultar económico \citep{WEBSITE:15}. Por ejemplo:
+
+\begin{itemize}
+\item Bluetooth
+\item Z-Wave
+\item NFC
+\item ZigBee
+\item Wi-Fi/802.11
+\end{itemize}
+
+%\vspace{1cm}
+
+\item Redes de área extensa de bajo consumo (LPWAN)
+
+Las redes LPWAN permiten la comunicación en un radio mínimo de 500 metros, tienen un consumo de energía mínimo y se usan para la mayoría de los dispositivos IoT \citep{WEBSITE:15}. 
+
+Los siguientes son algunos ejemplos comunes de redes LPWAN:
+
+\begin{itemize}
+\item 4G LTE para IoT
+\item 5G para IoT
+\item Cat-0
+\item Cat-1
+\item LoRaWAN
+\item LTE Cat-M1
+\item Sigfox
+\item Banda estrecha o NB-IoT/Cat-M2
+\end{itemize}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+
+La distancia a la que los datos deben viajar (corta o larga) determina el tipo de conectividad necesaria para un proyecto de IoT.
+
+
 \section{Motivación}
 Al encender cualquier dispositivo eléctrico u electrónico se produce un consumo de energía eléctrica que normalmente se desconoce. Simplemente a final de mes, se recibe la factura de consumo eléctrico, donde se indica el consumo mensual y el monto a pagar. A muchas de las empresas que tienen procesos industriales les ocurre lo mismo y es que el control del consumo de manera precisa no está normalizado en el ámbito doméstico (\emph{smart home}) y sigue siendo un aspecto aun por mejorar. Este control es muy importante ya que gracias a él podemos mejorar la eficiencia energética, ahorrando dinero para una familia o una empresa y a la vez siendo respetuosos con el medio ambiente.
 
@@ -45,34 +124,7 @@ Realizar el proceso de refacturación para corregir estos errores costará demas
 
 Como parte de los usuarios afectados en esta problemática en Perú, surge la necesidad de desarrollar un sistema de monitoreo y control que permita conocer el consumo eléctrico mensual detallado, siendo este una herramienta automatizada de respaldo y que sirva como evidencia para prevenir facturaciones erróneas para hogares, edificios habitacionales, empresas, etc.
 
-
-\section{Identificación y análisis}
-
-
-
-\subsection{Propósito}
-
-El propósito de este proyecto es diseñar y desarrollar un sistema informático capaz de controlar y monitorear viviendas u otros ambientes mediante el protocolo MQTT para brindar una gestión inteligente respecto a confort y consumo energético.
-
-\subsection{Alcance}
-
-El proyecto incluye los siguientes ítems:
-\begin{itemize}
-\item Diseño y desarrollo de un módulo principal local.
-\item Diseño y desarrollo del módulo replicador de datos local-nube.
-\item Diseño y desarrollo del módulo actuador y de consumo.
-\item Diseño y desarrollo del módulo de control de temperatura.
-\end{itemize}
-
-\subsection{Objetivos}
-\begin{itemize}
-\item Diseñar y desarrollar un sistema IoT para medir el consumo eléctrico.
-\item Diseñar y desarrollar un sistema que no dependa de una conexión a Internet para su funcionamiento.
-\item Diseñar y desarrollar un \emph{software} a medida para la gestión de control y monitoreo de una vivienda o edificio.
-\item Diseñar e implementar módulos con comunicación Wi-Fi para el control y monitoreo de energía eléctrica.
-\end{itemize}
-%----------------------------------------------------------------------------------------
-
+%-----------------------------------------------------------------------
 \section{Estado del arte}
 
 A continuación, se describen soluciones que son utilizadas en el control del consumo eléctrico y que están actualmente en el mercado comercial. 
@@ -263,7 +315,7 @@ La comparación entre las distintas soluciones mencionadas se muestran en las ta
 	\label{tab:tabla3}
 \end{table}
 
-
+\vspace{1cm}
 \item Módulos independientes para gestión de energía eléctrica:
 
 
@@ -283,86 +335,34 @@ La comparación entre las distintas soluciones mencionadas se muestran en las ta
 	\label{tab:tabla4}
 \end{table}
 
-
-
 \end{itemize}
 
-\section{Conceptos generales}
-
-En esta sección se describen aspectos esenciales para poder conocer y entender las tecnologías y servicios usados en el trabajo.
-
-\subsection{IoT y computación en la nube}
-
-Internet de las Cosas (IoT) y la computación en la nube (\emph{Cloud Computing}) son dos conceptos y soluciones que cada día ocupan una mayor importancia en el desarrollo tecnológico industrial y empresarial, pero antes de abordar su rol e importancia es importante definirlas:
+%----------------------------------------------------------------------------------------
+\section{Identificación y análisis}
 
 
 
+\subsection{Propósito}
+
+El propósito de este proyecto es diseñar y desarrollar un sistema informático capaz de controlar y monitorear viviendas u otros ambientes mediante el protocolo MQTT para brindar una gestión inteligente respecto a confort y consumo energético.
+
+\subsection{Alcance}
+
+El proyecto incluye los siguientes ítems:
 \begin{itemize}
-\item Internet de las Cosas (IoT): hace referencia a una tecnología basada en la conexión de objetos cotidianos a Internet que intercambian, agregan y procesan información sobre su entorno físico para proporcionar servicios de valor añadido a los usuarios finales. También reconoce eventos o cambios, y tales sistemas pueden reaccionar de forma autónoma y adecuada \citep{BOOK:1}.
-
-IoT es un conjunto de tecnologías que facilita la integración de sensores y actuadores que nos informan del estado de elementos cotidianos, como electrodomésticos, vehículos, herramientas o incluso seres vivos. Nos permite interactuar con ellos, habilitando su conectividad con plataformas en la nube que reciben y procesan la información para, tras su análisis, poder tomar decisiones.
-
-\item Cloud Computing: la computación en la nube como paradigma proporciona a las empresas y usuarios necesidades informáticas (como \emph{software}, almacenamiento de datos, capacidad de procesamiento, etc.) a través de internet que son fácilmente escalables bajo demanda. Los documentos, correos electrónicos y otros datos, así como las aplicaciones informáticas, se almacenarán ``en la nube'', es decir, en línea, de modo que se puede acceder a los mismos desde cualquier ordenador o dispositivo móvil \citep{BOOK:1}.
-
-La generalización del \emph{Cloud Computing} en la infraestructura TIC (tecnologías de información y comunicación) habilita la viabilidad de ejecutar aplicaciones completamente en Internet. En particular, permite flexibilidad de acceso \citep{BOOK:1}.
-
-La computación en la nube es una tecnología que permite acceso a \emph{software}, almacenaje de ficheros y procesamiento de datos a través de Internet, siendo una opción alternativa a la ejecución en un servidor local. 
-
-En el modelo de nube, no es necesario instalar aplicaciones de forma local en computadoras.
-
+\item Diseño y desarrollo de un módulo principal local.
+\item Diseño y desarrollo del módulo replicador de datos local-nube.
+\item Diseño y desarrollo del módulo actuador y de consumo.
+\item Diseño y desarrollo del módulo de control de temperatura.
 \end{itemize}
 
-\subsection{Sensores y redes inalámbricas}
-
-En la revolución de la industria conectada (Industria 4.0) cada vez existe una mayor oferta de sensores inteligentes que, además de medir la magnitud en cuestión, llevan integrado un circuito electrónico compatible con los estándares de comunicaciones más habituales en el mundo de IoT. Capturar datos y métricas siempre ha sido una necesidad en el mundo de los procesos y operaciones industriales.
-
+\subsection{Objetivos}
 \begin{itemize}
-\item Sensores: son dispositivos capaces de convertir el mundo real (físico/químico) en el mundo digital (electrónico), nos permiten llevar la realidad a una dimensión que podemos gestionar para finalmente tomar decisiones e, incluso, actuar sobre el propio entorno. Son equipos que convierten la magnitud de entrada (temperatura, humedad, nivel, presión, etc.) en una señal eléctrica medible e interpretable por los dispositivos electrónicos.
-
-\item Redes inalámbricas: las redes inalámbricas (\emph{Wireless}) logran propagar la conexión entre dispositivos a través de medios no físicos, usan diferentes tecnologías como las ondas electromagnéticas, radiación y medios ópticos para su transferencia. Existen varios tipos de redes inalámbricas con diferentes alcances y funcionalidades.
-
+\item Diseñar y desarrollar un sistema IoT para medir el consumo eléctrico.
+\item Diseñar y desarrollar un sistema que no dependa de una conexión a Internet para su funcionamiento.
+\item Diseñar y desarrollar un \emph{software} a medida para la gestión de control y monitoreo de una vivienda o edificio.
+\item Diseñar e implementar módulos con comunicación Wi-Fi para el control y monitoreo de energía eléctrica.
 \end{itemize}
-
-\subsection{Tipos de redes de IoT}
-
-Podemos clasificarlas en dos categorías:
-\begin{enumerate}
-\item Redes de corto alcance y bajo consumo 
-
-Las redes de baja potencia y corto alcance están indicadas para hogares, oficinas y otros entornos de reducido tamaño. Normalmente, necesitan baterías pequeñas y su usó suele resultar económico \citep{WEBSITE:15}. Por ejemplo:
-
-\begin{itemize}
-\item Bluetooth
-\item Z-Wave
-\item NFC
-\item ZigBee
-\item Wi-Fi/802.11
-\end{itemize}
-
-%\vspace{1cm}
-
-\item Redes de área extensa de bajo consumo (LPWAN)
-
-Las redes LPWAN permiten la comunicación en un radio mínimo de 500 metros, tienen un consumo de energía mínimo y se usan para la mayoría de los dispositivos IoT \citep{WEBSITE:15}. 
-
-Los siguientes son algunos ejemplos comunes de redes LPWAN:
-
-\begin{itemize}
-\item 4G LTE para IoT
-\item 5G para IoT
-\item Cat-0
-\item Cat-1
-\item LoRaWAN
-\item LTE Cat-M1
-\item Sigfox
-\item Banda estrecha o NB-IoT/Cat-M2
-\end{itemize}
-
-\end{enumerate}
-
-\vspace{0.5cm}
-
-La distancia a la que los datos deben viajar (corta o larga) determina el tipo de conectividad necesaria para un proyecto de IoT.
 
 %----------------------------------------------------------------------------------------
 \let\cleardoublepage\clearpage % para eliminar pagina en blanco siguiente

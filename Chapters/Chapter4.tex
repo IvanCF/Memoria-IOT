@@ -14,7 +14,7 @@ En este capítulo se detallan los resultados esperados y obtenidos sobre cada un
 
 \section{Banco de pruebas}
 
-Todos los ensayos que se describen en este capítulo fueron efectuados utilizando el diseño físico de red que se muestra en la figura \ref{fig:banco}. Las pruebas funcionales desde dentro de la red local se realizaron con una laptop MacBook Pro y las pruebas de funcionalidad remota se realizaron utilizando un dispositivo móvil Samsung A50 con acceso a la red celular mediante el uso de paquetes de datos a Internet.
+Todos los ensayos que se describen en este capítulo fueron efectuados utilizando el diseño físico de red que se muestra en la figura \ref{fig:banco}. Las pruebas funcionales desde dentro de la red local se realizaron con una laptop MacBook Pro y un equipo de escritorio con Windows 10. Para las pruebas de funcionalidad remota se realizaron utilizando un dispositivo móvil Samsung A50 con acceso a la red celular mediante el uso de paquetes de datos a Internet.
 
 \begin{figure}[htbp]
 	\centering
@@ -191,11 +191,11 @@ Los resultados de las búsquedas podrán ser exportados en formatos excel o pdf 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Pruebas de elección de canal y ancho de banda}
+Para las pruebas y análisis de las señales inalámbricas se utilizó el software WiFi Explorer Lite. Es una herramienta de descubrimiento de redes inalámbricas que ayuda a identificar conflictos de canales y problemas de configuración y  pueden afectar la conectividad o el rendimiento de la red Wi-Fi de un hogar u oficina \citep{WEBSITE:24}. 
 
+Los fundamentos y consideraciones para la elección del canal y ancho de banda de la señal Wi-Fi IoT que se utilizó, se describió en el capitulo 3. La elección dependió de las señales circundantes vecinas a la red domestica donde se instaló el sistema prototipo IoT. La figura \ref{fig:test01} muestra resultado del primer escaneo de las señales y el uso de los canales respectivos así como solapamiento existente entre ellos. 
 
-Los fundamentos y consideraciones para la mejoren la elección del canal y ancho de bana del canal Wi-Fi IoT que se utilizó se describió en el ....capitulo 3 .... La elección dependió de las señales circundantes vecinas a la red domestica donde se instaló el sistema prototipo IoT. La figura.... muestra resultado del primer escaneo de las señales y el uso de los canales respectivos así como solapamiento existente entre ellos. 
-
-De la imagen se describe lo siguiente:
+De la figura \ref{fig:test01} se describe lo siguiente:
 
 \keyword{Señal WLAN IoT} 
 \begin{itemize}
@@ -204,7 +204,7 @@ De la imagen se describe lo siguiente:
 \item Ancho de canal: 40 MHz (configuración automática)
 \item Potencia señal: 93\%
 \item Seguridad:  WPA2 (PSK)
-\item Tasa Máxima de transferencia: 300 Mbps
+\item Tasa máxima de transferencia: 300 Mbps
 \end{itemize}
 
 
@@ -218,14 +218,19 @@ De la imagen se describe lo siguiente:
 \item Tasa Máxima de transferencia: 144.4 Mbps
 \end{itemize}
 
-El procedimiento de mejora consistió en modificar la configuración por defecto del router/AP de la red IoT al cambiar el canal y reducir el ancho de banda, verificando en cada cambio el comportamiento de las señales en el ambiente y la reducción de solapamiento de los mismos.
+El procedimiento de mejora de la configuración de la señal IoT consistió en modificar la configuración por defecto del router/AP al cambiar el canal y reducir el ancho de banda, verificando en cada cambio el comportamiento de las señales en el ambiente y la reducción de solapamiento de los mismos.
+
+La figura \ref{fig:test02} muestra el ancho de banda que ocupa el canal de comunicación de la señal del router sin configurar. Esta configuración por defecto demuestra no ser la más adecuada para el ambiente IoT, debido a que produce interferencias a las señales circundantes.
+
+La figura \ref{fig:test03} muestra las características de la señal inalámbrica doméstica del lugar donde se implanto el sistema IoT prototipo.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/01.png}
-\caption{..... .}
+\caption{Estado inicial de las señales Wi-Fi local y circundantes en el ambiente donde se implanto el sistema IoT.}
 \label{fig:test01}
 \end{figure}
 \end{landscape} %
@@ -236,7 +241,7 @@ El procedimiento de mejora consistió en modificar la configuración por defecto
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/02.png}
-\caption{..... .}
+\caption{Ancho de banda de la señal del router para la red IoT con la configuración por defecto del dispositivo.}
 \label{fig:test02}
 \end{figure}
 \end{landscape} %
@@ -247,10 +252,22 @@ El procedimiento de mejora consistió en modificar la configuración por defecto
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/03.png}
-\caption{..... .}
+\caption{Ancho de banda  y canal de la señal Wi-Fi doméstica.}
 \label{fig:test03}
 \end{figure}
 \end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+El objetivo de usar un software de exploración Wi-Fi es detectar las zonas y canales con mayor interferencia y evitar que el canal elegido para nuestro trabajo tenga la mínima o ninguna intersección con la zona critica. El software detectó la zona con mayor solapamiento y lo marcó en color rojo, como se muestra en la figura \ref{fig:test04}, asociado al SSID y canal que lo causa.
+
+El análisis de las imágenes de señales que genera el software de exploración, nos permitió conocer cuales podrían ser los canales mas ideales. Cambiar el numero de canal así como el ancho de banda del mismo, tiene como objetivo reducir o eliminar problemas de solapamiento en el canal inalámbrico usado para la red IoT. El resultado del cambio de canal para la señal destinada a la comunicación IoT, se muestra en la figura \ref{fig:test05}. 
+
+Si se compara la figura \ref{fig:test02} (antes) con la figura \ref{fig:test05} (después), se puede observar la diferencia del canal configurado al mostrar la reducción de interferencias con las señales circundantes.
+
+Al cambiar el canal de la señal IoT, el software cambia el color de la zona crítica (de rojo a naranja) en señal que el solapamiento se redujo, demostrando que existe una mejora en la señal de comunicación a utilizar. La figura \ref{fig:test06} muestra los resultados de mejora obtenidos.
+
+Las pruebas y cambios de canal para el router/AP se debe realizar durante la instalación y puesta en marcha al sistema IoT y podrá ser actualizado de acuerdo al cronograma establecido para su mantenimiento. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -258,7 +275,7 @@ El procedimiento de mejora consistió en modificar la configuración por defecto
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/04.png}
-\caption{..... .}
+\caption{Zona crítica con mayor interferencia entre los canales de las redes inalámbricas.}
 \label{fig:test04}
 \end{figure}
 \end{landscape} %
@@ -270,7 +287,7 @@ El procedimiento de mejora consistió en modificar la configuración por defecto
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/05.png}
-\caption{..... .}
+\caption{Ancho de banda y nuevo canal de funcionamiento para las señales IoT y doméstica.}
 \label{fig:test05}
 \end{figure}
 \end{landscape} %
@@ -282,7 +299,7 @@ El procedimiento de mejora consistió en modificar la configuración por defecto
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/06.png}
-\caption{..... .}
+\caption{Zona con reducción de solapamiento después de la configuración manual del router.}
 \label{fig:test06}
 \end{figure}
 \end{landscape} %
