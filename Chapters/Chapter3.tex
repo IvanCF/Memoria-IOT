@@ -621,7 +621,7 @@ El figura \ref{fig:canales} muestra el ancho de banda utilizado por cada canal y
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.99\textwidth]{./Figures/canales.png}
+\includegraphics[width=1.0\textwidth]{./Figures/canales.png}
 \caption{Diagrama de los canales de 2.4 GHz.}
 \label{fig:canales}
 \end{figure}
@@ -647,7 +647,7 @@ Para la elección de la anchura del canal se establece en 20 MHz para la banda d
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.72\textwidth]{./Figures/configuracioncanal.png}
+\includegraphics[width=0.9\textwidth]{./Figures/configuracioncanal.png}
 \caption{Configuración por defecto del router SATRA.}
 \label{fig:configuracioncanal}
 \end{figure}
@@ -655,9 +655,6 @@ Para la elección de la anchura del canal se establece en 20 MHz para la banda d
 Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no solapar las redes vecinas \citep{WEBSITE:30}.
 
 La figura \ref{fig:configuracionancho} muestra la configuración final elegida para este trabajo. Las pruebas y análisis de canales así como la justificación para su elección se describen en el capitulo 4 de este documento.
-
-\subsubsection{Configuración de seguridad inalámbrica}
-Dentro de los parámetros de seguridad se configuró la opción de autenticación (\emph{auth. and encryption}). La figura \ref{fig:encriptacion} ilustra la elección de encriptación y autenticación para el acceso a la señal del access point y en la figura \ref{fig:configuracionfinal} Ilustra los resultados finales de la configuración del access point.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -672,16 +669,19 @@ Dentro de los parámetros de seguridad se configuró la opción de autenticació
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.72\textwidth]{./Figures/configuracionancho.png}
+\includegraphics[width=0.9\textwidth]{./Figures/configuracionancho.png}
 \caption{Configuración para la red WLAN del sistema IoT.}
 \label{fig:configuracionancho}
 \end{figure}
 %------------------------------------------------
 
+\subsubsection{Configuración de seguridad inalámbrica}
+Dentro de los parámetros de seguridad se configuró la opción de autenticación (\emph{auth. and encryption}). La figura \ref{fig:encriptacion} ilustra la elección de encriptación y autenticación para el acceso a la señal del access point y en la figura \ref{fig:configuracionfinal} Ilustra los resultados finales de la configuración del access point.
+
 %\vspace{0.1cm}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.7\textwidth]{./Figures/encriptacion.png}
+\includegraphics[width=1.0\textwidth]{./Figures/encriptacion.png}
 \caption{Configuración de autenticación para la señal Wi-Fi.}
 \label{fig:encriptacion}
 \end{figure}
@@ -689,25 +689,16 @@ Dentro de los parámetros de seguridad se configuró la opción de autenticació
 %\vspace{0.1cm}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/configuracionfinal.png}
+\includegraphics[width=1.0\textwidth]{./Figures/configuracionfinal.png}
 \caption{Resumen de la configuración resultante del router.}
 \label{fig:configuracionfinal}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/wifi/01-doc.png}
-\caption{img de pruebas}
-\label{fig:separador}
-\end{figure}
-\end{landscape} % 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Software a medida para monitoreo y control}
 
-El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro de los objetivos planteados al inicio, como emprendimiento personal. El software es de tipo web y cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos del mercado actual. La figura \ref{fig:software1} y \ref{fig:software2} muestran los resultados responsivos para cada tipo de dispositivo considerado en el desarrollo.
+El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro de los objetivos planteados al inicio, como emprendimiento personal. 
+
+El software es de tipo web y cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos del mercado actual. La figura \ref{fig:software1} y \ref{fig:software2} muestran los resultados responsivos para cada tipo de dispositivo considerado en el desarrollo.
 
 \begin{figure}[htpb]
 \centering 

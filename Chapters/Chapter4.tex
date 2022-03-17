@@ -18,7 +18,7 @@ Todos los ensayos que se describen en este capítulo fueron efectuados utilizand
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.91\textwidth]{./Figures/banco2.png}
+	\includegraphics[width=0.82\textwidth]{./Figures/banco2.png}
 	\caption{Esquema del banco de pruebas utilizado.}
 
 	\label{fig:banco}
@@ -31,7 +31,7 @@ En esta sección se muestran las imágenes reales de los resultados obtenidos de
  
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.95\textwidth]{./Figures/principal2.png}
+\includegraphics[width=0.9\textwidth]{./Figures/principal2.png}
 \caption{Vista superior y posterior del módulo principal.}
 \label{fig:modPrincipal}
 \end{figure}
@@ -40,7 +40,7 @@ En esta sección se muestran las imágenes reales de los resultados obtenidos de
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.9\textwidth]{./Figures/moduloTemp.png}
+\includegraphics[width=0.85\textwidth]{./Figures/moduloTemp2.png}
 \caption{Vista lateral, frente y superior del módulo de temperatura.}
 \label{fig:modTemp}
 \end{figure}
@@ -52,7 +52,7 @@ En esta sección se muestran las imágenes reales de los resultados obtenidos de
 \begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=1.8\textwidth]{./Figures/consumo2.png}
+\includegraphics[width=1.8\textwidth]{./Figures/consumo3.png}
 \caption{Vista frontal y lateral del módulo actuador y módulo de consumo.}
 \label{fig:modConsumo2}
 \end{figure}
@@ -62,12 +62,10 @@ En esta sección se muestran las imágenes reales de los resultados obtenidos de
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Interfaces gráficas del software de monitoreo}
 
-El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas el software por ser de tipo web requiere solo un navegador web y estar conectado a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros.
-
-Las principales interfaces gráficas de usuario (GUI) que se muestran a continuación son el resultado de lo logrado en esta primera version del software hasta la fecha de presentación de este trabajo. Las GUIs son:
+El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas el software por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros. Las principales interfaces gráficas de usuario (GUI) que se muestran a continuación son el resultado de lo logrado en esta primera versión del software hasta la fecha de presentación de este trabajo. Las GUIs son:
 
 \begin{itemize}
-\item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Los credenciales utilizados son el numero de su documento nacional de identidad (DNI)y una contraseña de longitud mínima de 8 caracteres.
+\item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Los credenciales utilizados son el numero de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
 
 \item La interfaz de presentación inicial al ingresar al sistema (dashboard) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente esta almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
 
@@ -83,9 +81,7 @@ Si el módulo esta con el estado CONECTADO se podrá observar sus detalles desde
 
 \item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y numero de módelo, para su identificación dentro del sistema.
 
-\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podran ser consultados desde las opciones: lectura de temperatura y consumos sin facturar.
-
-Los resultados de las búsquedas podrán ser exportados en formatos excel o pdf y si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
+\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podran ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
 
 \end{itemize}
 
