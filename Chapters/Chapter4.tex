@@ -302,8 +302,122 @@ Las pruebas y cambios de canal para el router/AP se debe realizar durante la ins
 
 
 \section{Pruebas del módulo de temperatura}
+
+El módulo permite leer las variables físicas de temperatura y humedad del ambiente donde se instaló. La temperatura se muestra en su pantalla Oled y con mas detalle desde el software de monitoreo y control.
+
+La figura \ref{fig:test-temp} muestra la instalación para las pruebas y el valor obtenido en la pantalla oled. La figura \ref{fig:temp-lectura} muestra los valores obtenidos en el software de monitoreo y sus detalles se muestra en la figura \ref{fig:temp-detalle}.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/test/temp/test-temp.png}
+\caption{Funcionamiento del módulo de temperatura.}
+\label{fig:test-temp}
+\end{figure}
+
+La figura \ref{fig:test-panel} muestra las características del panel de visualización del módulo en el software.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.65\textwidth]{./Figures/test/temp/panel.png}
+\caption{Características del panel de visualización.}
+\label{fig:test-panel}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.7\textwidth]{./Figures/test/temp/lectura.png}
+\caption{Monitoreo de los módulos la temperatura en el software.}
+\label{fig:temp-lectura}
+\end{figure}
+\end{landscape} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.7\textwidth]{./Figures/test/temp/detalle.png}
+\caption{Detalle del módulo de temperatura conectado y activo.}
+\label{fig:temp-detalle}
+\end{figure}
+\end{landscape} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Pruebas del módulo actuador y consumo}
+Para las pruebas se usó un esquema de conexión como se muestra en la figura \ref{fig:test-esquema}, usando un ventilador como electrodoméstico indicador de consumo. 
+\vspace{0.5cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.87\textwidth]{./Figures/test/consumo/esquema.png}
+\caption{Esquema de conexión para pruebas del módulo.}
+\label{fig:test-esquema}
+\end{figure}
+
+Al implementar el módulo y realizar las pruebas respectivas demostró que el sensor AC-ZMPT101B es muy sensible en la captura del valor de la tensión. El valor obtenido se contrastó con un multímetro digital dando una diferencia aproximada de +2 V / -2 V. La figura \ref{fig:test-tension} muestra la comprobación de la tensión.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/test/consumo/tension2.png}
+\caption{Comparación de la medida de la tensión entre el módulo y el multímetro.}
+\label{fig:test-tension}
+\end{figure}
+
+El modulo permite leer las variables físicas de tensión e intensidad así como el estado del relé actuador. Las lecturas se muestran en su pantalla gráfica como se muestra en la figura \ref{fig:test-activa1} y en la figura \ref{fig:test-activa2}.
+\vspace{0.5cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/test/consumo/paso.png}
+\caption{Pantalla gráfica del módulo con paso de la corriente eléctrica (led rojo indica peligro).}
+\label{fig:test-activa1}
+\end{figure}
+
+\vspace{0.5cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/test/consumo/bloqueo.png}
+\caption{Pantalla gráfica del módulo con bloqueo de la corriente eléctrica (led azul indica sin riesgo eléctrico).}
+\label{fig:test-activa2}
+\end{figure}
+
+\vspace{0.5cm}
+
+Para facilitar la comprensión de la interfaz gráfica, la figura \ref{fig:test-panel5} muestran las características del panel de visualización del módulo en el software cuando el actuador permite el paso de la corriente eléctrica.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/test/consumo/panel5.png}
+\caption{Panel de visualización del módulo con paso de corriente eléctrica.}
+\label{fig:test-panel4}
+\end{figure}
+
+La figura \ref{fig:test-panel4} muestra las características del panel de visualización del módulo en el software cuando el actuador bloquea el paso de la corriente eléctrica .
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.85\textwidth]{./Figures/test/consumo/panel4.png}
+\caption{Panel de visualización del módulo con bloqueo de la corriente eléctrica.}
+\label{fig:test-panel5}
+\end{figure}
+
+Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a el, se pueden visualizar en el software de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:test-activa1} y \ref{fig:test-activa2} ilustran lo mencionado.
+
 \section{Pruebas del funcionamiento del módulo replicador}
+
+estado de internet
+
+replicas envía a la nube
+
+recibe de la nube
+
+verifica sin replicar
+
+
 \section{Pruebas del funcionamiento del sistema sin Internet}
+
 \section{Pruebas y resultados de consumo de energía eléctrica}
+
+
 \section{Pruebas funcionales del sistema desde acceso remoto}
