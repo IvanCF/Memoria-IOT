@@ -25,167 +25,6 @@ Todos los ensayos que se describen en este capítulo fueron efectuados utilizand
 \end{figure}
 
 
-\section{Resultados de los módulos del sistema IoT}
-En esta sección se muestran las imágenes reales de los resultados obtenidos de la construcción de cada módulo físico. Estos dispositivos fueron utilizados para las pruebas de validación en un ambiente real IoT. Las figuras \ref{fig:modPrincipal}, \ref{fig:modTemp} y \ref{fig:modConsumo2} muestran los módulos.
-
- 
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.9\textwidth]{./Figures/principal2.png}
-\caption{Vista superior y posterior del módulo principal.}
-\label{fig:modPrincipal}
-\end{figure}
-
-
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.85\textwidth]{./Figures/moduloTemp2.png}
-\caption{Vista lateral, frente y superior del módulo de temperatura.}
-\label{fig:modTemp}
-\end{figure}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.8\textwidth]{./Figures/consumo3.png}
-\caption{Vista frontal y lateral del módulo actuador y módulo de consumo.}
-\label{fig:modConsumo2}
-\end{figure}
-\end{landscape} %
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Interfaces gráficas del software de monitoreo}
-
-El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas el software por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros. Las principales interfaces gráficas de usuario (GUI) que se muestran a continuación son el resultado de lo logrado en esta primera versión del software hasta la fecha de presentación de este trabajo. Las GUIs son:
-
-\begin{itemize}
-\item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Los credenciales utilizados son el numero de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
-
-\item La interfaz de presentación inicial al ingresar al sistema (dashboard) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente esta almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
-
-\item La interfaz de monitoreo para sensores se muestra en la figura \ref{fig:gui2}. Esta interfaz permite mostrar en tiempo real los sensores que tiene el sistema IoT, así como el estado de los mismos. 
-
-Si un sensor tiene un estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui2-1}.
-
-\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT.
-
-Cada módulo en estado CONECTADO muestra el dispositivo que esta realizando consumo mediante una onda de señal de energía activa, junto a su interruptor actuador cuya función es el control del paso o limitación de energía eléctrica en el módulo.
-
-Si el módulo esta con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
-
-\item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y numero de módelo, para su identificación dentro del sistema.
-
-\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podran ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
-
-\end{itemize}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/0.png}
-\caption{Interfaz gráfica de usuario de acceso al software de monitoreo y control.}
-\label{fig:gui0}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/1.png}
-\caption{Dashboard inicial del software de monitoreo y control.}
-\label{fig:gui1}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/2.png}
-\caption{Interfaz gráfica de usuario donde se listan los sensores del sistema.}
-\label{fig:gui2}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/2-1.png}
-\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor.}
-\label{fig:gui2-1}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.52\textwidth]{./Figures/gui/3.png}
-\caption{Interfaz gráfica de usuario donde se listan los sensores de consumo junto a su función de actuador.}
-\label{fig:gui3}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.52\textwidth]{./Figures/gui/3-1.png}
-\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor de consumo.}
-\label{fig:gui3-1}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/4.png}
-\caption{Interfaz gráfica de usuario para agregar un nuevo dispositivo al sistema.}
-\label{fig:gui4}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/5.png}
-\caption{Interfaz gráfica de usuario donde se muestran las consultas y reportes de la base de datos.}
-\label{fig:gui5}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Pruebas de elección de canal y ancho de banda}
 Para las pruebas y análisis de las señales inalámbricas se utilizó el software WiFi Explorer Lite. Es una herramienta de descubrimiento de redes inalámbricas que ayuda a identificar conflictos de canales y problemas de configuración y  pueden afectar la conectividad o el rendimiento de la red Wi-Fi de un hogar u oficina \citep{WEBSITE:24}. 
 
@@ -346,7 +185,7 @@ La figura \ref{fig:test-panel} muestra las características del panel de visuali
 \end{landscape} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Pruebas del módulo actuador y consumo}
+\section{Pruebas del módulo actuador}
 Para las pruebas se usó un esquema de conexión como se muestra en la figura \ref{fig:test-esquema}, usando un ventilador como electrodoméstico indicador de consumo. 
 \vspace{0.5cm}
 \begin{figure}[htpb]
@@ -370,7 +209,7 @@ El modulo permite leer las variables físicas de tensión e intensidad así como
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.0\textwidth]{./Figures/test/consumo/paso.png}
-\caption{Pantalla gráfica del módulo con paso de la corriente eléctrica (led rojo indica peligro).}
+\caption{Módulo con paso de la corriente eléctrica (led rojo indica riesgo eléctrico en la toma de corriente ).}
 \label{fig:test-activa1}
 \end{figure}
 
@@ -378,17 +217,75 @@ El modulo permite leer las variables físicas de tensión e intensidad así como
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.0\textwidth]{./Figures/test/consumo/bloqueo.png}
-\caption{Pantalla gráfica del módulo con bloqueo de la corriente eléctrica (led azul indica sin riesgo eléctrico).}
+\caption{Módulo con bloqueo de la corriente eléctrica (led azul indica sin riesgo eléctrico en la toma de corriente).}
 \label{fig:test-activa2}
 \end{figure}
 
 \vspace{0.5cm}
+\section{Pruebas de consumo de energía eléctrica}
 
-Para facilitar la comprensión de la interfaz gráfica, la figura \ref{fig:test-panel5} muestran las características del panel de visualización del módulo en el software cuando el actuador permite el paso de la corriente eléctrica.
+El consumo que se ha medido en estas pruebas se realizó a un ventilador de casa, cuyas características principales son:
+
+\begin{itemize}
+\item Marca: ELECTROLUX
+\item Tipo:	circuladores de aire con temporizador
+\item Modelo: BFV10
+\item Número de velocidades: 3
+\item Potencia: 30 W
+\end{itemize}
+
+La figura \ref{fig:ventilador}  muestra las especificaciones técnicas adherido en su parte posterior. Resaltar que el ventilador usado tiene más de 7 años de uso y en la actualidad este modelo de ventilador aún se comercializa, pero con un incremento en el numero de velocidades y en la potencia. 
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.9\textwidth]{./Figures/test/consumo/panel5.png}
+\includegraphics[width=0.7\textwidth]{./Figures/test/consumo/ventilador.png}
+\caption{Etiqueta con información técnica del ventilador.}
+\label{fig:ventilador}
+\end{figure}
+
+Según la guía del organismo de supervisor de la inversión en energía (OSINERG - Perú) \citep{BOOK:3}, para calcular el consumo eléctrico el valor de la potencia  debe ser convertida a Kilowatts (kW), para ello se divide la potencia entre 1000. Para el ventilador usado en la pruebas el valor ideal sería la ecuación \ref{eq:potenciatest2}.
+
+\begin{equation}
+	\label{eq:potenciatest2}
+	PE = \left( 0.03 \right) kW
+\end{equation}
+
+Para comparar el valor obtenido en la formula \ref{eq:potenciatest2} el módulo de consumo nos permite obtener un valor real de la potencia del ventilador mediante la formular \ref{eq:potenciaform}, las variables de tensión e intensidad de corriente son multiplicados y se obtiene un valor de potencia en un instante de tiempo. La figura \ref{fig:registroPotencia} muestra las lecturas almacenadas en la base de datos del sistema IoT y en la tabla \ref{tab:tablapotencias} se muestra la comparación del valor ideal con el valor real obtenidos desde el módulo de consumo.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/test/consumo/lecturas.png}
+\caption{Lecturas de potencia almacenadas en la base de datos del sistema IoT.}
+\label{fig:registroPotencia}
+\end{figure}
+
+%\vspace{1.0cm}
+
+\begin{table}[h]
+	\centering
+	\caption[Comparativa de registros de potencias obtenidas]{Comparativa de registros de potencias obtenidas}
+	\begin{tabular}{l c c c}    
+		\toprule
+		\textbf{P. ideal (W)} 	 & \textbf{P. ideal (kW)}  & \textbf{P. real - módulo (W)} &\textbf{P. real módulo (kW)} \\
+		\midrule
+		30 & 0.03 & 31.35 & 0.03135\\		
+		30& 0.03 & 31.55  &0.03155 \\
+		30& 0.03 & 31.47 & 0.03147\\		
+		30& 0.03 & 31.36 & 0.03136\\		
+		30& 0.03 & 31.33 & 0.03133\\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tablapotencias}
+\end{table}
+
+El valor de las variables físicas de tensión e intensidad que son necesarias para calcular la  potencia del ventilador usando los sensores, se muestran en el software de monitoreo y control dentro de un conjunto de paneles según la cantidad de módulos registrados en el sistema IoT.
+
+Para facilitar la comprensión de la interfaz gráfica del software, la figura \ref{fig:test-panel5} muestra las características del panel de visualización del módulo en el software cuando el actuador permite el paso de la corriente eléctrica.
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/test/consumo/panel5.png}
 \caption{Panel de visualización del módulo con paso de corriente eléctrica.}
 \label{fig:test-panel4}
 \end{figure}
@@ -397,13 +294,48 @@ La figura \ref{fig:test-panel4} muestra las características del panel de visual
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.85\textwidth]{./Figures/test/consumo/panel4.png}
+\includegraphics[width=1.0\textwidth]{./Figures/test/consumo/panel4.png}
 \caption{Panel de visualización del módulo con bloqueo de la corriente eléctrica.}
 \label{fig:test-panel5}
 \end{figure}
 
-Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a el, se pueden visualizar en el software de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:test-activa1} y \ref{fig:test-activa2} ilustran lo mencionado.
+Para mostrar el monto a pagar por el usuario se consideró consumos facturados y consumos no facturados. Los consumos facturados son aquellos registros resumen de un conjunto de registros temporales que se dieron dentro de un intervalo de tiempo. Por ejemplo dentro del intervalo '28-03-2022 16:00:00' y '28-03-2022 17:00:00' se capturan aproximadamente 1800 lecturas de potencia, para considerar la facturación se obtiene la media aritmética del valor de potencia del conjunto y se almacena como único registro en la tabla de facturación con fecha y hora '28-03-2022 17:00:00', posteriormente se procede a eliminar los 1800 registros temporales. Los consumos no facturados son aquellos registros temporales.
 
+Para el calcular el monto a pagar se consideró el costo de S/0.5 nuevos soles por cada 1 kWh.
+
+Para el ventilador de pruebas se realizó un muestreo de 5 horas de funcionamiento continuo y se obtuvieron los resultados que se muestran en la figura \ref{fig:dashboard-consumo} El dashboard del software de monitoreo y control ofrece una vista resumida del subtotal y total a pagar así como un gráfico interactivo de potencia vs costo de consumo por hora.
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.7\textwidth]{./Figures/test/consumo/consumo.png}
+\caption{Dashboard de facturación del software de monitoreo y control.}
+\label{fig:dashboard-consumo}
+\end{figure}
+\end{landscape} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------
+
+Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a el, se pueden visualizar en el software de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:test-activa1} y \ref{fig:test-activa2} ilustran lo mencionado.
 \section{Pruebas del funcionamiento del módulo replicador}
 
 estado de internet
@@ -416,8 +348,6 @@ verifica sin replicar
 
 
 \section{Pruebas del funcionamiento del sistema sin Internet}
-
-\section{Pruebas y resultados de consumo de energía eléctrica}
 
 
 \section{Pruebas funcionales del sistema desde acceso remoto}

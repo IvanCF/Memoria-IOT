@@ -411,12 +411,12 @@ El cálculo de la potencia eléctrica se obtiene al tener en cuenta la carga el�
 Siendo las variables y unidades:
 \begin{itemize}
 \item TE: tension eléctrica(V)
-\item IE: intensidad eléctrica (I)
-\item PE: potencia eléctrica del artefacto (kW)
+\item IE: intensidad eléctrica (A)
+\item PE: potencia eléctrica del artefacto (W)
 \end{itemize}
 
 
-Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (I) eléctrica y para dicha tarea se utilizaron dos sensores, el sensor SCT-013-030 para medir intensidad de corriente alterna y el sensor AC - ZMPT101B para medir tensión eléctrica alterna.
+Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (A) eléctrica y para dicha tarea se utilizaron dos sensores, el sensor SCT-013-030 para medir intensidad de corriente alterna y el sensor AC - ZMPT101B para medir tensión eléctrica alterna.
 
 Los aspectos más importantes para el diseño, desarrollo y construcción del módulo se describen  a continuación, así como conceptos técnicos específicos necesario para la programación del firmware y el proceso que permite almacenar los consumos electrónicos en la base de datos.
 
@@ -702,14 +702,184 @@ El software es de tipo web y cumple con la característica de ser responsivo par
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.65\textwidth]{./Figures/responsive1.png}
+\includegraphics[width=0.65 \textwidth]{./Figures/responsive1.png}
 \caption{Vista del software en equipos desktop y laptop.}
 \label{fig:software1}
 \end{figure}
 
+\vspace{1.0cm}
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.6\textwidth]{./Figures/responsive2.png}
 \caption{Vista del software en tableta y celular.}
 \label{fig:software2}
 \end{figure}
+
+\vspace{1.0cm}
+\section{Resultados de los módulos del sistema IoT}
+En esta sección se muestran las imágenes reales de los resultados obtenidos de la construcción de cada módulo físico. Estos dispositivos fueron utilizados para las pruebas de validación en un ambiente real IoT. Las figuras \ref{fig:modPrincipal}, \ref{fig:modTemp} y \ref{fig:modConsumo2} muestran los módulos.
+
+ 
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/principal2.png}
+\caption{Vista superior y posterior del módulo principal.}
+\label{fig:modPrincipal}
+\end{figure}
+
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.85\textwidth]{./Figures/moduloTemp2.png}
+\caption{Vista lateral, frente y superior del módulo de temperatura.}
+\label{fig:modTemp}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.8\textwidth]{./Figures/consumo3.png}
+\caption{Vista frontal y lateral del módulo actuador y módulo de consumo.}
+\label{fig:modConsumo2}
+\end{figure}
+\end{landscape} %
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Interfaces gráficas del software de monitoreo y control}
+
+El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas el software por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros. 
+
+%Las principales interfaces gráficas de usuario (GUI) que se muestran a %continuación son el resultado de lo logrado en esta primera versión del %software hasta la fecha de presentación de este trabajo. Las GUIs son:
+
+\begin{itemize}
+\item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Los credenciales utilizados son el numero de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
+
+\item La interfaz de presentación inicial al ingresar al sistema (dashboard) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente esta almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
+
+\item La interfaz de monitoreo para sensores se muestra en la figura \ref{fig:gui2}. Esta interfaz permite mostrar en tiempo real los sensores que tiene el sistema IoT, así como el estado de los mismos. Si un sensor tiene un estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui2-1}.
+
+\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que esta realizando consumo mediante una onda de señal de energía activa, junto a su interruptor actuador cuya función es el control del paso o limitación de energía eléctrica en el módulo. Si el módulo esta con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
+
+\item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y numero de módelo, para su identificación dentro del sistema.
+
+\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podran ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
+
+\item El software cuenta con una interfaz que muestra un grafo que permite visualizar en tiempo real la comunicación de los módulos asi como los mensajes entre canales. El grafo se muestra en la figura \ref{fig:grafo}.
+
+
+\end{itemize}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.55\textwidth]{./Figures/gui/0.png}
+\caption{Interfaz gráfica de usuario de acceso al software de monitoreo y control.}
+\label{fig:gui0}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.55\textwidth]{./Figures/gui/1.png}
+\caption{Dashboard inicial del software de monitoreo y control.}
+\label{fig:gui1}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.55\textwidth]{./Figures/gui/2.png}
+\caption{Interfaz gráfica de usuario donde se listan los sensores del sistema.}
+\label{fig:gui2}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.5\textwidth]{./Figures/gui/2-1.png}
+\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor.}
+\label{fig:gui2-1}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.52\textwidth]{./Figures/gui/3.png}
+\caption{Interfaz gráfica de usuario donde se listan los sensores de consumo junto a su función de actuador.}
+\label{fig:gui3}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.52\textwidth]{./Figures/gui/3-1.png}
+\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor de consumo.}
+\label{fig:gui3-1}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.55\textwidth]{./Figures/gui/4.png}
+\caption{Interfaz gráfica de usuario para agregar un nuevo dispositivo al sistema.}
+\label{fig:gui4}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.5\textwidth]{./Figures/gui/5.png}
+\caption{Interfaz gráfica de usuario donde se muestran las consultas y reportes de la base de datos.}
+\label{fig:gui5}
+\end{figure}
+\end{landscape} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{landscape} % esto es para rotar la pagina e imagen
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.5\textwidth]{./Figures/gui/nucleo.png}
+\caption{Grafo de comunicación y sincronización del núcleo del sistema IoT.}
+\label{fig:grafo}
+\end{figure}
+\end{landscape} %
