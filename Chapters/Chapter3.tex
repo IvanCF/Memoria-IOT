@@ -53,7 +53,7 @@ Existen tres componentes claves dentro de la solución propuesta y se mencionan 
 
 
 \begin{itemize}
-\item Dispositivos IoT: son los módulos diseñados a partir de la integración de software, firmware y hardware; es posible conectarlos de forma inalámbrica a una red más amplia.
+\item Dispositivos IoT: son los módulos diseñados a partir de la integración de \emph{software}, \emph{firmware} y \emph{hardware}; es posible conectarlos de forma inalámbrica a una red más amplia.
 \item Redes: los routers domésticos, puntos de acceso y las configuraciones de las redes o las puertas de enlaces son los responsables de conectar varios dispositivos IoT a la nube.
 \item Nube: servidores remotos en centros de datos que consolidan y almacenan la información con seguridad. Son servicios utilizados en el trabajo para garantizar el acceso remoto de usuarios al sistema.
 \end{itemize}
@@ -178,7 +178,7 @@ Los requerimientos considerados durante el proceso, son los siguientes:
 \subsection{Requerimientos para los módulos IoT}
 
 \begin{itemize}
-\item Uso de programación basada en código modular para el desarrollo del firmware.
+\item Uso de programación basada en código modular para el desarrollo del \emph{firmware}.
 \item Uso de la biblioteca en su versión más actual para la comunicación MQTT.
 \item Los objetos de datos a transmitir serán del formato JSON.
 \item La comunicación el protocolo MQTT debe contener TLS.
@@ -269,9 +269,9 @@ El modulo principal tiene la capacidad de conectarse a la red vía Wi-Fi o vía 
 
 \subsection{Módulo replicador a la nube}
 
-Este módulo esta dentro del módulo principal y para su desarrollo de se diseñó una estructura interna compuesta por subprocesos, que al trabajar en conjunto forman el sistema completo de replicación.
+El módulo replicador a la nube está dentro del módulo principal y para su desarrollo de se diseñó una estructura interna compuesta por subprocesos que, al trabajar en conjunto, forman el sistema completo de replicación.
 
-La replicación solo se da mientras exista conexión a internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:logicareplicador} ilustra la lógica de trabajo del replicador.
+La replicación solo se da mientras exista conexión a Internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:logicareplicador} ilustra la lógica de trabajo del replicador.
 
 
 %\begin{figure}[htpb]
@@ -296,7 +296,7 @@ Las descripciones de cada subproceso interno que contiene el módulo replicador,
 
 \item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar, en caso de disponer de una conexion a Internet y a partir de registros marcados como no replicados, este procederá a enviar los últimos registros hacia la nube, para luego limpiar la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria para el sistema local y remoto.
 
-\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador) para, posteriormente comprobar si existe conexión a Internet y poder registrar en la base de datos local y remoto. En caso que no existiera conexión a Internet, solo registra en la tabla correspondiente al sensor o actuador de la base de datos local y a su vez realiza una copia hacia la tabla de registros\_no\_enviados, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
+\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador) para, posteriormente, comprobar si existe conexión a Internet y poder registrar en la base de datos local y remoto. En caso que no existiera conexión a Internet, solo registra en la tabla correspondiente al sensor o actuador de la base de datos local y a su vez realiza una copia hacia la tabla de registros\_no\_enviados, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
 
 \item \keyword{mqtt\_gestionDispositivosConectados (P7)}: es el responsable de recibir todos los mensajes que llegan al broker, verificar la pertenencia del JSON capturado (sensor o actuador) para registrar temporalmente el tiempo de llegada del mensaje del dispositivo. 
 
@@ -353,7 +353,7 @@ El proceso de integración total lo podemos ver en las fotografías que se visua
 
 Este módulo permite activar o desactivar el paso de la corriente eléctrica dentro de un tomacorriente. La acción de cambio de estados (activado o desactivado) se realiza desde un switch en la interfaz de la aplicación web de monitoreo y control.
 
-Para la construcción del módulo se utilizó una caja (case) de tomacorriente  resistente a impactos, de gran durabilidad, autoextinguible e Ideal para conductos de cables \citep{WEBSITE:18}, categoría 12 y 14. Para fijar el tomacorriente se usó una placa modular de soporte. En figura \ref{fig:caseactuador} se ilustran los componentes mencionados.
+Para la construcción del módulo se utilizó una caja (case) de tomacorriente  resistente a impactos, de gran durabilidad, autoextinguible e ideal para conductos de cables \citep{WEBSITE:18}. Para fijar el tomacorriente se usó una placa modular de soporte. En figura \ref{fig:caseactuador} se ilustran los componentes mencionados.
 
 \begin{figure}[htpb]
 \centering 
@@ -380,13 +380,13 @@ Este módulo es el responsable de medir el consumo de energía eléctrica dentro
 
 %\vspace{2cm}
 
-\keyword{¿Cómo se mide el consumo de energía eléctrica?}
+\keyword{Cálculo de consumo de energía eléctrica}
 
 La energía eléctrica que consume un artefacto eléctrico, se determina multiplicando la potencia de dicho artefacto por la cantidad de horas que está encendido \citep{BOOK:3}. Por ejemplo ver la ecuación \ref{eq:consumoform}.
 
 \begin{equation}
 	\label{eq:consumoform}
-	EC = \left( T x PE \right)
+	EC = \left( T \cdot P \right)
 \end{equation}
 
 \vspace{0.1cm}
@@ -394,52 +394,50 @@ Siendo las variables y unidades:
 \begin{itemize}
 \item EC: energía consumida (kWh)
 \item T: tiempo que esta encendido (h)
-\item PE: potencia eléctrica del artefacto (kW)
+\item P: potencia eléctrica del artefacto (kW)
 \end{itemize}
 
 \vspace{0.1cm}
-\keyword{¿Cómo se calcula la potencia eléctrica?}
+\keyword{Cálculo de la potencia eléctrica}
 
-El cálculo de la potencia eléctrica se obtiene al tener en cuenta la carga eléctrica, también conocida como tensión eléctrica, que pasa en un tiempo limitado a través de una diferencia de potencia, denominada intensidad. El resultado, cuya unidad es el vatio (en inglés, watt) su símbolo es la W , se obtiene al multiplicar la tensión por la intensidad. La tensión se pone en Voltios (V) y la Intensidad en amperios (A). La fórmula de la potencia eléctrica se ilustra en la ecuación \ref{eq:potenciaform} \citep{WEBSITE:20}.
+El cálculo de la potencia eléctrica se obtiene multiplicando la carga eléctrica, también conocida como tensión eléctrica, que pasa en un instante de tiempo a través de una diferencia de potencia, denominada intensidad. El resultado, cuya unidad es el vatio (en inglés, watt) su símbolo es la W, se obtiene al multiplicar la tensión por la intensidad. La tensión se pone en Voltios (V) y la intensidad en Amperios (A). La fórmula de la potencia eléctrica se ilustra en la ecuación \ref{eq:potenciaform} \citep{WEBSITE:20}.
 
 \begin{equation}
 	\label{eq:potenciaform}
-	PE = \left( TE x IE \right)
+	P = \left( V \cdot I \right)
 \end{equation}
 
 \vspace{0.2cm}
 Siendo las variables y unidades:
 \begin{itemize}
-\item TE: tension eléctrica(V)
-\item IE: intensidad eléctrica (A)
-\item PE: potencia eléctrica del artefacto (W)
+\item V: tension eléctrica (V)
+\item I: intensidad eléctrica (A)
+\item P: potencia eléctrica del artefacto (W)
 \end{itemize}
 
 
-Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (A) eléctrica y para dicha tarea se utilizaron dos sensores, el sensor SCT-013-030 para medir intensidad de corriente alterna y el sensor AC - ZMPT101B para medir tensión eléctrica alterna.
+Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (A), para lo que se utilizaron los sensores SCT-013-030 y  AC - ZMPT101B respectivamente.
 
-Los aspectos más importantes para el diseño, desarrollo y construcción del módulo se describen  a continuación, así como conceptos técnicos específicos necesario para la programación del firmware y el proceso que permite almacenar los consumos electrónicos en la base de datos.
+Los aspectos más importantes para el diseño, desarrollo y construcción del módulo se describen  a continuación, así como los conceptos técnicos específicos necesarios para la programación del \emph{firmware} y el proceso que permite almacenar los consumos eléctricos en la base de datos.
 
 
 \begin{enumerate}
 \item \keyword{Componentes para la construcción del módulo}
 \begin{itemize}
-\item Case de protección
+\item Gabinete de protección
 \item Sensor de tensión eléctrica AC - ZMPT101B
 \item Sensor de corriente eléctrica SCT-013-030
 \item Convertidor ADC ADS1115
-\item Cable de calibre 14:
+\item Cable de calibre 14
 \item Fusible de 30 A
 \item Pantalla gráfica LCD
-\item Fuente embebida input 220 V, output 5 V
+\item Fuente embebida con entrada 220 V y salida de 5 V
 \item Leds ultra brillantes:
 \end{itemize}
 
 \item \keyword{Aplicación del sensor SCT-013-030}
 
-La familia SCT-013 son sensores de corrientes no invasivos que permiten medir la intensidad de corriente que atraviesa un conductor sin necesidad de cortar o modificar el conductor. Es posible emplear estos sensores con un procesador Arduino o derivados para medir la intensidad o potencia consumida por una carga. Los sensores SCT-013 son transformadores de corriente, dispositivos de instrumentación que proporcionan una medición proporcional a la intensidad que atraviesa un circuito. La medición se realiza por inducción electromagnética \citep{WEBSITE:9}.
-
-Los sensores SCT-013 disponen de un núcleo ferromagnético partido (como una  pinza) que permite abrirlo para arrollar un conductor de una instalación eléctrica sin necesidad de cortarlo. Dentro de la familia SCT-013 existen modelos que proporcionan la medición como una salida de intensidad o de tensión. Para este trabajo se utilizó el sensor de salida por tensión, el SCT-013-030 para corrientes máximas de 30 A (30 A /1 V) y salida en tensión de 1 V.A. Es importante disponer un rango amplio de medición, pero hay que tener en cuenta que un modelo de mayor intensidad se traducirá en una menor precisión. Una intensidad de 30 A a 230 V corresponde con una carga de 6.900 W, potencia suficiente para la mayoría de usuarios domésticos. En la figura \ref{fig:consumo1} ilustra el esquema lógico a usar y la pinza del sensor.
+Para este trabajo se utilizó el sensor de salida por tensión, el SCT-013-030 para corrientes máximas de 30 A (30 A /1 V) y salida en tensión de 1 V.A. Es importante disponer un rango amplio de medición, pero hay que tener en cuenta que un modelo de mayor intensidad se traducirá en una menor precisión. Una intensidad de 30 A a 230 V corresponde con una carga de 6.900 W, potencia suficiente para la mayoría de usuarios domésticos. En la figura \ref{fig:consumo1} ilustra el esquema lógico a usar y la pinza del sensor.
 
 \begin{figure}[htpb]
 \centering 
