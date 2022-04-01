@@ -386,7 +386,7 @@ La energía eléctrica que consume un artefacto eléctrico, se determina multipl
 
 \begin{equation}
 	\label{eq:consumoform}
-	EC = \left( T \cdot P \right)
+	EC = \left( P \cdot T \right)
 \end{equation}
 
 \vspace{0.1cm}
@@ -438,51 +438,13 @@ Los aspectos más importantes para el diseño, desarrollo y construcción del m�
 \item \keyword{Aplicación del sensor SCT-013-030}
 
 Para este trabajo se utilizó el sensor de salida por tensión, el SCT-013-030 para corrientes máximas de 30 A (30 A /1 V) y salida en tensión de 1 V.A. Es importante disponer un rango amplio de medición, pero hay que tener en cuenta que un modelo de mayor intensidad se traducirá en una menor precisión. Una intensidad de 30 A a 230 V corresponde con una carga de 6.900 W, potencia suficiente para la mayoría de usuarios domésticos. En la figura \ref{fig:consumo1} ilustra el esquema lógico a usar y la pinza del sensor.
-
+\vspace{1.0cm}
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.9\textwidth]{./Figures/consumo1.png}
 \caption{Circuito y pinza del sensor de corriente. }
 \label{fig:consumo1}
 \end{figure}
-
-La precisión del sensor puede ser del 1\% a 2\%, pero para ello es muy importante que el núcleo ferromagnético se cierre adecuadamente. Hasta un pequeño hueco de aire puede introducir desviaciones del 10\%. Como desventaja, al ser una carga inductiva, el SCT-013 introduce una variación del ángulo de fase cuyo valor es función de la carga que lo atraviesa, pudiendo llegar a ser de hasta 3º \citep{WEBSITE:9}.
-
-Los sensores SCT-013 son pequeños transformadores de corriente o CT (\emph{Current transformartor}) instrumentos ampliamente empleados como elementos de medición. Un transformador de corriente es similar a un transformador de tensión y está basado en los mismos principios de funcionamiento. Sin embargo, persiguen objetivos diferentes \citep{WEBSITE:9}.
-
-Los sensores de la serie SCT-013 son sensores que trabajan como transformadores, la corriente que circula por el cable que se desea medir actúa como el devanado primario (1 espira) e internamente tiene un devanado secundario que dependiendo del modelo puede tener hasta más de 2000 espiras. La cantidad de espiras representa la relación entre corriente que circula por el cable y la que el sensor nos entrega, esta relación o proporción es lo que marca la diferencia entre los diferentes modelos SCT-013, adicionalmente pueden tener una resistencia de carga en la salida y de esta forma en lugar de corriente se trabaja con una salida de tensión \citep{WEBSITE:21}. La figura \ref{fig:espiras} ilustra los devanados mencionados.
-
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.0\textwidth]{./Figures/espiras.jpg}
-\caption{Partes del núcleo ferromagnético del sensor de corriente.}
-\label{fig:espiras}
-\end{figure}
-
-La relación de transformación de intensidad se expresa entre el número de espiras, como se muestra en ecuación \ref{eq:proporcionform}.
-
-\begin{equation}
-	\label{eq:proporcionform}
-	\left( \frac{Is}{Ip} \right)=\left( \frac{Vp}{Vs} \right)=\left( \frac{Np}{Ns} \right)
-\end{equation}
-
-A esto se le llama relación de transformación. Relaciona el número de espiras del devanado primario (Np), del devanado secundario (Ns), las intensidades del primario (Ip), del secundario (Is), el tensión del primario (Vp) y del secundario (Vs). 
-
-
-Para utilizar el sensor SCT-013 no es necesario interrumpir (cortar o desempalmar) el cable que vamos a medir, porque al igual que una pinza amperimétrica tiene el núcleo partido. Si pasamos por ejemplo los dos cables de una conexión monofásica, nuestra lectura será 0, puesto que los cables tienen corrientes opuestas \citep{WEBSITE:21}. La figura \ref{fig:conectacorrecto} ilustra la forma correcta de uso del sensor.
-\vspace{0.5cm}
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.8\textwidth]{./Figures/correcto.jpg}
-\caption{Forma de uso del sensor de corriente \protect\footnotemark.}
-\label{fig:conectacorrecto}
-\end{figure}
-
-\footnotetext{Imagen de \url{https://programarfacil.com/blog/arduino-blog/sct-013-consumo-electrico-arduino/}}
-
-
-A diferencia de los transformadores de tensión, en un transformador de intensidad el circuito secundario nunca debería estar abierto, porque las corrientes inducidas podrían llegar a dañar el componente. Por ese motivo, los sensores de SCT-013 disponen de protecciones (resistencia de Burden en los sensores de salida por tensión, o diodos de protección en los sensores de salida por corriente)\citep{WEBSITE:9}.
 
 El proceso de ensamblado se ilustra en las fotografías de la figura \ref{fig:armadoactuador}.
 
@@ -493,49 +455,25 @@ El proceso de ensamblado se ilustra en las fotografías de la figura \ref{fig:ar
 \label{fig:armadoactuador}
 \end{figure}
 
-\item  \keyword{Aplicación del sensor de tensión eléctrica AC - ZMPT101B}
 
-El sensor transformador de tensión alterno ZMPT101B permite medir tensión alterna como la que se dispone en nuestros hogares (en Perú: 220 VAC - 60 Hz), esta tensión AC no puede ser medida directamente por el ADC de nuestro circuito o placa pues escapa al rango de entrada (0 V a 5 V). El módulo ZMPT101B soluciona el problema reduciendo la tensión AC de entrada a una tensión menor que pueda ser leído por el Arduino, NodeMCU o cualquier otro microcontrolador. La figura \ref{fig:sensortension} ilustra la forma de conexión del módulo sensor a la línea eléctrica doméstica.
-
-El sensor está integrado por un transformador que cumple la función de aislador galvánico para mayor seguridad en el uso. El lado primario del transformador se conecta a la tensión alterna que se desea medir, por ejemplo: la red eléctrica de un hogar de 220 VAC. En el lado secundario del transformador se encuentra un divisor de tensión y un circuito con amplificador operacional (OPAMP LM358) para adicionar un desplazamiento (\emph{offset}) a la salida análoga \citep{WEBSITE:22}. 
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.85\textwidth]{./Figures/sensortension.png}
-\caption{Conexión y partes del sensor de tension.}
-\label{fig:sensortension}
-\end{figure}
-
-
-Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que la onda no tenga tensiones negativas y así poder leer la onda completamente con el ADC. El desplazamiento depende de la tensión con la que alimentemos el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2.5 V y si se alimenta el módulo con 3.3 V el desplazamiento será de 1.65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC), de esta forma es posible leer la tensión instantánea y realizar cálculos de energía, como: tensión pico a pico (Vpp) y tensión eficaz (Vrms). 
-
-Debido a la naturaleza de los transformadores solo puede medir tensión AC \citep{WEBSITE:22} \citep{ARTICLE:1}. Para su uso con la tarjeta NodeMCU ESP8266, los extremos son 0 y 3.3 V con una compensación de 1.65 V. La figura \ref{fig:ondas} muestra el desplazamiento de onda senoidal.
-
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.02\textwidth]{./Figures/ondas.png}
-\caption{Señal del ZMPT101B con el NodeMCU ESP8266 \protect\footnotemark.}
-\label{fig:ondas}
-\end{figure}
-
-\footnotetext{Imagen tomada de \url{https://surtrtech.com/2020/04/08/}}
-\vspace{1.0cm}
 \item \keyword{Medición del consumo eléctrico}
 
-Para determinar la potencia eléctrica consumida, el sistema recolecta mediciones del sensor de consumo y realiza la operación matemática de la formula \ref{eq:potenciaform} y los resultados los almacena de forma periódica en la base de datos local y remota. Los datos son agrupados según la hora de lectura junto a su respectiva fecha. La tabla \ref{tab:tablaconsumos} muestra la lógica de registros.
+Para determinar la potencia eléctrica consumida, el sistema recolecta mediciones del sensor de consumo y realiza la operación matemática de la formula \ref{eq:potenciaform}. Los resultados los almacena de forma periódica (aproximadamente cada 2 segundos) en la base de datos local y remota. Los datos son agrupados según la hora de lectura junto a su respectiva fecha. La tabla \ref{tab:tablaconsumos} muestra la lógica de registros.
+
+
+
 
 \begin{table}[h]
 	\centering
 	\caption[Registros de consumos]{Registros de consumos}
-	\begin{tabular}{l c c c}    
+	\begin{tabular}{l c c }     
 		\toprule
-		\textbf{Potencia electrodoméstico} 	 & \textbf{formato}  & \textbf{respaldo} &\textbf{fecha} \\
+		\textbf{Potencia electrodoméstico} & \textbf{Respaldo} &\textbf{Fecha} \\
 		\midrule
-		P. consumo ventilador (pcv) & agrupacion (a1) & 10:00 am & 01/02/2022\\		
-		P. consumo ventilador (pcv)& agrupacion (a2) & 11:00 am &01/02/2022 \\
-		P. consumo ventilador (pcv)& agrupacion (a3) & 2:00 pm & 01/02/2022\\		
-		P. consumo ventilador (pcv)& agrupacion (a4) & 3:00 pm & 01/02/2022\\		
+		Potencia media del ventilador (Pmv) & 10:00 am & 01/02/2022\\		
+		Potencia media del ventilador (Pmv) & 11:00 am &01/02/2022 \\
+		Potencia media del ventilador (Pmv) & 2:00 pm & 01/02/2022\\		
+		Potencia media del ventilador (Pmv) & 3:00 pm & 01/02/2022\\		
 		
 		\bottomrule
 		\hline
@@ -543,15 +481,11 @@ Para determinar la potencia eléctrica consumida, el sistema recolecta medicione
 	\label{tab:tablaconsumos}
 \end{table}
 
-Considerando como ejemplo los datos de la tabla \ref{tab:tablaconsumos}, el consumo del ventilador en el día 01/02/2022 será la sumatoria de las agrupaciones. La formula \ref{eq:potenciaformejemplo} muestra la operación.
-\begin{equation}
-	\label{eq:potenciaformejemplo}
-	Consumo Total = \left( pcv(a1) + pcv(a2)+ pcv(a3)+ pcv(a4) \right)
-\end{equation}
-La formula \ref{eq:potenciaformejemplo} es equivalente a la formula \ref{eq:potenciaformejemplo2} para las horas de uso, según el ejemplo citado.
+Cada agrupación tiene un aproximado de 1800 registros temporales registrados en una determinada hora. Si se considera como ejemplo los datos de la tabla \ref{tab:tablaconsumos}, el consumo del ventilador en el día 01/02/2022 se calcula usando la formular \ref{eq:consumoform}, dando como resultado la ecuación \ref{eq:potenciaformejemplo}.
+
 \begin{equation}
 	\label{eq:potenciaformejemplo2}
-	Consumo Total = \left(Potencia Consumida Ventilador X 4 Horas Uso \right)
+	EC =  \left( P \cdot T \right) = \left(Pmv \cdot 4 \right)
 \end{equation}
 
 Los valores del consumo total serán usados para generar la facturación mensual por consumo eléctrico. La figura \ref{fig:modconsumo} muestra la construcción del módulo de consumo.
@@ -574,15 +508,15 @@ Este módulo contiene una copia del software de monitoreo y control pero con la 
 
 \section{Configuración de la red WLAN}
 
-El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación más seguro si interferir la red doméstica.
+El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación seguro, sin interferir la red doméstica.
 
 \subsection{Diseño de la red física local}
 
-Para esta tarea se agregó un Router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura \ref{fig:diagramared} ilustra el diseño física de la red utilizada.
+Para esta tarea se agregó un router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura \ref{fig:diagramared} ilustra el diseño física de la red utilizada.
 
 
 \subsection{Configuración del Router inalámbrico}
-Los principales criterios de configuración a considerar del router inalámbrico son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usamos un \emph{Router/Access Point} de alta ganancia 300 MBPS SATRA, porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos en un nivel mas alto \citep{WEBSITE:25}. La figura \ref{fig:router} muestra el modelo del router SATRA.
+Los principales criterios de configuración del router inalámbrico a considerar son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo usó un \emph{Router/Access Point} de alta ganancia 300 Mbps SATRA, porque ofrece tasas de transferencia de datos de 300Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos en un nivel mas alto \citep{WEBSITE:25}. La figura \ref{fig:router} muestra el modelo del router SATRA.
 
 \begin{figure}[htpb]
 \centering 
@@ -593,7 +527,7 @@ Los principales criterios de configuración a considerar del router inalámbrico
 
 Este router tiene tres formas de funcionamiento: access point, router y repetidor. Para nuestro trabajo se seleccionó la configuración Access Point (AP) o punto de acceso. La figura \ref{fig:funcionamientorouter} muestra la configuración del modo de funcionamiento.
 
-Al crear y configurar una red inalámbrica WLAN, nos encontramos con uno de los problemas más comunes con las redes WiFi, el solapamiento de canales, debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La mala configuración de red puede ser un motivo para problemas de comunicación Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. Cada equipo WiFi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. 
+Al crear y configurar una red inalámbrica WLAN, nos encontramos con uno de los problemas más comunes con las redes Wi-Fi, el solapamiento de canales, debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La mala configuración de red puede ser un motivo para problemas de comunicación Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. Cada equipo Wi-Fi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -635,7 +569,7 @@ Para la elección del canal se tomo en cuenta la figura  \ref{fig:canales} y las
 \item El canal 11 interferirá y recibirá interferencias de los canales 7-13 de 2,4 GHz.
 \end{itemize}
 
-Utilizando la información anterior, se puede observar que siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, se tendrá la interferencia de más de un canal inalámbrico principal de 2,4 GHz \citep{WEBSITE:28}, ocasionando solapamiento o interferencia en el canal de comunicación de la red IoT a utilizar. Sin embargo, es posible que no se pueda acceder a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes vecinas que utilicen canales que se solapen parcialmente y para estos casos, se debe buscar un canal donde el impacto de ese solapamiento sea mínimo \citep{WEBSITE:27}.
+Utilizando la información anterior, se puede observar que siempre se debe elegir los canales 1, 11 o 6. Si se hace lo contrario, se tendrá la interferencia de más de un canal inalámbrico principal de 2,4 GHz \citep{WEBSITE:28}, ocasionando solapamiento o interferencia en el canal de comunicación de la red IoT a utilizar. Sin embargo, es posible que no se pueda acceder a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes vecinas que utilicen canales que se solapen parcialmente y, para estos casos, se debe buscar un canal donde el impacto de ese solapamiento sea mínimo \citep{WEBSITE:27}.
 
 Pare este trabajo la elección del número de canal se fundamentó en la investigación antes mencionada y en la exploración de las redes Wi-Fi vecinas existentes en el entorno donde se implantó el sistema IoT.
 
@@ -650,7 +584,7 @@ Para la elección de la anchura del canal se establece en 20 MHz para la banda d
 \label{fig:configuracioncanal}
 \end{figure}
 
-Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto el router sólo utilizará 40 MHz si los canales vecinos están libres de lo contrario, utilizará 20 MHz para no solapar las redes vecinas \citep{WEBSITE:30}.
+Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto, el router sólo utilizará 40 MHz si los canales vecinos están libres, de lo contrario, utilizará 20 MHz \citep{WEBSITE:30}.
 
 La figura \ref{fig:configuracionancho} muestra la configuración final elegida para este trabajo. Las pruebas y análisis de canales así como la justificación para su elección se describen en el capitulo 4 de este documento.
 
@@ -751,22 +685,22 @@ En esta sección se muestran las imágenes reales de los resultados obtenidos de
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Interfaces gráficas del software de monitoreo y control}
 
-El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas el software por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros. 
+El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas, el \emph{software} por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros. 
 
 %Las principales interfaces gráficas de usuario (GUI) que se muestran a %continuación son el resultado de lo logrado en esta primera versión del %software hasta la fecha de presentación de este trabajo. Las GUIs son:
 
 \begin{itemize}
 \item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Los credenciales utilizados son el numero de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
 
-\item La interfaz de presentación inicial al ingresar al sistema (dashboard) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente esta almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
+\item La interfaz de presentación inicial al ingresar al sistema (\emph{dashboard}) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente esta almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
 
 \item La interfaz de monitoreo para sensores se muestra en la figura \ref{fig:gui2}. Esta interfaz permite mostrar en tiempo real los sensores que tiene el sistema IoT, así como el estado de los mismos. Si un sensor tiene un estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui2-1}.
 
-\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que esta realizando consumo mediante una onda de señal de energía activa, junto a su interruptor actuador cuya función es el control del paso o limitación de energía eléctrica en el módulo. Si el módulo esta con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
+\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que esta realizando consumo mediante una señal de onda, junto a su interruptor actuador cuya función es el control del paso o limitación de energía eléctrica en el módulo. Si el módulo esta con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
 
 \item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y numero de módelo, para su identificación dentro del sistema.
 
-\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podran ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
+\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podran ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y, si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
 
 \item El software cuenta con una interfaz que muestra un grafo que permite visualizar en tiempo real la comunicación de los módulos asi como los mensajes entre canales. El grafo se muestra en la figura \ref{fig:grafo}.
 

@@ -316,7 +316,77 @@ Especificaciones técnicas del sensor de corriente:
 \item Tamaño abierto: 13 mm x 13 mm
 \end{itemize}
 
+La precisión del sensor puede ser del 1\% a 2\%, pero para ello es muy importante que el núcleo ferromagnético se cierre adecuadamente. Hasta un pequeño hueco de aire puede introducir desviaciones del 10\%. Como desventaja, al ser una carga inductiva, el SCT-013 introduce una variación del ángulo de fase cuyo valor es función de la carga que lo atraviesa, pudiendo llegar a ser de hasta 3º \citep{WEBSITE:9}.
+
+%Los sensores SCT-013 son pequeños transformadores de corriente o CT (\emph{Current transformartor}) instrumentos ampliamente empleados como elementos de medición. Un transformador de corriente es similar a un transformador de tensión y está basado en los mismos principios de funcionamiento. Sin embargo, persiguen objetivos diferentes \citep{WEBSITE:9}.
+
+Los sensores de la serie SCT-013 son sensores que trabajan como transformadores, la corriente que circula por el cable que se desea medir actúa como el devanado primario (1 espira) e internamente tiene un devanado secundario que dependiendo del modelo puede tener hasta más de 2000 espiras. La cantidad de espiras representa la relación entre corriente que circula por el cable y la que el sensor nos entrega, esta relación o proporción es lo que marca la diferencia entre los diferentes modelos SCT-013, adicionalmente pueden tener una resistencia de carga en la salida y de esta forma en lugar de corriente se trabaja con una salida de tensión \citep{WEBSITE:21}. La figura \ref{fig:espiras} ilustra los devanados mencionados.
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/espiras.jpg}
+\caption{Partes del núcleo ferromagnético del sensor de corriente.}
+\label{fig:espiras}
+\end{figure}
+
+La relación de transformación de intensidad se expresa entre el número de espiras, como se muestra en ecuación \ref{eq:proporcionform}.
+
+\begin{equation}
+	\label{eq:proporcionform}
+	\left( \frac{Is}{Ip} \right)=\left( \frac{Vp}{Vs} \right)=\left( \frac{Np}{Ns} \right)
+\end{equation}
+
+A esto se le llama relación de transformación. Relaciona el número de espiras del devanado primario (Np), del devanado secundario (Ns), las intensidades del primario (Ip), del secundario (Is), el tensión del primario (Vp) y del secundario (Vs). 
+
+
+Para utilizar el sensor SCT-013 no es necesario interrumpir (cortar o desempalmar) el cable que vamos a medir, porque al igual que una pinza amperimétrica tiene el núcleo partido. Si pasamos por ejemplo los dos cables de una conexión monofásica, nuestra lectura será 0, puesto que los cables tienen corrientes opuestas \citep{WEBSITE:21}. La figura \ref{fig:conectacorrecto} ilustra la forma correcta de uso del sensor.
+\vspace{0.5cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/correcto.jpg}
+\caption{Forma de uso del sensor de corriente \protect\footnotemark.}
+\label{fig:conectacorrecto}
+\end{figure}
+
+\footnotetext{Imagen de \url{https://programarfacil.com/blog/arduino-blog/sct-013-consumo-electrico-arduino/}}
+
+
+A diferencia de los transformadores de tensión, en un transformador de intensidad el circuito secundario nunca debería estar abierto, porque las corrientes inducidas podrían llegar a dañar el componente. Por ese motivo, los sensores de SCT-013 disponen de protecciones (resistencia de Burden en los sensores de salida por tensión, o diodos de protección en los sensores de salida por corriente)\citep{WEBSITE:9}.
+
 Para el trabajo se consideró el módulo SCT-013 de 30 A y con soporte para 250 VAC.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sensor de tensión eléctrica AC - ZMPT101B}
+
+El sensor transformador de tensión alterno ZMPT101B permite medir tensión alterna como la que se dispone en nuestros hogares (en Perú: 220 VAC - 60 Hz), esta tensión AC no puede ser medida directamente por el ADC de nuestro circuito o placa pues escapa al rango de entrada (0 V a 5 V). El módulo ZMPT101B soluciona el problema reduciendo la tensión AC de entrada a una tensión menor que pueda ser leído por el Arduino, NodeMCU o cualquier otro microcontrolador. La figura \ref{fig:sensortension} ilustra la forma de conexión del módulo sensor a la línea eléctrica doméstica.
+
+El sensor está integrado por un transformador que cumple la función de aislador galvánico para mayor seguridad en el uso. El lado primario del transformador se conecta a la tensión alterna que se desea medir, por ejemplo: la red eléctrica de un hogar de 220 VAC. En el lado secundario del transformador se encuentra un divisor de tensión y un circuito con amplificador operacional (OPAMP LM358) para adicionar un desplazamiento (\emph{offset}) a la salida análoga \citep{WEBSITE:22}. 
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.85\textwidth]{./Figures/sensortension.png}
+\caption{Conexión y partes del sensor de tension.}
+\label{fig:sensortension}
+\end{figure}
+
+
+Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que la onda no tenga tensiones negativas y así poder leer la onda completamente con el ADC. El desplazamiento depende de la tensión con la que alimentemos el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2.5 V y si se alimenta el módulo con 3.3 V el desplazamiento será de 1.65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC), de esta forma es posible leer la tensión instantánea y realizar cálculos de energía, como: tensión pico a pico (Vpp) y tensión eficaz (Vrms). 
+
+Debido a la naturaleza de los transformadores, solo puede medir tensión AC \citep{WEBSITE:22} \citep{ARTICLE:1}. Para su uso con la tarjeta NodeMCU ESP8266, los extremos son 0 y 3.3 V con una compensación de 1.65 V. La figura \ref{fig:ondas} muestra el desplazamiento de onda senoidal.
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.02\textwidth]{./Figures/ondas.png}
+\caption{Señal del ZMPT101B con el NodeMCU ESP8266 \protect\footnotemark.}
+\label{fig:ondas}
+\end{figure}
+
+\footnotetext{Imagen tomada de \url{https://surtrtech.com/2020/04/08/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \subsection{Relé Actuador}
 

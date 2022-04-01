@@ -93,13 +93,13 @@ La figura \ref{fig:test03} muestra las características de la señal inalámbric
 \end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-El objetivo de usar un software de exploración Wi-Fi es detectar las zonas y canales con mayor interferencia y evitar que el canal elegido para nuestro trabajo tenga la mínima o ninguna intersección con la zona critica. El software detectó la zona con mayor solapamiento y lo marcó en color rojo, como se muestra en la figura \ref{fig:test04}, asociado al SSID y canal que lo causa.
+El objetivo de usar un software de exploración Wi-Fi es detectar las zonas y canales con mayor interferencia y evitar que el canal elegido para nuestro trabajo tenga la mínima o ninguna intersección con la zona critica. El \emph{software} detectó la zona con mayor solapamiento y lo marcó en color rojo, como se muestra en la figura \ref{fig:test04}, asociado al SSID y canal que lo causa.
 
-El análisis de las imágenes de señales que genera el software de exploración, nos permitió conocer cuales podrían ser los canales mas ideales. Cambiar el numero de canal así como el ancho de banda del mismo, tiene como objetivo reducir o eliminar problemas de solapamiento en el canal inalámbrico usado para la red IoT. El resultado del cambio de canal para la señal destinada a la comunicación IoT, se muestra en la figura \ref{fig:test05}. 
+El análisis de las imágenes de señales que genera el \emph{software} de exploración permite conocer cuales podrían ser los canales ideales. El resultado del cambio de canal para la señal destinada a la comunicación IoT, se muestra en la figura \ref{fig:test05}. 
 
 Si se compara la figura \ref{fig:test02} (antes) con la figura \ref{fig:test05} (después), se puede observar la diferencia del canal configurado al mostrar la reducción de interferencias con las señales circundantes.
 
-Al cambiar el canal de la señal IoT, el software cambia el color de la zona crítica (de rojo a naranja) en señal que el solapamiento se redujo, demostrando que existe una mejora en la señal de comunicación a utilizar. La figura \ref{fig:test06} muestra los resultados de mejora obtenidos.
+Al cambiar el canal de la señal IoT, el \emph{software} cambia el color de la zona crítica (de rojo a naranja) en señal que el solapamiento se redujo, demostrando que existe una mejora en la señal de comunicación a utilizar. La figura \ref{fig:test06} muestra los resultados de mejora obtenidos.
 
 Las pruebas y cambios de canal para el router/AP se debe realizar durante la instalación y puesta en marcha al sistema IoT y podrá ser actualizado de acuerdo al cronograma establecido para su mantenimiento. 
 
@@ -142,9 +142,9 @@ Las pruebas y cambios de canal para el router/AP se debe realizar durante la ins
 
 \section{Pruebas del módulo de temperatura}
 
-El módulo permite leer las variables físicas de temperatura y humedad del ambiente donde se instaló. La temperatura se muestra en su pantalla Oled y con mas detalle desde el software de monitoreo y control.
+El módulo permite leer las variables físicas de temperatura y humedad del ambiente donde se instaló. La temperatura se muestra en su pantalla Oled y con mas detalle desde el \emph{software} de monitoreo y control.
 
-La figura \ref{fig:test-temp} muestra la instalación para las pruebas y el valor obtenido en la pantalla oled. La figura \ref{fig:temp-lectura} muestra los valores obtenidos en el software de monitoreo y sus detalles se muestra en la figura \ref{fig:temp-detalle}.
+La figura \ref{fig:test-temp} muestra la instalación para las pruebas y el valor obtenido en la pantalla oled. La figura \ref{fig:temp-lectura} muestra los valores obtenidos en el \emph{software} de monitoreo y sus detalles se muestra en la figura \ref{fig:temp-detalle}.
 
 \begin{figure}[htpb]
 \centering 
@@ -281,7 +281,7 @@ Para comparar el valor obtenido en la formula \ref{eq:potenciatest2} el módulo 
 
 El valor de las variables físicas de tensión e intensidad que son necesarias para calcular la  potencia del ventilador usando los sensores, se muestran en el software de monitoreo y control dentro de un conjunto de paneles según la cantidad de módulos registrados en el sistema IoT.
 
-Para facilitar la comprensión de la interfaz gráfica del software, la figura \ref{fig:test-panel5} muestra las características del panel de visualización del módulo en el software cuando el actuador permite el paso de la corriente eléctrica. La figura \ref{fig:test-panel4} muestra las características del panel de visualización del módulo en el software cuando el actuador bloquea el paso de la corriente eléctrica .
+Para facilitar la comprensión de la interfaz gráfica del software, la figura \ref{fig:test-panel5} muestra las características del panel de visualización del módulo en el \emph{software} cuando el actuador permite el paso de la corriente eléctrica. La figura \ref{fig:test-panel4} muestra las características del panel de visualización del módulo en el \emph{software} cuando el actuador bloquea el paso de la corriente eléctrica .
 
 \begin{figure}[htpb]
 \centering 
@@ -299,11 +299,11 @@ Para facilitar la comprensión de la interfaz gráfica del software, la figura \
 \label{fig:test-panel4}
 \end{figure}
 
-Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a el, se pueden visualizar en el software de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:dashboard-v1} y \ref{fig:dashboard-v2} ilustran lo mencionado.
+Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a el, se pueden visualizar en el \emph{software} de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:dashboard-v1} y \ref{fig:dashboard-v2} ilustran lo mencionado.
 
-Para calcular el monto a pagar por el usuario se consideró consumos facturados y consumos no facturados. Los consumos facturados son aquellos registros resumen de un conjunto de registros temporales que se dieron dentro de un intervalo de tiempo. Por ejemplo dentro del intervalo '28-03-2022 16:00:00' y '28-03-2022 17:00:00' se capturan aproximadamente 1800 lecturas de potencia, para considerar la facturación se obtiene la media aritmética del valor de potencia del conjunto y se almacena como único registro en la tabla de facturación con fecha y hora '28-03-2022 17:00:00', posteriormente se procede a eliminar los 1800 registros temporales. Los consumos no facturados son los registros temporales. Para el calcular el monto a pagar se consideró el costo de S/0.5 nuevos soles por cada 1 kWh.
+Para calcular el monto a pagar por el usuario se consideró consumos facturados y consumos no facturados. Los consumos facturados son aquellos registros resumen de un conjunto de registros temporales que se dieron dentro de un intervalo de tiempo. Por ejemplo dentro del intervalo '28-03-2022 16:00:00' y '28-03-2022 17:00:00' se capturan aproximadamente 1800 lecturas de potencia, para considerar la facturación se obtiene la media aritmética del valor de potencia del conjunto y se almacena como único registro en la tabla de facturación con fecha y hora '28-03-2022 17:00:00', posteriormente se procede a eliminar los 1800 registros temporales. Los consumos no facturados son los registros temporales. 
 
-Se realizó un muestreo de 5 horas de funcionamiento continuo del ventilador y se obtuvieron los resultados que se muestran en la figura \ref{fig:dashboard-consumo} El dashboard del software de monitoreo y control ofrece una vista resumida del subtotal y total a pagar así como un gráfico interactivo de potencia vs costo de consumo por hora.
+Se realizó un muestreo de 5 horas de funcionamiento continuo del ventilador y se obtuvieron los resultados que se muestran en la figura \ref{fig:dashboard-consumo} El \emph{dashboard} del \emph{software} de monitoreo y control ofrece una vista resumida del subtotal y total a pagar así como un gráfico interactivo de potencia vs costo de consumo por hora.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -348,7 +348,7 @@ Los valores obtenidos en la figura \ref{fig:dashboard-consumo} fueron contrastad
 	EC = \left( 0.15 \right) kW
 \end{equation}
 
-Para obtener el costo monetario (Nuevo sol) según el consumo, se utilizó la ecuación.... y la ultima lectura de potencia del software se muestra en la figura \ref{fig:dashboard-v1} , potencia igual a 32.55 W. La tabla \ref{tab:tablacostos} muestra la comparación entre los valores obtenidos, considerando el uso del ventilador por 5 horas por día, por semana (25 h) y por mes (100 h).
+Para obtener el costo monetario (Nuevo sol) según el consumo, se multiplica el costo por kWh con el consumo. Para fines de pruebas se usará la ultima lectura de potencia entregada por el \emph{software}, que se muestra en la figura \ref{fig:dashboard-v1}, potencia igual a 32.55 W. La tabla \ref{tab:tablacostos} muestra la comparación entre los valores obtenidos, considerando el uso del ventilador por 5 horas por día, por semana (25 h) y por mes (100 h). Se consideró el costo de S/0.5 nuevos soles por cada 1 kWh.
 
 \begin{table}[h]
 	\centering
@@ -372,16 +372,16 @@ Para obtener el costo monetario (Nuevo sol) según el consumo, se utilizó la ec
 Significado de columnas:
 \begin{itemize}
 \item Pi: potencia ideal (según descripción técnica del ventilador) 
-\item Ps: potencia entregada por el software de monitoreo y control
+\item Ps: potencia entregada por el \emph{software} de monitoreo y control
 \item T: tiempo
 \item Ci: consumo ideal o esperado
-\item Cs: consumo entregado por el software de monitoreo y control
+\item Cs: consumo entregado por el \emph{software} de monitoreo y control
 \item Coi: costo ideal o esperado
-\item Cos: costo calculado por el software de monitoreo y control
+\item Cos: costo calculado por el \emph{software} de monitoreo y control
 \end{itemize}
 
 \vspace{0.1cm}
-De la columna Coi (valor esperado) y Cos (valor obtenido) podemos observar que los valores entregados por el software son muy cercanos al esperado, para obtener los errores relativos (Er) y errores absolutos (Ea) usaremos las ecuaciones  \ref{eq:ea} y \ref{eq:er} . La tabla \ref{tab:tablaerror} muestra los resultados de los errores obtenidos para muestreo.
+De la columna Coi (valor esperado) y Cos (valor obtenido) podemos observar que los valores entregados por el \emph{software} son muy cercanos al esperado, para obtener los errores relativos (Er) y errores absolutos (Ea) usaremos las ecuaciones  \ref{eq:ea} y \ref{eq:er} . La tabla \ref{tab:tablaerror} muestra los resultados de los errores obtenidos para muestreo.
 
 
 %\begin{equation}
@@ -468,7 +468,7 @@ Se mencionó en los capítulos anteriores que el replicador esta constantemente 
 
 El módulo replicador contiene un subproceso que se ejecuta de forma continua y verifica el estado del servicio de Internet. La salida del proceso se muestra en la figura \ref{fig:inter1}. 
 
-Al estar sin Internet en la red, el sistema detecta dicho corte y muestra un mensaje en la parte superior del software de monitoreo y control. La figura \ref{fig:inter2} y la figura \ref{fig:inter3} muestran la alerta.
+Al estar sin Internet en la red, el sistema detecta dicho corte y muestra un mensaje en la parte superior del \emph{software} de monitoreo y control. La figura \ref{fig:inter2} y la figura \ref{fig:inter3} muestran la alerta.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htpb]
 \centering 
@@ -495,7 +495,7 @@ Al estar sin Internet en la red, el sistema detecta dicho corte y muestra un men
 
 \section{Pruebas del sistema desde acceso remoto}
 
-Para visualizar la comunicación entre el software réplica - remoto y el módulo principal local se muestra el grafo del funcionamiento del sistema de monitoreo y control. El software nos permite visualizar en tiempo real el comportamiento y el envió de mensajes entre canales como se muestra en la figura \ref{fig:graforemoto}. Los puntos de colores en la figura significan:
+Para visualizar la comunicación entre el \emph{software} réplica - remoto y el módulo principal local se muestra el grafo del funcionamiento del sistema de monitoreo y control. El software nos permite visualizar en tiempo real el comportamiento y el envió de mensajes entre canales como se muestra en la figura \ref{fig:graforemoto}. Los puntos de colores en la figura significan:
 
 \begin{itemize}
 \item Punto negro: mensaje enviado.
