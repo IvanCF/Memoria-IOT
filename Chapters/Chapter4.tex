@@ -26,9 +26,9 @@ Todos los ensayos que se describen en este capítulo fueron efectuados utilizand
 
 
 \section{Pruebas de elección de canal y ancho de banda}
-Para las pruebas y análisis de las señales inalámbricas se utilizó el software WiFi Explorer Lite. Es una herramienta de descubrimiento de redes inalámbricas que ayuda a identificar conflictos de canales y problemas de configuración y  pueden afectar la conectividad o el rendimiento de la red Wi-Fi de un hogar u oficina \citep{WEBSITE:24}. 
+Para las pruebas y análisis de las señales inalámbricas se utilizó el software WiFi Explorer Lite. Es una herramienta de descubrimiento de redes inalámbricas que ayuda a identificar conflictos de canales y problemas de configuración que puedan afectar la conectividad o el rendimiento de la red Wi-Fi de un hogar u oficina \citep{WEBSITE:24}. 
 
-Los fundamentos y consideraciones para la elección del canal y ancho de banda de la señal Wi-Fi IoT que se utilizó, se describió en el capitulo 3. La elección dependió de las señales circundantes vecinas a la red domestica donde se instaló el sistema prototipo IoT. La figura \ref{fig:test01} muestra resultado del primer escaneo de las señales y el uso de los canales respectivos así como solapamiento existente entre ellos. 
+Los fundamentos y consideraciones para la elección del canal y ancho de banda de la señal Wi-Fi IoT que se utilizó, se describieron en el capítulo 3. La elección dependió de las señales circundantes vecinas a la red doméstica donde se instaló el sistema prototipo IoT. La figura \ref{fig:test01} muestra resultado del primer escaneo de las señales y el uso de los canales respectivos así como solapamiento existente entre ellos. 
 
 De la figura \ref{fig:test01} se describe lo siguiente:
 
@@ -57,7 +57,7 @@ El procedimiento de mejora de la configuración de la señal IoT consistió en m
 
 La figura \ref{fig:test02} muestra el ancho de banda que ocupa el canal de comunicación de la señal del router sin configurar. Esta configuración por defecto demuestra no ser la más adecuada para el ambiente IoT, debido a que produce interferencias a las señales circundantes.
 
-La figura \ref{fig:test03} muestra las características de la señal inalámbrica doméstica del lugar donde se implanto el sistema IoT prototipo.
+La figura \ref{fig:test03} muestra las características de la señal inalámbrica doméstica del lugar donde se implementó el sistema IoT prototipo.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,7 +93,7 @@ La figura \ref{fig:test03} muestra las características de la señal inalámbric
 \end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-El objetivo de usar un software de exploración Wi-Fi es detectar las zonas y canales con mayor interferencia y evitar que el canal elegido para nuestro trabajo tenga la mínima o ninguna intersección con la zona critica. El \emph{software} detectó la zona con mayor solapamiento y lo marcó en color rojo, como se muestra en la figura \ref{fig:test04}, asociado al SSID y canal que lo causa.
+El objetivo de usar un software de exploración Wi-Fi es detectar las zonas y canales con mayor interferencia y evitar que el canal elegido para el presente trabajo tenga la mínima o ninguna intersección con la zona critica. El \emph{software} detectó la zona con mayor solapamiento y lo marcó en color rojo, como se muestra en la figura \ref{fig:test04}, asociado al SSID y canal que lo causa.
 
 El análisis de las imágenes de señales que genera el \emph{software} de exploración permite conocer cuales podrían ser los canales ideales. El resultado del cambio de canal para la señal destinada a la comunicación IoT, se muestra en la figura \ref{fig:test05}. 
 
@@ -101,7 +101,7 @@ Si se compara la figura \ref{fig:test02} (antes) con la figura \ref{fig:test05} 
 
 Al cambiar el canal de la señal IoT, el \emph{software} cambia el color de la zona crítica (de rojo a naranja) en señal que el solapamiento se redujo, demostrando que existe una mejora en la señal de comunicación a utilizar. La figura \ref{fig:test06} muestra los resultados de mejora obtenidos.
 
-Las pruebas y cambios de canal para el router/AP se debe realizar durante la instalación y puesta en marcha al sistema IoT y podrá ser actualizado de acuerdo al cronograma establecido para su mantenimiento. 
+Las pruebas y cambios de canal para el router/AP se deben realizar durante la instalación y puesta en marcha al sistema IoT y podrán ser actualizados de acuerdo al cronograma establecido para su mantenimiento. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,9 +142,9 @@ Las pruebas y cambios de canal para el router/AP se debe realizar durante la ins
 
 \section{Pruebas del módulo de temperatura}
 
-El módulo permite leer las variables físicas de temperatura y humedad del ambiente donde se instaló. La temperatura se muestra en su pantalla Oled y con mas detalle desde el \emph{software} de monitoreo y control.
+El módulo permite leer las variables físicas de temperatura y humedad del ambiente donde se instaló. La temperatura se muestra en su pantalla OLED y con mas detalle desde el \emph{software} de monitoreo y control.
 
-La figura \ref{fig:test-temp} muestra la instalación para las pruebas y el valor obtenido en la pantalla oled. La figura \ref{fig:temp-lectura} muestra los valores obtenidos en el \emph{software} de monitoreo y sus detalles se muestra en la figura \ref{fig:temp-detalle}.
+La figura \ref{fig:test-temp} muestra la instalación para las pruebas y el valor obtenido en la pantalla OLED. La figura \ref{fig:temp-lectura} muestra los valores obtenidos en el \emph{software} de monitoreo y sus detalles se muestra en la figura \ref{fig:temp-detalle}.
 
 \begin{figure}[htpb]
 \centering 
@@ -204,7 +204,7 @@ Al implementar el módulo y realizar las pruebas respectivas demostró que el se
 \label{fig:test-tension}
 \end{figure}
 
-El modulo permite leer las variables físicas de tensión e intensidad así como el estado del relé actuador. Las lecturas se muestran en su pantalla gráfica como se muestra en la figura \ref{fig:test-activa1} y en la figura \ref{fig:test-activa2}.
+El módulo permite leer las variables físicas de tensión e intensidad así como el estado del relé actuador. Las lecturas se muestran en su pantalla gráfica como se muestra en la figura \ref{fig:test-activa1} y en la figura \ref{fig:test-activa2}.
 \vspace{0.5cm}
 \begin{figure}[htpb]
 \centering 
@@ -224,7 +224,7 @@ El modulo permite leer las variables físicas de tensión e intensidad así como
 \vspace{0.5cm}
 \section{Pruebas de consumo de energía eléctrica}
 
-El consumo que se ha medido en estas pruebas se realizó a un ventilador de casa, cuyas características principales son:
+El consumo que se ha medido en estas pruebas se realizó a un ventilador de casa (modelo antiguo), cuyas características principales son:
 
 \begin{itemize}
 \item Marca: ELECTROLUX
@@ -234,7 +234,7 @@ El consumo que se ha medido en estas pruebas se realizó a un ventilador de casa
 \item Potencia: 30 W
 \end{itemize}
 
-La figura \ref{fig:ventilador}  muestra las especificaciones técnicas adherido en su parte posterior. Resaltar que el ventilador usado tiene más de 7 años de uso y en la actualidad este modelo de ventilador aún se comercializa, pero con un incremento en el numero de velocidades y en la potencia. 
+La figura \ref{fig:ventilador}  muestra las especificaciones técnicas adheridas en su parte posterior. En la actualidad este modelo de ventilador aún se comercializa pero con un incremento en el número de velocidades y en la potencia de consumo. 
 
 \begin{figure}[htpb]
 \centering 
@@ -250,7 +250,7 @@ Según la guía del organismo de supervisor de la inversión en energía (OSINER
 	PE = \left( 0.03 \right) kW
 \end{equation}
 
-Para comparar el valor obtenido en la formula \ref{eq:potenciatest2} el módulo de consumo nos permite obtener un valor real de la potencia del ventilador mediante la formular \ref{eq:potenciaform}, las variables de tensión e intensidad de corriente son multiplicados y se obtiene un valor de potencia en un instante de tiempo. La figura \ref{fig:registroPotencia} muestra las lecturas almacenadas en la base de datos del sistema IoT y en la tabla \ref{tab:tablapotencias} se muestra la comparación del valor ideal con el valor real obtenidos desde el módulo de consumo.
+Para comparar el valor obtenido en la formula \ref{eq:potenciatest2} el módulo de consumo nos permite obtener un valor real de la potencia del ventilador mediante la formula \ref{eq:potenciaform}, las variables de tensión e intensidad de corriente son multiplicadas y se obtiene un valor de potencia en un instante de tiempo. La figura \ref{fig:registroPotencia} muestra las lecturas almacenadas en la base de datos del sistema IoT y en la tabla \ref{tab:tablapotencias} se muestra la comparación del valor ideal con el valor real obtenidos desde el módulo de consumo.
 
 \begin{figure}[htpb]
 \centering 
@@ -263,7 +263,7 @@ Para comparar el valor obtenido en la formula \ref{eq:potenciatest2} el módulo 
 
 \begin{table}[h]
 	\centering
-	\caption[Comparativa de registros de potencias obtenidas]{Comparativa de registros de potencias obtenidas}
+	\caption[Comparativa de registros de potencias obtenidas]{Comparativa de registros de potencias obtenidas.}
 	\begin{tabular}{l c c c}    
 		\toprule
 		\textbf{P. ideal (W)} 	 & \textbf{P. ideal (kW)}  & \textbf{P. real - módulo (W)} &\textbf{P. real módulo (kW)} \\
@@ -299,9 +299,9 @@ Para facilitar la comprensión de la interfaz gráfica del software, la figura \
 \label{fig:test-panel4}
 \end{figure}
 
-Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a el, se pueden visualizar en el \emph{software} de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:dashboard-v1} y \ref{fig:dashboard-v2} ilustran lo mencionado.
+Las variables de tensión, intensidad y potencia eléctrica del electrodoméstico conectado a él, se pueden visualizar en el \emph{software} de monitoreo y control así como los detalles de su funcionamiento en tiempo real. La figura \ref{fig:dashboard-v1} y \ref{fig:dashboard-v2} ilustran lo mencionado.
 
-Para calcular el monto a pagar por el usuario se consideró consumos facturados y consumos no facturados. Los consumos facturados son aquellos registros resumen de un conjunto de registros temporales que se dieron dentro de un intervalo de tiempo. Por ejemplo dentro del intervalo '28-03-2022 16:00:00' y '28-03-2022 17:00:00' se capturan aproximadamente 1800 lecturas de potencia, para considerar la facturación se obtiene la media aritmética del valor de potencia del conjunto y se almacena como único registro en la tabla de facturación con fecha y hora '28-03-2022 17:00:00', posteriormente se procede a eliminar los 1800 registros temporales. Los consumos no facturados son los registros temporales. 
+Para calcular el monto a pagar por el usuario se consideraron consumos facturados y consumos no facturados. Los consumos facturados son aquellos registros resumen de un conjunto de registros temporales que se dieron dentro de un intervalo de tiempo. Por ejemplo, dentro del intervalo '28-03-2022 16:00:00' y '28-03-2022 17:00:00' se capturan aproximadamente 1800 lecturas de potencia, para considerar la facturación se obtiene la media aritmética del valor de potencia del conjunto y se almacena como único registro en la tabla de facturación con fecha y hora '28-03-2022 17:00:00', posteriormente se procede a eliminar los 1800 registros temporales. Los consumos no facturados son los registros temporales. 
 
 Se realizó un muestreo de 5 horas de funcionamiento continuo del ventilador y se obtuvieron los resultados que se muestran en la figura \ref{fig:dashboard-consumo} El \emph{dashboard} del \emph{software} de monitoreo y control ofrece una vista resumida del subtotal y total a pagar así como un gráfico interactivo de potencia vs costo de consumo por hora.
 
@@ -336,7 +336,7 @@ Se realizó un muestreo de 5 horas de funcionamiento continuo del ventilador y s
 \end{landscape} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Los valores obtenidos en la figura \ref{fig:dashboard-consumo} fueron contrastados con los valores indeales para el funcionamiento de 5 horas de uso, usando la ecuación \ref{eq:consumoform} tenemos la ecuación \ref{eq:ec} y \ref{eq:ec2}. 
+Los valores obtenidos en la figura \ref{fig:dashboard-consumo} fueron contrastados con los valores ideales para el funcionamiento de 5 horas de uso, usando la ecuación \ref{eq:consumoform} tenemos la ecuación \ref{eq:ec} y \ref{eq:ec2}. 
 
 \begin{equation}
 	\label{eq:ec}
@@ -348,11 +348,11 @@ Los valores obtenidos en la figura \ref{fig:dashboard-consumo} fueron contrastad
 	EC = \left( 0.15 \right) kW
 \end{equation}
 
-Para obtener el costo monetario (Nuevo sol) según el consumo, se multiplica el costo por kWh con el consumo. Para fines de pruebas se usará la ultima lectura de potencia entregada por el \emph{software}, que se muestra en la figura \ref{fig:dashboard-v1}, potencia igual a 32.55 W. La tabla \ref{tab:tablacostos} muestra la comparación entre los valores obtenidos, considerando el uso del ventilador por 5 horas por día, por semana (25 h) y por mes (100 h). Se consideró el costo de S/0.5 nuevos soles por cada 1 kWh.
+Para obtener el costo monetario (Nuevo sol) según el consumo, se multiplica el costo por kWh con el consumo, se utilizará la última lectura de potencia entregada por el \emph{software}, que se muestra en la figura \ref{fig:dashboard-v1}, potencia igual a 32.55 W. La tabla \ref{tab:tablacostos} muestra la comparación entre los valores obtenidos, considerando el uso del ventilador por 5 horas por día, por semana (25 h) y por mes (100 h). Se consideró el costo de S/0.5 nuevos soles por cada 1 kWh.
 
 \begin{table}[h]
 	\centering
-	\caption[Comparativa de consumos y costos]{Comparativa de consumos y costos}
+	\caption[Comparativa de consumos y costos]{Comparativa de consumos y costos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
 		\textbf{Pi (kW)} 	 & \textbf{Ps (kW)}  & \textbf{T (h)} &\textbf{Ci (kW)} &\textbf{Cs (kW)} &\textbf{Coi (S/)} &\textbf{Cos (S/)}\\
@@ -381,7 +381,7 @@ Significado de columnas:
 \end{itemize}
 
 \vspace{0.1cm}
-De la columna Coi (valor esperado) y Cos (valor obtenido) podemos observar que los valores entregados por el \emph{software} son muy cercanos al esperado, para obtener los errores relativos (Er) y errores absolutos (Ea) usaremos las ecuaciones  \ref{eq:ea} y \ref{eq:er} . La tabla \ref{tab:tablaerror} muestra los resultados de los errores obtenidos para muestreo.
+De la columna Coi (valor esperado) y Cos (valor obtenido) es posible observar que los valores entregados por el \emph{software} son muy cercanos al esperado, para obtener los errores relativos (Er) y errores absolutos (Ea) se utilizarán las ecuaciones  \ref{eq:ea} y \ref{eq:er} . La tabla \ref{tab:tablaerror} muestra los resultados de los errores obtenidos para muestreo.
 
 
 %\begin{equation}
@@ -411,7 +411,7 @@ Siendo las variables:
 \vspace{0.5cm}
 \begin{table}[h]
 	\centering
-	\caption[Error absoluto y relativo]{Error absoluto y relativo}
+	\caption[Error absoluto y relativo]{Error absoluto y relativo.}
 	\begin{tabular}{c c c c c}    
 		\toprule
 		\textbf{T (h)} & \textbf{Coi (Vr)} &\textbf{Cos (Va)} &\textbf{Ea} &\textbf{Er}\\
@@ -429,9 +429,9 @@ Siendo las variables:
 
 \section{Pruebas del funcionamiento del módulo replicador}
 
-Este módulo esta compuesto con un conjunto de procesos internos que se ejecutan de forma continua dentro del sistema operativo y se mostrará resultados de su salida por la terminal, según su comportamiento . Resaltar que este prototipo tiene fines comerciales por tal motivo se oculto la información sensible que usa el software en su funcionamiento.
+Este módulo esta compuesto con un conjunto de procesos internos que se ejecutan de forma continua dentro del sistema operativo y mostrará resultados de su salida por la terminal, según su comportamiento . Resaltar que este prototipo tiene fines comerciales por tal motivo se ocultó la información sensible que usa el software para su funcionamiento.
 
-El proceso de envió de valores a la nube esta dividido en dos subprocesos, la primera es el envió de registros mediante API remota para replicar los registros que se envían a la base de datos y la segunda el envió de valores al broker remoto. Las figura \ref{fig:envia1} muestra la salida durante el llamado a la API y la figura \ref{fig:envia2} muestra la salida durante el envío al broker remoto.
+El proceso de envío de valores a la nube esta dividido en dos subprocesos, la primera es el envío de registros mediante API remota para replicar los registros que se envían a la base de datos y la segunda el envío de valores al broker remoto. La figura \ref{fig:envia1} muestra la salida durante el llamado a la API y la figura \ref{fig:envia2} muestra la salida durante el envío al broker remoto.
 
 \begin{figure}[htpb]
 \centering 
@@ -447,7 +447,7 @@ El proceso de envió de valores a la nube esta dividido en dos subprocesos, la p
 \label{fig:envia2}
 \end{figure}
 
-Se mencionó en los capítulos anteriores que el replicador esta constantemente verificando si existen registros que no han sido replicados a la nube, de ser así automáticamente llamara a la API del sistema remoto para replicar los registros marcados como sin replicar. La figura \ref{fig:r1} muestra la salida el proceso sin registros por replicar y la figura \ref{fig:r2} muestra la salida al replicar usando la API. 
+Se mencionó en los capítulos anteriores que el replicador esta constantemente verificando si existen registros que no han sido replicados a la nube, de ser así automáticamente llamará a la API del sistema remoto para replicar los registros marcados como sin replicar. La figura \ref{fig:r1} muestra la salida el proceso sin registros por replicar y la figura \ref{fig:r2} muestra la salida al replicar usando la API. 
 
 \begin{figure}[htpb]
 \centering 
@@ -479,11 +479,11 @@ Al estar sin Internet en la red, el sistema detecta dicho corte y muestra un men
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.7\textwidth]{./Figures/test/replicador/desconexion3.png}
+\includegraphics[width=0.6\textwidth]{./Figures/test/replicador/desconexion3.png}
 \caption{Salida del proceso al detectar corte de Internet.}
 \label{fig:inter1}
 \end{figure}
-\vspace{1.0cm}
+\vspace{0.25cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htpb]
 \centering 
@@ -500,7 +500,7 @@ Para visualizar la comunicación entre el \emph{software} réplica - remoto y el
 \begin{itemize}
 \item Punto negro: mensaje enviado.
 \item Punto rojo: cliente remoto conectado al sistema IoT.
-\item Punto azul: Cliente conectado al broker remoto en modo escucha.
+\item Punto azul: cliente conectado al broker remoto en modo escucha.
 \item Punto naranja: mensaje de un cliente remoto conectado temporalmente para enviar sincronizacion de estados desde el remoto al modulo principal local. 
 \end{itemize}
 
@@ -515,3 +515,45 @@ Para visualizar la comunicación entre el \emph{software} réplica - remoto y el
 \end{landscape} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Comparativa del resultado con soluciones similares}
+
+Una vez expuestos los resultados obtenidos para cada módulo, se presenta a continuación el análisis de los resultados comparativos entre los tres tipos de soluciones descritos en el capítulo 1. La tabla \ref{tab:tabla-resultado} permite determinar las diferencias significativas con el uso y el tipo de servidor contra cada una de las diferentes soluciones.
+
+\begin{table}[h]
+	\centering
+	\caption[Comparativa de soluciones entre acceso y servidor]{Comparativa acceso y tipo de servidor.}
+	\begin{tabular}{l c c c c }    
+		\toprule
+		\textbf{Producto} & \textbf{Acceso}  & \textbf{Uso} & \textbf{S. local}   & \textbf{S. remoto} \\
+		\midrule
+		Energy Manager & Local y remoto 	& navegador & no & sí  \\		
+		Iammeter	 & local y remoto	& navegador y app. & no & sí  \\
+		Bee2energy	 & local y remoto	& navegador & no & sí  \\
+		\rowcolor[HTML]{ebedef}Cenergy IoT System & local y remoto& navegador & sí & sí \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tabla-resultado}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+La tabla \ref{tab:tabla-resultado2} permite determinar las diferencias respecto al uso de protocolos y el tipo de módulos que usa cada solución. 
+
+
+\begin{table}[h]
+	\centering
+	\caption[Comparativa de soluciones entre protocolo y hardware]{Comparativa protocolo y tipos de hardware.}
+	\begin{tabular}{l p{5cm} p{5cm}}    
+		\toprule
+		\textbf{Producto} 	 & \textbf{Protocolos}  & \textbf{M. sensores y actuadores}  \\
+		\midrule
+		Energy Manager & Modbus, M-Bus y TCP/IP 	& diseños propios \\		
+		Iammeter	 & MQTT y TCP/IP	&diseños propios y compatibles con       dispositivos Sonoff   \\
+		Bee2energy	 & múltiples protocolos IoT		& diseños propios y compatibles con otros comerciales  \\
+		\rowcolor[HTML]{ebedef}Cenergy IoT	System & MQTT y TCP/IP		&diseños propios  \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tabla-resultado2}
+\end{table}
