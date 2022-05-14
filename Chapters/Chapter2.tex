@@ -95,9 +95,13 @@ En la figura \ref{fig:capas-servicios} se muestran las capas de cada servicio de
 
 %\footnotetext{Imagen tomada del libro \textit{Cloud Computing for Pymes}. \citep{BOOK:1}}}
 
-Para el trabajo se usó el servicio tipo PaaS en la creación y configuración del \emph{broker} remoto y para almacenar la aplicación web así como para gestionar la base de datos.
+Para el trabajo se usó el servicio tipo PaaS en la creación y configuración del broker remoto así como para almacenar la aplicación web y para gestionar la base de datos.
 
 \section{Protocolo MQTT}
+
+MQTT  (\textit{Message Queue Telemetry Transport}) es un protocolo de red ligero de mensajería estándar para IoT. Está diseñado como un transporte de mensajería extremadamente liviano y se utiliza en una amplia variedad de industrias, como la automotriz, la fabricación, las telecomunicaciones, el petróleo y el gas, etc \citep{WEBSITE:4}. 
+
+Para construir una red usando MQTT, es necesario entender los conceptos que se utilizan para crear una red IoT: 
 
 \begin{itemize}
 \item El broker MQTT
@@ -114,13 +118,13 @@ El servidor o broker es el programa que se encarga de recepcionar los mensajes e
 
 \footnotetext{Imagen tomada de \url{https://www.factor.mx/portal/base-de-conocimiento/mqtt/}}
 
-La comunicación puede estar cifrada mediante TLS (\emph{Transport Layer Security}) y contar con credenciales de acceso para el control de los canales de envío y recepción. Al broker se le puede conectar un sin fin de dispositivos como teléfonos móviles, computadoras, sensores, actuadores, lámparas, relojes, bombas de agua e, incluso, refrigeradores, cocinas y mucho más. 
+El broker MQTT usado en el trabajo es Eclipse Mosquitto, por ser de código abierto.
 
 %\vspace{1cm}
-\vspace{1cm}
-\item El protocolo MQTT
+%\vspace{1cm}
+\item Comunicación MQTT
 
-MQTT (\textit{Message Queue Telemetry Transport}) es un protocolo de red ligero de publicación-suscripción que transporta mensajes entre dispositivos. El protocolo generalmente se ejecuta sobre TCP / IP ; sin embargo, cualquier protocolo de red que proporcione conexiones bidireccionales ordenadas y sin pérdidas puede admitir MQTT. Está diseñado para conexiones con ubicaciones remotas donde existen restricciones de recursos o el ancho de banda de la red es limitado \citep{WEBSITE:3}. Su modelo de comunicación lo podemos ver en la figura \ref{fig:mqtt}.
+MQTT es un protocolo de red que transporta mensajes entre dispositivos. El protocolo generalmente se ejecuta sobre TCP / IP ; sin embargo, cualquier protocolo de red que proporcione conexiones bidireccionales ordenadas y sin pérdidas puede admitir MQTT. Está diseñado para conexiones con ubicaciones remotas donde existen restricciones de recursos o el ancho de banda de la red es limitado \citep{WEBSITE:3}. Su modelo de comunicación lo podemos ver en la figura \ref{fig:mqtt}.
 
 \vspace{0.5cm}
 
@@ -133,26 +137,25 @@ MQTT (\textit{Message Queue Telemetry Transport}) es un protocolo de red ligero 
 
 \footnotetext{Imagen tomada de \url{https://mqtt.org/}}
 
+La comunicación MQTT puede estar cifrada mediante TLS (\emph{Transport Layer Security}) y contar con credenciales de acceso para el control de los canales de envío y recepción. Al broker se le puede conectar un sin fin de dispositivos como teléfonos móviles, computadoras, sensores, actuadores, lámparas, relojes, bombas de agua, refrigeradores, cocinas y mucho más. 
 
-MQTT es un protocolo de mensajería estándar para IoT. Está diseñado como un transporte de mensajería extremadamente liviano y se utiliza en una amplia variedad de industrias, como la automotriz, la fabricación, las telecomunicaciones, el petróleo y el gas, etc \citep{WEBSITE:4}. 
 \end{itemize}
 
-\section{Elementos del broker MQTT}
+%\section{Elementos del broker MQTT}
 
-Antes de construir una red MQTT, es necesario entender los conceptos que se utilizan para crear una red para IoT: 
-\begin{itemize}
-\item Cliente: un dispositivo que puede publicar mensajes, suscribirse para recibir mensajes, o ambos.
-\item Broker: es el servidor que acepta mensajes publicados por clientes y los difunde entre los clientes suscritos.
-\item Publicar: cuando un cliente envía un mensaje al broker usando un tópico.
-\item Tópico: los mensajes deben estar etiquetados con algún tópico o tema. Los clientes se suscriben a tópicos específicos, de manera que solo reciben los mensajes publicados con dichos tópicos. 
-\end{itemize}
 
-El broker MQTT usado en el trabajo es Eclipse Mosquitto, por ser de código abierto.
+%\begin{itemize}
+%\item Cliente: un dispositivo que puede publicar mensajes, suscribirse para recibir mensajes, o ambos.
+%\item Broker: es el servidor que acepta mensajes publicados por clientes y los difunde entre los clientes suscritos.
+%\item Publicar: cuando un cliente envía un mensaje al broker usando un tópico.
+%\item Tópico: los mensajes deben estar etiquetados con algún tópico o tema. Los clientes se suscriben a tópicos específicos, de manera que solo reciben los mensajes publicados con dichos tópicos. 
+%\end{itemize}
+
 
 \section{Eclipse Mosquitto} 
-Eclipse Mosquitto es un agente de mensajes de código abierto (con licencia EPL / EDL) que implementa las versiones 5.0, 3.1.1 y 3.1 del protocolo MQTT. Mosquitto es liviano y adecuado para su uso en todos los dispositivos, desde computadoras de placa única de baja potencia hasta servidores completos \citep{WEBSITE:5}.
+Es un agente de mensajes de código abierto (con licencia EPL / EDL) que implementa las versiones 5.0, 3.1.1 y 3.1 del protocolo MQTT. Mosquitto es liviano y adecuado para su uso en todos los dispositivos, desde computadoras de placa única de baja potencia hasta servidores completos \citep{WEBSITE:5}.
 
-El protocolo MQTT proporciona un método ligero para realizar mensajes mediante un modelo de publicación / suscripción. Esto lo hace adecuado para la mensajería de Internet de las cosas, como con sensores de baja potencia o dispositivos móviles como teléfonos, computadoras integradas o microcontroladores \citep{WEBSITE:5}.
+%El protocolo MQTT proporciona un método ligero para realizar mensajes mediante un modelo de publicación / suscripción. Esto lo hace adecuado para la mensajería de Internet de las cosas, como con sensores de baja potencia o dispositivos móviles como teléfonos, computadoras integradas o microcontroladores \citep{WEBSITE:5}.
 
 Mosquitto es parte de la Fundación Eclipse \citep{WEBSITE:5}, es un proyecto de IoT \citep{WEBSITE:39} y está patrocinado por la compañía Cedalo \citep{WEBSITE:40}. 
 
@@ -449,7 +452,7 @@ La elaboración de este trabajo involucró el usó de distintos \emph{software}s
 \item Python: es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código. Se trata de un lenguaje de programación multiparadigma, ya que soporta parcialmente la orientación a objetos, programación imperativa y, en menor medida, programación funcional.
 
 Se utilizó para la creación de procesos internos en el módulo principal. 
-\item PHP: es un lenguaje de programación de usó general que se adapta especialmente al desarrollo web del lado \emph{backend}.
+\item PHP: es un lenguaje de programación de uso general que se adapta especialmente al desarrollo web del lado del servidor.
 
 Se utilizó como lenguaje \emph{backend} del \emph{software} de monitoreo y control.
 \item JavaScript: lenguaje de programación interpretado utilizado en el lado del cliente, es el único lenguaje de programación que funciona en los navegadores de forma nativa (lenguaje interpretado sin necesidad de compilación).

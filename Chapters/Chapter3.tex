@@ -29,7 +29,7 @@ El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispo
 
 \begin{table}[h]
 	\centering
-	\caption[Desarrollo integrado por módulo]{Desarrollo integrado por módulo}
+	\caption[Desarrollo integrado por módulo]{Desarrollo integrado por módulo.}
 	\begin{tabular}{l c c }    
 		\toprule
 		\textbf{Módulo} 	 & \textbf{Desarrollo}  & \textbf{Dispositivo}\\
@@ -83,7 +83,7 @@ Las principales características  del servicio contratado para la implementació
 
 \begin{table}[h]
 	\centering
-	\caption[Características del servicio en la nube]{Características del servicio en la nube}
+	\caption[Características del servicio en la nube]{Características del servicio en la nube.}
 	\begin{tabular}{p{7cm} p{5cm} }    
 		\toprule
 		\textbf{Característica} 	 & \textbf{Detalle}  \\
@@ -125,7 +125,7 @@ Las características del servicio para broker remoto se muestran en la tabla  \r
 
 \begin{table}[h]
 	\centering
-	\caption[Características del broker remoto]{Características del broker remoto}
+	\caption[Características del broker remoto]{Características del broker remoto.}
 	\begin{tabular}{p{5cm} p{7cm} }    
 		\toprule
 		\textbf{Característica} 	 & \textbf{Detalle}  \\
@@ -249,13 +249,13 @@ Las descripciones de cada subproceso interno que contiene el módulo replicador,
 
 \item \keyword{mqtt\_recibe\_nube\_poo (P2)}: es el responsable de recibir los datos JSON que fueron generados en la aplicación web remota y que llegan desde el broker remoto para luego transmitirlo.
 
-\item \keyword{actuador\_registros\_bd (P3)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de actuadores capturadas dentro de una hora en las tablas auxiliares de actuadores y consumos para luego sumar el consumo y hacer un solo registro en la tabla de historial de consumo. Este subproceso realiza un borrado de registros de las tablas auxiliares de actuadores por cada registro en la tabla historial.
+\item \keyword{actuador\_registros\_bd (P3)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de actuadores dentro de una hora específica en las tablas auxiliares de actuadores y consumos, luego obtiene la media de los consumos y hace un solo registro en la tabla de historial de consumo. Este subproceso realiza un borrado de registros temporales de las tablas auxiliares de actuadores por cada registro en la tabla historial.
 
-\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores capturadas dentro de una hora en las tablas auxiliares de sensores, para luego promediarlos y hacer un solo registro en la tabla de historial. Este subproceso realiza un borrado de registros de las tablas auxiliares de sensores por cada registro en la tabla historial.
+\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores dentro de una hora específica en las tablas auxiliares de sensores, luego obtiene la media de los registros y hacer un solo registro en la tabla de historial de sensores. Este subproceso realiza un borrado de registros temporales de las tablas auxiliares de sensores por cada registro en la tabla historial.
 
-\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar, en caso de disponer de una conexion a Internet y a partir de registros marcados como no replicados, este procederá a enviar los últimos registros hacia la nube, para luego limpiar la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria para el sistema local y remoto.
+\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar, en caso de disponer de una conexion a Internet y a partir de registros marcados como no replicados, este procederá a enviar los últimos registros hacia la nube, para luego actualizar en campo de la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria para el sistema local y remoto.
 
-\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador) para, posteriormente, comprobar si existe conexión a Internet y poder registrar en la base de datos local y remoto. En caso que no existiera conexión a Internet, solo registra en la tabla correspondiente al sensor o actuador de la base de datos local y a su vez realiza una copia hacia la tabla de registros\_no\_enviados, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
+\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador), posteriormente, comprueba si existe conexión a Internet y poder registrar en la base de datos local y remoto. En caso que no existiera conexión a Internet, solo registra en la tabla correspondiente al sensor o actuador de la base de datos local y a su vez marca el registro como no replicado, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
 
 %\vspace{0.05cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -670,11 +670,11 @@ El software de monitoreo y control fue diseñado y desarrollado a medida con el 
 
 \item La interfaz de monitoreo para sensores se muestra en la figura \ref{fig:gui2}. Esta interfaz permite mostrar en tiempo real los sensores que tiene el sistema IoT, así como el estado de los mismos. Si un sensor tiene un estado CONECTADO se podrán observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui2-1}.
 
-\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que está realizando consumo mediante una señal de onda, junto a su interruptor actuador cuya función es el control del paso o limitación de energía eléctrica en el módulo. Si el módulo está o se encuentra con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
+\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que está realizando consumo mediante una señal de onda, junto a su interruptor actuador cuya función es el control del paso o bloqueo de energía eléctrica en el módulo. Si el módulo se encuentra con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
 
 \item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y número de módelo, para su identificación dentro del sistema.
 
-\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aun no completan las horas, podrán ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y, si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
+\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra como consumo en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aún no completan las horas, podrán ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y, si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
 
 \item El software cuenta con una interfaz que muestra un grafo que permite visualizar en tiempo real la comunicación de los módulos así como los mensajes entre canales. El grafo se muestra en la figura \ref{fig:grafo}.
 
