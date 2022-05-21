@@ -4,8 +4,8 @@
 
 \label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-En este capítulo se detallan las conclusiones relacionadas al alcance de los objetivos que se plantearon al inicio del trabajo. Además, se analizan las características de software y hardware del prototipo desarrollado, el cumplimiento de la planificación y los próximos pasos a seguir para mejorar y hacerlo un producto
-comercial.
+En este capítulo se detallan las conclusiones relacionadas al alcance de los objetivos que se plantearon al inicio del trabajo. Además, se analizan las características de \emph{software} y \emph{hardware} del prototipo desarrollado, el cumplimiento de la planificación y los próximos pasos a seguir para mejorarlo y convertirlo en un producto comercial.
+
 
 %----------------------------------------------------------------------------------------
 
@@ -15,7 +15,10 @@ comercial.
 
 \section{Conclusiones generales }
 
-Este trabajo logró desarrollar de forma exitosa un sistema IoT para monitoreo y control de viviendas y edificios orientados al consumo de energía eléctrica. Se verificó el cumplimiento de los requerimientos más importantes, quedando aún por validar algunos menos relevantes y que pueden ser implementados en trabajos futuros con un cronograma con mayor margen de tiempo.
+Este trabajo logró desarrollar de forma exitosa un sistema IoT para monitoreo y control de viviendas y edificios.Particularmente se implementó el monitoreo, supervisión y control de temperatura, humedad y medición de características de la red eléctrica del edificio. Se verificó el cumplimiento de los requerimientos más importantes, quedando aún por validar algunos menos relevantes y que pueden ser implementados en trabajos futuros con un cronograma con mayor margen de tiempo.
+
+
+
 
 %Los módulos que requirieron de \emph{hardware} y \emph{firmware} para cumplir su función dentro del sistema IoT fueron desarrollados considerando los requerimientos funcionales y el tiempo marcado en el cronograma como principales objetivos a cumplir. 
 
@@ -25,13 +28,13 @@ Se realizaron pruebas principales de usabilidad, funcionalidad, acceso de red y 
 
 %Para mayor información y seguimiento de futuros desarrollos funcionales, se puede acceder a la web oficial: www.cenergy.icfnet.org
 
-Durante el desarrollo de este trabajo se aplicaron conocimientos adquiridos a lo largo de la especialización. Todas las asignaturas fueron importantes para incorporar nuevos conceptos y experiencias requeridas para el desarrollo del sistema IoT. A continuación, se detallan las que tuvieron mayor relevancia:
+Durante el desarrollo de este trabajo se aplicaron conocimientos adquiridos a lo largo de la especialización. A continuación, se detallan las que tuvieron mayor relevancia:
 
 
 \begin{itemize}
 \item Gestión de proyectos: se elaboró un plan de proyecto, pudiendo contar desde el comienzo con una planificación clara del trabajo a realizar.
 
-\item Protocolos de Internet: permitió conocer las capas de red, protocolos de red y configuración para redes LAN y WLAN. 
+\item Protocolos de Internet: se aprendió sobre las capas de red, protocolos de red y configuración para redes LAN y WLAN. 
 
 \item Arquitectura de protocolos: se aplicaron los conocimientos sobre el protocolo MQTT para el esquema de comunicación de sistemas IoT.
 
@@ -55,7 +58,7 @@ Para dar continuidad al esfuerzo realizado hasta el momento y poder obtener un p
 
 \begin{itemize}
 
-\item Rediseñar cada módulo físico y unificar los componentes electrónicos internos en una PCB (\emph{printed circuit board}) más pequeña, considerando estándares de fabricación de placas electrónicas para uso comercial.
+\item Rediseñar cada módulo físico y unificar los componentes electrónicos internos en una placa de circuito impreso o PCB (por las siglas en ingles \emph{printed circuit board}) más pequeña, considerando estándares de fabricación de placas electrónicas para uso comercial.
 
 %Integrar una unidad de almacenamiento interno en el módulo actuador para guardar el ultimo estado valido antes de ser apagado y de esta manera acelerar la sincronización del modulo al ser encendido nuevamente.
 
@@ -65,5 +68,5 @@ Para dar continuidad al esfuerzo realizado hasta el momento y poder obtener un p
 
 \item Desarrollar una aplicación móvil para entornos Android e IOS para facilitar el acceso y agregado de módulos al sistema IoT y garantizar un servicio más amigable al usuario.
 
-\item Implementar mecanismos de cifrado de unidades internas del microSD del módulo principal donde se almacena el software de monitoreo, procesos internos de red y base de datos local, para evitar la fácil manipulación de información confidencial del sistema.
+\item Implementar mecanismos de cifrado de unidades internas de la tarjeta microSD del módulo principal donde se almacena el software de monitoreo, los procesos internos de red y la base de datos local, para evitar la fácil manipulación de información confidencial del sistema.
 \end{itemize}
