@@ -13,23 +13,21 @@ En este capítulo se detallan las consideraciones de diseño que se tuvieron en 
 
 \section{Diseño general del sistema}
 
-Como se observa en la \ref{fig:arquitectura}, el sistema está compuesto por una arquitectura que integra cuatro componentes necesarios para su funcionamiento, los dispositivos (sensores y actuadores), el servidor local, los elementos de red y el servicio en la nube.
+Como se observa en la figura \ref{fig:arquitectura}, el sistema está compuesto por una arquitectura que integra cuatro componentes necesarios para su funcionamiento, los dispositivos (sensores y actuadores), el servidor local, los elementos de red y el servicio en la nube.
 
-El diseño del sistema se basó en una arquitectura distribuida donde se despliegan distintas tecnologías, \emph{hardware} y \emph{software} con el objetivo de ofrecer acceso local y remoto desde dentro o fuera de la red doméstica del edificio. Además, la interfaz de comunicación con el servidor interno y externo se hizo mediante el protocolo MQTT por ser ligero y de bajo consumo de ancho de banda de la red \emph{wireless} usada. 
+El diseño del sistema se basó en una arquitectura distribuida donde se despliegan distintas tecnologías de \emph{hardware} y \emph{software} con el objetivo de ofrecer acceso desde dentro o fuera de la red doméstica del edificio. La interfaz de comunicación con el servidor interno y externo se hizo mediante el protocolo MQTT por ser ligero y de bajo consumo de ancho de banda para la red \emph{wireless} utilizada. 
 
-El diseño del sistema comenzó con la modelización de los componentes más importantes del sistema IoT, que son los módulos, sensores y actuadores para posteriormente desarrollar el software de monitoreo de tipo web, usando los patrones y características de desarrollo web seguro. 
+La etapa de diseño se inició con la modelización de los componentes más importantes del sistema IoT, que son los módulos sensores y actuadores. En un segundo paso se desarrolló el software de monitoreo web, según patrones de diseño y características para garantizar la seguridad de la aplicación web. 
+
+Para el diseño e implementación de \emph{firmware} se utilizó Arduino teniendo en cuenta patrones y conceptos de la programación funcional. La comunicación MQTT se realizó mediante la biblioteca PubSubClient versión 2.7.0 \citep{WEBSITE:46} y la visualización gráfica de las pantallas OLED y GLCD, con las bibliotecas Adafruit GFX versión 1.7.2 \citep{WEBSITE:47} y U8g2\_for\_Adafruit\_GFX versión 2.28.10 \citep{WEBSITE:48} respectivamente.
+
 
 Como se eligió el protocolo MQTT para la comunicación entre módulos y el conjunto de servicios, se definió tres tipos de tópicos para poder comunicarse entre sí. Estos tópicos fueron:
 
 \begin{itemize}
-\item Tópicos para sincronización: permite que un módulo envié un dato JSON con los datos que deben actualizarse a todos los clientes suscritos a este tópico. Solo lo usan los módulos actuadores y el servidor local para la comunicación bidireccional.
+\item Tópico de sincronización: permite que un módulo envíe un dato JSON para actualizar información en todos los módulos suscriptos al tópico. Solamente utilizado mediante comunicación bidireccional entre los actuadores y el servidor local.
 
-\item Tópicos para envió de valores: permite que un módulo envié un dato JSON con valores de su sensor hacia el servidor. Es usado por sensores de comunicación unidireccional.
-
-\item Tópicos para comunicación de estados: es usado por todos los módulos y permite el envió de un dato JSON con valores con su estado actual hacia sensor hacia el servidor. Es usado solo en comunicación unidireccional.
-\end{itemize}
-
-%\vspace{1cm}
+\item Tópico de envió de valores: permite que un módulo envíe un dato JSON con valores de su sensor hacia el servidor. Solamente utilizado mediante comunicación unidireccional.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -42,15 +40,22 @@ Como se eligió el protocolo MQTT para la comunicación entre módulos y el conj
 \end{landscape} % esto es para rotar
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\item Tópico de comunicación de estados: es utilizado por todos los módulos y permite el envió de un dato JSON con valores de su estado actual desde el sensor hacia el servidor local. Solamente utilizado mediante comunicación unidireccional.
+\end{itemize}
 
-El software de monitoreo del tipo web local y remoto fue diseñado y desarrollado a medida para garantizar dominio total de la plataforma usada. Utiliza el \emph{framework bootstrap} para lograr interfaces graficas de usuario que cumplan con los principios de experiencia de usuario (UX) y compatibilidad de dispositivos. Para la recepción de mensajes se usó web sockets mediante \emph{JavaScript} teniendo configurado los tres tópicos de comunicación antes mencionados para el intercambio de mensajes con los módulos.
+%\vspace{1cm}
+
+
+
+
+El software de monitoreo de tipo web local y remoto fue diseñado y desarrollado a medida para garantizar dominio total de la plataforma usada. Utiliza el \emph{framework bootstrap} para lograr interfaces graficas de usuario que cumplan con los principios de experiencia de usuario (UX) y compatibilidad de dispositivos. Para la recepción de mensajes se usó web sockets mediante \emph{JavaScript} teniendo configurado los tres tópicos de comunicación antes mencionados para el intercambio de mensajes con los módulos.
 
 La figura \ref{fig:diagrama_general} muestra el diagrama general del funcionamiento del sistema desde la perspectiva conceptual. El desarrollo, consideraciones de construcción y fabricación para cada módulo del sistema se describen a detalle en las siguientes secciones de este capítulo.
 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./Figures/diagrama0.png}
+	\includegraphics[width=1.0\textwidth]{./Figures/diagrama0.png}
 	\caption{Diagrama general del funcionamiento del sistema.}
 
 	\label{fig:diagrama_general}
@@ -89,26 +94,26 @@ La figura \ref{fig:diagrama_general} muestra el diagrama general del funcionamie
 %%%%%%%%%%%%%%%%%
 \section{Módulo principal}
 
-El módulo principal representa el elemento central dentro de la solución IoT planteada y para la construcción e instalación se utilizaron recursos que hicieron posible una versión de fácil uso para el usuario. Las consideraciones generales de seguridad para el módulo principal fueron:
+El módulo principal representa el elemento central dentro de la solución IoT planteada y para  su construcción e instalación se utilizaron recursos que hicieron posible una versión de fácil uso para el usuario. Las consideraciones generales de seguridad para el módulo principal fueron:
 
 \begin{itemize}
-\item Sistema operativo GNU/Linux oficial Raspberry Pi OS.
+\item Sistema operativo GNU/Linux oficial Raspberry Pi OS \citep{WEBSITE:44}\citep{WEBSITE:45}.
 \item Acceso al sistema operativo mediante usuario y contraseña.
 \item Accesos remotos por SSH (\emph{Secure Shell}) y FTP (\emph{File Transfer Protocol})  desactivados.
-\item Cifrado de las unidades del sistema operativo.
+\item Cifrado de las unidades de almacenamiento del sistema operativo.
 \end{itemize}
 
-La figura \ref{fig:argon} muestra la integración y ensamblado del módulo.
+%La figura \ref{fig:argon} muestra la integración y ensamblado del módulo.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
+%\begin{figure}[htpb]
+%\centering 
 %\includegraphics[width=1.7\textwidth]{./Figures/argon.png}
-\includegraphics[width=0.92\textwidth]{./Figures/armadoactuador.png}
-\caption{Ensamblado y partes del módulo principal. }
-\label{fig:argon}
-\end{figure}
+%\includegraphics[width=0.92\textwidth]{./Figures/armadoactuador.png}
+%\caption{Ensamblado y partes del módulo principal. }
+%\label{fig:argon}
+%\end{figure}
 %\end{landscape} % esto es para rotar
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -130,7 +135,7 @@ La figura \ref{fig:argon} muestra la integración y ensamblado del módulo.
 
 El módulo replicador a la nube está dentro del módulo principal y para su desarrollo se diseñó una estructura interna compuesta por subprocesos que, al trabajar en conjunto, forman el sistema completo de replicación.
 
-La replicación solo se da mientras exista conexión a Internet. El desarrollo de cada subproceso se programó en el lenguaje de programación Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:logicareplicador} ilustra la lógica de trabajo del replicador.
+La replicación solo se da mientras exista conexión a Internet. El desarrollo de cada subproceso se programó en Python por tratarse de un lenguaje multiplataforma, robusto y orientado a objetos. La figura \ref{fig:logicareplicador} ilustra la lógica de trabajo del replicador.
 
 
 %\begin{figure}[htpb]
@@ -142,20 +147,20 @@ La replicación solo se da mientras exista conexión a Internet. El desarrollo d
 
 
 
-Las descripciones de cada subproceso interno que contiene el módulo replicador, se detallan a continuación usando el nombre del proceso con el cual fue creado: 
+Las descripciones de cada subproceso interno que contiene el módulo replicador se detallan a continuación usando el nombre del proceso con el cual fue creado: 
 
 \begin{itemize}
-\item \keyword{mqtt\_envia\_nube\_poo (P1)}: es el responsable de enviar todos los datos que llegan de los canales hacia el broker remoto usando el formato JSON.
+\item \keyword{mqtt\_envia\_nube\_poo (P1)}: es el responsable de reenviar al broker remoto todos los mensajes que llegan al broker local, usando el formato JSON.
 
-\item \keyword{mqtt\_recibe\_nube\_poo (P2)}: es el responsable de recibir los datos JSON que fueron generados en la aplicación web remota y que llegan desde el broker remoto para luego transmitirlo.
+\item \keyword{mqtt\_recibe\_nube\_poo (P2)}: es el responsable de recibir los datos JSON que fueron generados en la aplicación web remota y que llegan desde el broker remoto para luego enviarlos al broker local.
 
-\item \keyword{actuador\_registros\_bd (P3)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de actuadores dentro de una hora específica en las tablas auxiliares de actuadores y consumos, luego obtiene la media de los consumos y hace un solo registro en la tabla de historial de consumo. Este subproceso realiza un borrado de registros temporales de las tablas auxiliares de actuadores por cada registro en la tabla historial.
+\item \keyword{actuador\_registros\_bd (P3)}: es el responsable de verificar los registros en la base de datos. La verificación se realiza en intervalos de tiempo de una hora. Consulta todos los registros de lecturas de actuadores dentro de una hora específica en las tablas auxiliares de actuadores y consumos, luego obtiene la media de los consumos y hace un solo registro en la tabla de historial de consumo. Finalmente realiza el borrado de los registros temporales utilizados.
 
-\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. Su verificación está basada en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores dentro de una hora específica en las tablas auxiliares de sensores, luego obtiene la media de los registros y hacer un solo registro en la tabla de historial de sensores. Este subproceso realiza un borrado de registros temporales de las tablas auxiliares de sensores por cada registro en la tabla historial.
+\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. La verificación se realiza en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores dentro de una hora específica en las tablas auxiliares de sensores, luego obtiene la media de los registros y hacer un solo registro en la tabla de historial de sensores. Finalmente realiza el borrado de los registros temporales utilizados.
 
-\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar, en caso de disponer de una conexion a Internet y a partir de registros marcados como no replicados, este procederá a enviar los últimos registros hacia la nube, para luego actualizar en campo de la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria para el sistema local y remoto.
+\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar. En caso de disponer de una conexión a Internet y a partir de registros marcados como no replicado procederá a enviar los últimos registros hacia la nube. Finalmente actualiza en el campo de la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria entre el sistema local y remoto.
 
-\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador), posteriormente, comprueba si existe conexión a Internet y poder registrar en la base de datos local y remoto. En caso que no existiera conexión a Internet, solo registra en la tabla correspondiente al sensor o actuador de la base de datos local y a su vez marca el registro como no replicado, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
+\item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador). Posteriormente, comprueba si existe conexión a Internet. En el caso que no esté disponible la conexión solo se hace el registro en la tabla local y se lo marca como no replicado, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
 
 %\vspace{0.05cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -180,7 +185,7 @@ Este subproceso usa hilos en Python para estar constantemente registrando los ti
 
 \section{Módulo de medición de temperatura}
 
-Este módulo permite recoger lecturas del valor de la temperatura y humedad en ambientes de un hogar, oficina o edificio. Los valores son enviados y procesados en el sistema IoT de control y monitoreo que se encuentra en el servidor web del módulo principal. Las lecturas de temperatura son utilizadas para conocer la curva de cambios de temperatura según el horario registrado, así como su relación directa con el consumo eléctrico por el uso de ventiladores y equipos de aire acondicionado. Para su construcción se usó la placa NodeMCU8266 V3, por la capacidad de conexión inalámbrica. 
+Este módulo permite recoger lecturas de temperatura y humedad en ambientes de un hogar, oficina o edificio. Los valores son enviados y procesados en el sistema IoT de control y monitoreo que se encuentra en el servidor web del módulo principal. Las lecturas de temperatura son utilizadas para conocer la curva de cambios de temperatura según el horario registrado, así como su relación directa con el consumo eléctrico por el uso de ventiladores y equipos de aire acondicionado. Para su construcción se usó la placa NodeMCU8266 V3, por su capacidad de conexión inalámbrica. 
 
 Este módulo integra una pantalla SSD1306 OLED para visualizar el valor de la temperatura en tiempo real. Para el encapsulado y construcción se utilizó un tablero adosable de montaje de interruptores térmicos y diferenciales tipo RIEL-DIN, de material de poliestireno y cubierta trasparente de policarbonato con apertura vertical \citep{WEBSITE:17}, como se aprecia en la figura \ref{fig:casetemp}.
 
@@ -203,7 +208,7 @@ El diseño de integración de componentes electrónicos se realizó en una Placa
 \label{fig:citemp}
 \end{figure}
 
-El proceso de integración total lo podemos ver en las fotografías que se visualizan en la figura \ref{fig:entemp}.
+El proceso de integración se puede ver en la figura \ref{fig:entemp}.
 
 \begin{figure}[htpb]
 \centering 
@@ -214,11 +219,17 @@ El proceso de integración total lo podemos ver en las fotografías que se visua
 
 \section{Módulo actuador}
 
-Este módulo permite activar o desactivar el paso de la corriente eléctrica dentro de un tomacorriente. La acción de cambio de estados (activado o desactivado) se realiza desde un switch en la interfaz de la aplicación web de monitoreo y control.
+Este módulo permite activar o desactivar el paso de la corriente eléctrica dentro de un tomacorriente. La acción de cambio de estado (activado o desactivado) se realiza desde un switch en la interfaz de la aplicación web de monitoreo y control. El software envía un mensaje JSON por medio del canal de sincronización con el código y número de modelo del relé a activar o desactivar.
 
-Para la construcción del módulo se utilizó una caja (\emph{case}) de tomacorriente  resistente a impactos, de gran durabilidad, autoextinguible e ideal para conductos de cables \citep{WEBSITE:18}. Para fijar el tomacorriente se usó una placa modular de soporte. En la figura \ref{fig:caseactuador} se ilustran los componentes mencionados.
+Para la construcción del módulo se utilizó una caja de tomacorriente  resistente a impactos, de gran durabilidad, autoextinguible e ideal para conductos de cables \citep{WEBSITE:18}. Para fijar el tomacorriente se usó una placa modular de soporte. En la figura \ref{fig:caseactuador} se ilustran los componentes mencionados.
 
-Para la activación del relé de 5 V mediante una salida de la placa NodeMCU8266 fue necesario usar un convertidor de tensión DC-DC Step-Up 2 A MT3608, porque las salidas de la placa NodeMCU8266 son de 3.3 V y la activación del relé requiere 5 V para funcionar. El DC-DC Step-Up tiene como función entregar una tensión de salida constante superior a la tensión de entrada, soporta como tensión de entrada entre 2 V a 24 V y tensión de salida entre 2 V a 28 V. La tensión de salida se puede regular mediante un potenciómetro multivuelta \citep{WEBSITE:19}. La figura \ref{fig:esquemaactuador} ilustra el relé de 30 A y el convertidor de tensión utilizado para la solución a este problema.
+%El corte o paso de energía eléctrica se realiza desde el software de monitoreo mediante el componente \emph{Toggle Switch} para activar o desactivar el relé. 
+
+Para la activación del relé de 5 V mediante la salida de la placa NodeMCU8266 fue necesario usar un convertidor de tensión DC-DC Step-Up 2 A MT3608, porque las salidas de la placa NodeMCU8266 son de 3.3 V y la activación del relé requiere 5 V para funcionar. La figura \ref{fig:esquemaactuador} ilustra el relé de 30 A y el convertidor de tensión utilizado para la solución a este problema.
+
+
+%El DC-DC Step-Up tiene como función entregar una tensión de salida constante superior a la tensión de entrada, soporta como tensión de entrada entre 2 V a 24 V y tensión de salida entre 2 V a 28 V. La tensión de salida se puede regular mediante un potenciómetro multivuelta \citep{WEBSITE:19}. 
+
 
 \begin{figure}[htpb]
 \centering 
@@ -240,13 +251,13 @@ Para la activación del relé de 5 V mediante una salida de la placa NodeMCU8266
 
 \section{Módulo de consumo eléctrico}
 
-Este módulo es el responsable de medir el consumo de energía eléctrica dentro de un hogar, oficina o edificio. La integración de los componentes representó un gran reto dentro del proceso de construcción y desarrollo por ser un módulo que permite comunicación bidireccional con el servidor local y a su vez tener sincronización con todos los clientes conectados al sistema.
+Este módulo es el responsable de medir el consumo de energía eléctrica dentro de un hogar, oficina o edificio. Este módulo fue desarrollado para permitir la comunicación bidireccional entre el módulo y el servidor local por la necesidad de sincronización con todos los clientes actuadores conectados al sistema.
 
-\vspace{2cm}
+%\vspace{2cm}
 
 \keyword{Cálculo de consumo de energía eléctrica}
 
-La energía eléctrica que consume un artefacto eléctrico, se determina multiplicando la potencia de dicho artefacto por la cantidad de horas que está encendido \citep{BOOK:3}. Por ejemplo ver la ecuación \ref{eq:consumoform}.
+La energía que consume un artefacto eléctrico, se determina multiplicando la potencia de dicho artefacto por la cantidad de horas que está encendido \citep{BOOK:3}. Por ejemplo ver la ecuación \ref{eq:consumoform}.
 
 \begin{equation}
 	\label{eq:consumoform}
@@ -282,29 +293,29 @@ Siendo las variables y unidades:
 
 Como se observa en la ecuación \ref{eq:potenciaform}, para poder medir el consumo eléctrico se necesita medir la tensión (V) y la intensidad (A), para lo que se utilizaron los sensores SCT-013-030 y  AC - ZMPT101B, respectivamente.
 
-Los aspectos más importantes para el diseño, desarrollo y construcción del módulo de consumo eléctrico se describen  a continuación, así como el proceso que se usó para almacenar y calcular los consumos eléctricos.
+Los aspectos más importantes para el diseño, desarrollo y construcción del módulo de consumo eléctrico se describen  a continuación:
 
 
 \begin{enumerate}
 \item \keyword{Componentes para la construcción del módulo}
 
-Los elementos necesarios son:
+Los elementos necesarios fueron:
 \begin{itemize}
-\item Gabinete de protección
-\item Sensor de tensión eléctrica AC - ZMPT101B
-\item Sensor de corriente eléctrica SCT-013-030
-\item Convertidor ADC ADS1115
-\item Cable de calibre 14
-\item Fusible de 30 A
-\item Pantalla gráfica LCD
-\item Fuente embebida con entrada 220 V y salida de 5 V
-\item Leds ultra brillantes:
+\item Gabinete de protección.
+\item Sensor de tensión eléctrica AC - ZMPT101B.
+\item Sensor de corriente eléctrica SCT-013-030.
+\item Convertidor ADC ADS1115.
+\item Cable de calibre 14.
+\item Fusible de 30 A.
+\item Pantalla gráfica LCD.
+\item Fuente embebida con entrada 220 V y salida de 5 V.
+\item Leds ultra brillantes.
 \end{itemize}
 
 \item \keyword{Aplicación del sensor SCT-013-030}
 
-Para este trabajo se utilizó el sensor de salida por tensión, el SCT-013-030 para corrientes máximas de 30 A (30 A /1 V) y salida en tensión de 1 V.A. Es importante disponer un rango amplio de medición, pero hay que tener en cuenta que un modelo de mayor intensidad se traducirá en una menor precisión. Una intensidad de 30 A a 230 V corresponde con una carga de 6.900 W, potencia suficiente para la mayoría de usuarios domésticos. En la figura \ref{fig:consumo1} se ilustra el esquema lógico a usar y la pinza del sensor.
-\vspace{1.0cm}
+Para este trabajo se utilizó el sensor de salida por tensión SCT-013-030 que soporta corrientes máximas de 30 A (30 A /1 V) y salida en tensión de 1 V.A. Una intensidad de 30 A a 230 V corresponde con una carga de 6.900 W, potencia suficiente para la mayoría de usuarios domésticos. En la figura \ref{fig:consumo1} se ilustra el esquema lógico a usar y la pinza del sensor.
+\vspace{0.5cm}
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.9\textwidth]{./Figures/consumo1.png}
@@ -347,7 +358,7 @@ Para determinar la potencia eléctrica consumida, el sistema recolecta medicione
 	\label{tab:tablaconsumos}
 \end{table}
 
-Cada agrupación tiene un aproximado de 1800 registros temporales registrados en una determinada hora. Si se considera como ejemplo los datos de la tabla \ref{tab:tablaconsumos}, el consumo del ventilador en el día 01/02/2022 se calcula usando la formula \ref{eq:consumoform}, dando como resultado la ecuación \ref{eq:potenciaformejemplo2}.
+Cada agrupación tiene un aproximado de 1800 registros temporales obtenidos en una determinada hora. Si se considera como ejemplo los datos de la tabla \ref{tab:tablaconsumos}, el consumo del ventilador en el día 01/02/2022 se calcula usando la formula \ref{eq:consumoform}, dando como resultado la ecuación \ref{eq:potenciaformejemplo2}.
 
 \begin{equation}
 	\label{eq:potenciaformejemplo2}
@@ -366,7 +377,7 @@ Los valores del consumo total serán usados para generar la facturación mensual
 
 \end{enumerate}
 \section{Módulo réplica}
-Este módulo contiene una copia del software de monitoreo y control pero con la diferencia que se ejecuta en la nube usando los servicios de un servidor y un broker remoto.
+Este módulo es una copia del software de monitoreo y control local y esta ubicado en la nube. Utiliza los servicios de un servidor y un broker remoto.
 
 %\vspace{1.0cm}
 
@@ -382,40 +393,10 @@ Este módulo contiene una copia del software de monitoreo y control pero con la 
 %\end{figure}
 %\end{landscape} % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Diseño de la red física local}
+\section{Diseño de la red IoT}
 
-Para esta tarea se agregó un router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura \ref{fig:diagramared} ilustra el diseño físico de la red utilizada.
+Para el diseño de la red se agregó un router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura \ref{fig:diagramared} ilustra el diseño físico de la red utilizada.
 
-
-
-\section{Configuración de la red WLAN}
-
-El diseño y la configuración de la red WLAN tiene un rol fundamental dentro del desempeño del sistema porque permite garantizar un canal de comunicación seguro, sin interferir la red doméstica.
-
-%Las consideraciones de seguridad para una configuración Wi-Fi segura fueron:
-
-%\begin{itemize}
-%\item Uso de un AP (\emph{Access Point}) como elemento central para el servicio Wi-Fi independiente (dedicado solo para el sistema IoT) para garantizar una subred paralela al usado para la red doméstica.
-%\item Configuración ideal del canal de comunicación inalámbrica, para evitar el uso de un canal con alto grado de solapamiento.
-%\item Uso de dispositivos AP con la función de seguridad de clave WPA2-PSK (AES).
-%\item Configurar el nombre de la señal por defecto, la clave de acceso al AP y a la señal Wi-Fi, considerando letras minúsculas, mayúsculas, números y símbolos especiales.
-%\item Monitoreo continuo de la red Wi-Fi del AP, para supervisar la presencia únicamente de solo dispositivos válidos en la red dedicada.
-%\end{itemize}
-
-\subsection{Configuración del Router inalámbrico}
-Los principales criterios de configuración del router inalámbrico a considerar son la seguridad de la señal y la elección del canal para la comunicación Wi-Fi. Para el presente trabajo se usó un \emph{Router/Access Point} (AP) de alta ganancia 300 Mbps SATRA, porque ofrece tasas de transferencia de datos de 300 Mbps y garantiza una cobertura inalámbrica sin cortes tanto en la red del hogar como de la oficina y es compatible con el estándar de encriptación WPA2 (\emph{Wi-Fi Protected Access 2}), diseñado para proteger a la red de ataques externos en un nivel más alto \citep{WEBSITE:25}. La figura \ref{fig:router} muestra el modelo del router SATRA.
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.7\textwidth]{./Figures/router.jpg}
-\caption{Modelo del router utilizado para el diseño de red.}
-\label{fig:router}
-\end{figure}
-
-Este router tiene tres formas de funcionamiento: AP, router y repetidor. Para nuestro trabajo se seleccionó la configuración AP o punto de acceso. La figura \ref{fig:funcionamientorouter} muestra la configuración del modo de funcionamiento.
-
-Al crear y configurar una red inalámbrica WLAN, es común encontrarse con uno de los problemas más habituales en las redes Wi-Fi, el solapamiento de canales, debido a la gran cantidad de equipos que funcionan en la banda de frecuencia de 2,4 GHz. La mala configuración de red puede ser un motivo para problemas de comunicación Wi-Fi. La conexión a Internet lenta y las desconexiones pueden ocurrir si la red inalámbrica no está configurada correctamente o si hay demasiados dispositivos que están compitiendo por el espacio aéreo inalámbrico de la red. Cada equipo Wi-Fi que cumple con el estándar 802.11 b/g utiliza uno de los 13 canales establecidos de 14 en total y si 2 o más equipos cercanos utilizan el mismo canal, se produce el solapamiento. 
-%%%% hasta aqui se revisoooooooooooo 26/04/2022
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
@@ -425,296 +406,19 @@ Al crear y configurar una red inalámbrica WLAN, es común encontrarse con uno d
 \label{fig:diagramared}
 \end{figure}
 \end{landscape} % 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% se retira la seccion de configuración wlan
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Diseño del software para monitoreo y control}
 
-Cada canal ocupa un ancho de banda de 22 MHz. El efecto del solapamiento es la bajada en el rendimiento (velocidad) de las redes afectadas \citep{WEBSITE:26}.
+El software desarrollado para este trabajo fue diseñado e implementado a medida por ser parte fundamental dentro de los objetivos planteados al inicio. El software es de tipo web y cumple con la característica de ser un diseño responsivo para garantizar la correcta visualización en los distintos dispositivos del mercado actual. 
 
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.7\textwidth]{./Figures/funcionamientorouter.png}
-\caption{Elección del modo de funcionamiento del router.}
-\label{fig:funcionamientorouter}
-\end{figure}
-
-La figura \ref{fig:canales} muestra el ancho de banda utilizado por cada canal y el solapamiento que se produce entre ellos \citep{WEBSITE:27}.
+La figura \ref{fig:patrondiseniosoftware} muestra el patrón a seguir en el desarrollo de las interfaces gráficas de usuario (GUI) del software.
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=1.0\textwidth]{./Figures/canales.png}
-\caption{Diagrama de los canales de 2.4 GHz.}
-\label{fig:canales}
+\includegraphics[width=0.8\textwidth]{./Figures/responsive3.png}
+\caption{Patrón del diseño web responsivo para el \emph{software} \protect\footnotemark.}
+\label{fig:patrondiseniosoftware}
 \end{figure}
-
-\subsubsection{Elección del canal de comunicación}
-En la banda de 2,4 GHz, que por lo general es \emph{Wireless-N}, siempre se elije el canal 1, 11 o 6. Los canales distintos de 1, 11 o 6 recibirán más interferencias. 
-
-Para la elección del canal se tomó en cuenta la figura  \ref{fig:canales} y las siguientes consideraciones \citep{WEBSITE:28}:
-
-\begin{itemize}
-\item El canal 1 interferirá y recibirá interferencias de los canales 1-5 de  2,4 GHz.
-\item El canal 6 interferirá y recibirá interferencias de los canales 2-10 de  2,4 GHz.
-\item El canal 11 interferirá y recibirá interferencias de los canales 7-13 de 2,4 GHz.
-\end{itemize}
-
-Utilizando la información anterior, se puede observar que siempre se deben elegir los canales 1, 11 o 6. Si se hace lo contrario, se tendrá la interferencia de más de un canal inalámbrico principal de 2,4 GHz \citep{WEBSITE:28}, ocasionando solapamiento o interferencia en el canal de comunicación de la red IoT a utilizar. Sin embargo, es posible que no se pueda acceder a un canal no interferible, porque pueden existir redes Wi-Fi que estén ocupando los canales 1, 6 y 11. Incluso, pueden existir otras redes vecinas que utilicen canales que se solapen parcialmente y, para estos casos, se debe buscar un canal donde el impacto de ese solapamiento sea mínimo \citep{WEBSITE:27}.
-
-Pare este trabajo la elección del número de canal se fundamentó en la investigación antes mencionada y en la exploración de las redes Wi-Fi vecinas existentes en el entorno donde se implantó el sistema IoT.
-
-\subsubsection{Elección del ancho de banda del canal}
-
-Para la elección de la anchura del canal se establece en 20 MHz para la banda de 2,4 GHz y en automático o en todos los anchos (20 MHz, 40 MHz y 80 MHz) para la banda de 5 GHz \citep{WEBSITE:29}. La anchura del canal especifica el tamaño del ``cauce'' disponible para transferir datos. Los canales más anchos son más rápidos, pero más propensos a sufrir interferencias y a interferir con otros dispositivos. Los 20 MHz para la banda de 2,4 GHz ayudan a evitar problemas de rendimiento y fiabilidad, especialmente cerca de otras redes Wi-Fi y dispositivos de 2,4 GHz, incluidos los dispositivos Bluetooth \citep{WEBSITE:29}. La figura \ref{fig:configuracioncanal} muestra los valores por defecto que tiene el router utilizado y la figura \ref{fig:solapamiento} muestra el solapamiento de las redes inalámbricas locales y vecinas donde se probó el sistema IoT.
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.9\textwidth]{./Figures/configuracioncanal.png}
-\caption{Configuración por defecto del router SATRA.}
-\label{fig:configuracioncanal}
-\end{figure}
-
-Para los casos donde se amplía el canal (40 MHz), eso significa duplicar las interferencias con las redes vecinas. Para remediarlo, la IEEE introdujo un mecanismo de coexistencia en 2,4 GHz para evitar las molestias a las redes vecinas, muchos fabricantes de routers se han adaptado a la norma, por lo que no permiten que los usuarios seleccionen arbitrariamente los 40 MHz, sino que se limitan a un ``auto 20/40''. Por lo tanto, el router solo utilizará la frecuencia de 40 MHz si los canales vecinos están libres, de lo contrario, utilizará la frecuencia de 20 MHz \citep{WEBSITE:30}.
-
-La figura \ref{fig:configuracionancho} muestra la configuración final elegida para este trabajo. Las pruebas y análisis de canales así como la justificación para su elección se describen en el capítulo 4 de este documento.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/wifi/01-doc.png}
-\caption{Solapamiento de canales de las redes inalámbricas locales y vecinas.}
-\label{fig:solapamiento}
-\end{figure}
-\end{landscape} % 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{0.5cm}
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.0\textwidth]{./Figures/configuracionancho.png}
-\caption{Configuración para la red WLAN del sistema IoT.}
-\label{fig:configuracionancho}
-\end{figure}
-%------------------------------------------------
-
-\subsubsection{Configuración de seguridad inalámbrica}
-Dentro de los parámetros de seguridad se configuró la opción de autenticación \emph{auth. and encryption}. La figura \ref{fig:encriptacion} ilustra la elección de encriptación y autenticación para el acceso a la señal del AP 
-%access point y en la figura \ref{fig:configuracionfinal} Ilustra los resultados finales de la %configuración del access point.
-
-\vspace{0.5cm}
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.0\textwidth]{./Figures/encriptacion.png}
-\caption{Configuración de autenticación para la señal Wi-Fi.}
-\label{fig:encriptacion}
-\end{figure}
-%------------------------------------------------------
-%\vspace{0.1cm}
-%\begin{figure}[htpb]
-%\centering 
-%\includegraphics[width=1.0\textwidth]{./Figures/configuracionfinal.png}
-%\caption{Resumen de la configuración resultante del router.}
-%\label{fig:configuracionfinal}
-%\end{figure}
-
-\section{Software para monitoreo y control}
-
-El software desarrollado para este trabajo fue hecho a medida por ser parte fundamental dentro de los objetivos planteados al inicio, como emprendimiento personal. El software es de tipo web y cumple con la característica de ser responsivo para garantizar la adaptación visual a distintos dispositivos del mercado actual. 
-
-%Las consideraciones de seguridad para el \emph{software} de monitoreo fueron:
-
-%\begin{itemize}
-%\item Encriptación de claves de acceso, la longitud de cadena de las claves  deben ser mayor a 8 dígitos, considerando números, letras mayúsculas, letras minúsculas, números y símbolos especiales.
-%\item Medidas de protección contra \emph{Injeccion SQL} y usar sentencias preparadas u objetos PDO (\emph{PHP Data Objects}) para las conexiones hacia la base de datos.
-%\item Control de acceso por CORS (\emph{Cross Origin Resource Sharing}) para recursos de la API REST.
-%\item Configuración del archivo .htaccess para evitar listado de directorios o accesos no permitidos.
-%\item Minificar los archivos CSS (\emph{Cascading Style Sheets}) y JS (\emph{JavaScript}) de la aplicación web.
-%\item Control de acceso al sistema según validación de roles y permisos.
-%\item Uso de la programación orientada a objetos.
-%\item Uso de peticiones POST como prioridad, si fuera necesario el uso de las peticiones GET, utilizarlas con el paso de parámetros encriptados.
-%\end{itemize}
-
-
-
-Las figuras \ref{fig:software1} y \ref{fig:software2} muestran los resultados responsivos para cada tipo de dispositivo considerado en el desarrollo.
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.62 \textwidth]{./Figures/responsive1.png}
-\caption{Vista del software en equipos desktop y laptop.}
-\label{fig:software1}
-\end{figure}
-
-\vspace{1.0cm}
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.65\textwidth]{./Figures/responsive2.png}
-\caption{Vista del software en tableta y celular.}
-\label{fig:software2}
-\end{figure}
-
-\vspace{1.0cm}
-\section{Resultados de los módulos del sistema IoT}
-En esta sección se muestran las imágenes reales de los resultados obtenidos de la construcción de cada módulo físico. Estos dispositivos fueron utilizados para las pruebas de validación en un ambiente real IoT. Las figuras \ref{fig:modPrincipal}, \ref{fig:modTemp} y \ref{fig:modConsumo2} muestran los módulos.
-
- 
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.9\textwidth]{./Figures/principal2.png}
-\caption{Vista superior y posterior del módulo principal.}
-\label{fig:modPrincipal}
-\end{figure}
-
-
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.85\textwidth]{./Figures/moduloTemp2.png}
-\caption{Vista lateral, frente y superior del módulo de temperatura.}
-\label{fig:modTemp}
-\end{figure}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.8\textwidth]{./Figures/consumo3.png}
-\caption{Vista frontal y lateral del módulo actuador y módulo de consumo.}
-\label{fig:modConsumo2}
-\end{figure}
-\end{landscape} %
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Interfaces gráficas del software de monitoreo y control}
-
-El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de ser el autor de este trabajo el dueño de los derechos de \emph{Copyright} del mismo, ademas, el \emph{software} por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. El software ha sido nombrado como: \emph{Cenergy IoT System} y hace referencia al control de energía eléctrica mediante un sistema IoT. Se espera su evolución y madurez en trabajos futuros. 
-
-%Las principales interfaces gráficas de usuario (GUI) que se muestran a %continuación son el resultado de lo logrado en esta primera versión del %software hasta la fecha de presentación de este trabajo. Las GUIs son:
-
-\begin{itemize}
-\item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Las credenciales utilizadas son el número de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
-
-\item La interfaz de presentación inicial al ingresar al sistema (\emph{dashboard}) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente está almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
-
-\item La interfaz de monitoreo para sensores se muestra en la figura \ref{fig:gui2}. Esta interfaz permite mostrar en tiempo real los sensores que tiene el sistema IoT, así como el estado de los mismos. Si un sensor tiene un estado CONECTADO se podrán observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui2-1}.
-
-\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que está realizando consumo mediante una señal de onda, junto a su interruptor actuador cuya función es el control del paso o bloqueo de energía eléctrica en el módulo. Si el módulo se encuentra con el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles'', pudiendo acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
-
-\item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y número de módelo, para su identificación dentro del sistema.
-
-\item El software actualmente presenta interfaces para cuatro tipos de consultas, que son: lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra como consumo en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aún no completan las horas, podrán ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formatos excel o pdf y, si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
-
-\item El software cuenta con una interfaz que muestra un grafo que permite visualizar en tiempo real la comunicación de los módulos así como los mensajes entre canales. El grafo se muestra en la figura \ref{fig:grafo}.
-
-
-\end{itemize}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/0.png}
-\caption{Interfaz gráfica de usuario de acceso al software de monitoreo y control.}
-\label{fig:gui0}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/1.png}
-\caption{Dashboard inicial del software de monitoreo y control.}
-\label{fig:gui1}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/2.png}
-\caption{Interfaz gráfica de usuario donde se listan los sensores del sistema.}
-\label{fig:gui2}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/2-1.png}
-\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor.}
-\label{fig:gui2-1}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.52\textwidth]{./Figures/gui/3.png}
-\caption{Interfaz gráfica de usuario donde se listan los sensores de consumo junto a su función de actuador.}
-\label{fig:gui3}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.52\textwidth]{./Figures/gui/3-1.png}
-\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor de consumo.}
-\label{fig:gui3-1}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/4.png}
-\caption{Interfaz gráfica de usuario para agregar un nuevo dispositivo al sistema.}
-\label{fig:gui4}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/5.png}
-\caption{Interfaz gráfica de usuario donde se muestran las consultas y reportes de la base de datos.}
-\label{fig:gui5}
-\end{figure}
-\end{landscape} %
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/nucleo.png}
-\caption{Grafo de comunicación y sincronización del núcleo del sistema IoT.}
-\label{fig:grafo}
-\end{figure}
-\end{landscape} %
+\footnotetext{Imagen tomada de \url{https://www.genbeta.com/desarrollo/responsive-design-introduccion}}
