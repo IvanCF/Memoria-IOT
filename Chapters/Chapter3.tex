@@ -22,7 +22,7 @@ La etapa de diseño se inició con la modelización de los componentes más impo
 Para el diseño e implementación de \emph{firmware} se utilizó Arduino teniendo en cuenta patrones y conceptos de la programación funcional. La comunicación MQTT se realizó mediante la biblioteca PubSubClient versión 2.7.0 \citep{WEBSITE:46} y la visualización gráfica de las pantallas OLED y GLCD, con las bibliotecas Adafruit GFX versión 1.7.2 \citep{WEBSITE:47} y U8g2\_for\_Adafruit\_GFX versión 2.28.10 \citep{WEBSITE:48} respectivamente.
 
 
-Como se eligió el protocolo MQTT para la comunicación entre módulos y el conjunto de servicios, se definió tres tipos de tópicos para poder comunicarse entre sí. Estos tópicos fueron:
+Como se eligió el protocolo MQTT para la comunicación entre módulos y el conjunto de servicios, se definieron tres tipos de tópicos para poder comunicarse entre sí. Estos tópicos son:
 
 \begin{itemize}
 
@@ -68,7 +68,7 @@ Como se eligió el protocolo MQTT para la comunicación entre módulos y el conj
 
 El software de monitoreo de tipo web local y remoto fue diseñado y desarrollado a medida para garantizar dominio total de la plataforma usada. Utiliza el \emph{framework bootstrap} para lograr interfaces gráficas de usuario que cumplan con los principios de experiencia de usuario (UX) y compatibilidad de dispositivos. Para la recepción de mensajes se usó web sockets mediante \emph{JavaScript} teniendo configurado los tres tópicos de comunicación antes mencionados para el intercambio de mensajes con los módulos.
 
-La figura \ref{fig:diagrama_general} muestra el diagrama general del funcionamiento del sistema desde la perspectiva conceptual. El desarrollo, consideraciones de construcción y fabricación para cada módulo del sistema se describen a detalle en las siguientes secciones de este capítulo.
+La figura \ref{fig:diagrama_general} muestra el diagrama general del funcionamiento del sistema desde la perspectiva conceptual. El desarrollo, consideraciones de construcción y fabricación para cada módulo del sistema se describen en detalle en las siguientes secciones de este capítulo.
 
 
 \begin{figure}[htbp]
@@ -168,15 +168,15 @@ La replicación solo se da mientras exista conexión a Internet. El desarrollo d
 Las descripciones de cada subproceso interno que contiene el módulo replicador se detallan a continuación usando el nombre del proceso con el cual fue creado: 
 
 \begin{itemize}
-\item \keyword{mqtt\_envia\_nube\_poo (P1)}: es el responsable de reenviar al broker remoto todos los mensajes que llegan al broker local, usando el formato JSON.
+\item \keyword{mqtt\_envia\_nube\_poo (P1)}: es el responsable de reenviar al broker remoto todos los mensajes que llegan al broker local. Se usa el formato JSON.
 
 \item \keyword{mqtt\_recibe\_nube\_poo (P2)}: es el responsable de recibir los datos JSON que fueron generados en la aplicación web remota y que llegan desde el broker remoto para luego enviarlos al broker local.
 
 \item \keyword{actuador\_registros\_bd (P3)}: es el responsable de verificar los registros en la base de datos. La verificación se realiza en intervalos de tiempo de una hora. Consulta todos los registros de lecturas de actuadores dentro de una hora específica en las tablas auxiliares de actuadores y consumos, luego obtiene la media de los consumos y hace un solo registro en la tabla de historial de consumo. Finalmente realiza el borrado de los registros temporales utilizados.
 
-\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. La verificación se realiza en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores dentro de una hora específica en las tablas auxiliares de sensores, luego obtiene la media de los registros y hacer un solo registro en la tabla de historial de sensores. Finalmente realiza el borrado de los registros temporales utilizados.
+\item \keyword{sensor\_registros\_bd (P4)}: es el responsable de verificar los registros en la base de datos. La verificación se realiza en intervalos de tiempo de una hora, consulta todos los registros de lecturas de sensores dentro de una hora específica en las tablas auxiliares de sensores, luego obtiene la media de los registros y hace un solo registro en la tabla de historial de sensores. Finalmente realiza el borrado de los registros temporales utilizados.
 
-\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar. En caso de disponer de una conexión a Internet y a partir de registros marcados como no replicado procederá a enviar los últimos registros hacia la nube. Finalmente actualiza en el campo de la tabla de registros\_no\_enviados, y así mantener la consistencia necesaria entre el sistema local y remoto.
+\item \keyword{sensor\_historial\_replicas\_bd (P5)}: es el responsable de verificar de forma constante la conexión a Internet y si existen datos por replicar. En caso de disponer de una conexión a Internet y a partir de registros marcados como no replicado procede a enviar los últimos registros hacia la nube. Finalmente actualiza en el campo de la tabla de registros\_no\_enviados, y así se mantiene la consistencia necesaria entre el sistema local y remoto.
 
 \item \keyword{mqtt\_gestionBD\_poo (P6)}: es el responsable de recibir todos los mensajes que llegan al broker y verificar la pertenencia del JSON capturado (sensor o actuador). Posteriormente, comprueba si existe conexión a Internet. En el caso que no esté disponible la conexión solo se hace el registro en la tabla local y se lo marca como no replicado, para que pueda ser enviado a la nube cuando vuelva a existir la conexión a Internet. Este subproceso también permite actualizar el estado de un sensor o actuador en la base de datos con el estado de ``CONECTADO'' mientras esté activo en la red.
 
@@ -244,7 +244,7 @@ Para la construcción del módulo se utilizó una caja de tomacorriente  resiste
 
 %El corte o paso de energía eléctrica se realiza desde el software de monitoreo mediante el componente \emph{Toggle Switch} para activar o desactivar el relé. 
 
-Para la activación del relé de 5 V mediante la salida de la placa NodeMCU8266 fue necesario usar un convertidor de tensión DC-DC Step-Up 2 A MT3608, porque las salidas de la placa NodeMCU8266 son de 3.3 V y la activación del relé requiere 5 V para funcionar. La figura \ref{fig:esquemaactuador} ilustra el relé de 30 A y el convertidor de tensión utilizado para la solución a este problema.
+Para la activación del relé de 5 V mediante la salida de la placa NodeMCU8266 fue necesario usar un convertidor de tensión DC-DC Step-Up 2 A MT3608, porque las salidas de la placa NodeMCU8266 son de 3,3 V y la activación del relé requiere 5 V para funcionar. La figura \ref{fig:esquemaactuador} ilustra el relé de 30 A y el convertidor de tensión utilizado para la solución a este problema.
 
 
 %El DC-DC Step-Up tiene como función entregar una tensión de salida constante superior a la tensión de entrada, soporta como tensión de entrada entre 2 V a 24 V y tensión de salida entre 2 V a 28 V. La tensión de salida se puede regular mediante un potenciómetro multivuelta \citep{WEBSITE:19}. 
@@ -444,7 +444,7 @@ El software desarrollado para este trabajo fue diseñado e implementado a medida
 
 \section{Almacenamiento de los datos}
 
-El sistema de monitoreo utiliza una base de datos para almacenar los valores de sensores y consumos. Por consiguiente, para este trabajo fue necesario la creación de una base de datos para almacenar los valores que se generan por todos los módulos de sensores y actuadores. 
+El sistema de monitoreo utiliza una base de datos para almacenar los valores de sensores y consumos. Por consiguiente, para este trabajo fue necesaria la creación de una base de datos para almacenar los valores que se generan por todos los módulos de sensores y actuadores. 
 
 El gestor de base de datos elegido fue MySQL por ser de característica \emph{software} libre y ofrecer alta compatibilidad de conexión con el lenguaje \emph{backend} utilizado. El modelo entidad relación implementado en la base de datos se muestra en la figura \ref{fig:entidadrelacion}:
 

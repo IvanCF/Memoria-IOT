@@ -23,7 +23,7 @@ Todos estos componentes trabajan en conjunto para brindar al cliente una soluci�
 	\label{fig:diagrama1}
 \end{figure}
 
-El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispositivo que cuente con un navegador web y con conectividad a Internet a cualquier usuario, ya sea desde dentro de la red local o desde fuera. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo de \emph{software} que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. Para los casos de corte de Internet, el módulo replicador enviará los datos de forma automática la próxima vez que detecte el servicio de conexión a Internet. 
+El sistema tiene la capacidad de permitir el acceso por medio de cualquier dispositivo que cuente con un navegador web y con conectividad a Internet a cualquier usuario, ya sea desde dentro de la red local o desde fuera. Para alcanzar esta funcionalidad, fue necesario desarrollar un módulo de \emph{software} que permita la replicación de datos desde la red local hacia un broker remoto ubicado en la nube. La necesidad de replicación de los datos hacia la nube solo se da mientras exista conexión a Internet. Para los casos de corte de Internet, el módulo replicador enviará los datos de forma automática la próxima vez que detecte el servicio.% de conexión a Internet. 
 
 Los componentes claves dentro de la solución propuesta y que se integran en la arquitectura IoT usada en el proceso de desarrollo son: 
 
@@ -53,7 +53,7 @@ Los servicios en la nube se clasifican en:
 
 %\vspace{0.5cm}
 
-\item Plataforma como servicio (PaaS): este servicio ofrece plataformas de desarrollo sin necesidad de adquirir tecnología con costo muy elevado. El \emph{hardware} y el \emph{software} en este modelo es administrado por el proveedor del servicio, además de que los desarrolladores no se preocupan por el rendimiento del hardware ni por las actualizaciones del sistema, ya que todo lo realiza el proveedor del servicio \citep{BOOK:2}.
+\item Plataforma como servicio (PaaS): este servicio ofrece plataformas de desarrollo sin necesidad de adquirir tecnología de costo muy elevado. El \emph{hardware} y el \emph{software} en este modelo es administrado por el proveedor del servicio, además de que los desarrolladores no se preocupan por el rendimiento del hardware ni por las actualizaciones del sistema, ya que todo lo realiza el proveedor \citep{BOOK:2}.
  
 %Ejemplos de PaaS:
 
@@ -67,7 +67,7 @@ Los servicios en la nube se clasifican en:
 %\vspace{0.5cm}
 
 
-\item \emph{Software} como servicio (SaaS): constituye el modelo más utilizado porque, además de brindar servicio de \emph{software}, ofrece también el almacenamiento de la información. Este modelo permite la simplicidad de integración y escalabilidad \citep{BOOK:2}. 
+\item \emph{Software} como servicio (SaaS): constituye el modelo más utilizado porque, además de brindar servicio de \emph{software}, ofrece también el almacenamiento de la información. Este modelo permite simplicidad de integración y escalabilidad \citep{BOOK:2}. 
 
 %Ejemplos de SaaS:
 
@@ -103,14 +103,14 @@ Para el trabajo se usó el servicio tipo PaaS en la creación y configuración d
 
 %Para el trabajo se consideró el servicio de \emph{cloud computing} tipo PaaS, porque permite la creación y configuración del broker remoto, el servidor Apache para la aplicación web y el gestor de base de datos MySQL.
 
-El plan utilizado se divide en dos categorías, la primera está definida por el servicio del servidor web para alojar la aplicación web de monitoreo y control (réplica) y la segunda por el servicio del broker remoto que permite la comunicación directa con el broker local. La comunicación entre ambos servicios se hace mediante el protocolo MQTT utilizando la biblioteca  \emph{Eclipse Paho JavaScript Client}, se puede encontrar mayor información en la página oficial de la biblioteca \citep{WEBSITE:41}. 
+El plan utilizado se divide en dos categorías, la primera está definida por el servicio del servidor web para alojar la aplicación web de monitoreo y control (réplica) y la segunda por el servicio del broker remoto que permite la comunicación directa con el broker local. La comunicación entre ambos servicios se hace mediante el protocolo MQTT utilizando la biblioteca  \emph{Eclipse Paho JavaScript Client}, se puede encontrar mayor información en su página oficial \citep{WEBSITE:41}. 
 
 Las principales características  del servicio contratado para la implementación del sistema de monitoreo se muestran en la tabla \ref{tab:serverweb} y las características del servicio para el broker remoto se muestran en la tabla  \ref{tab:brokerremoto}.
 
 
 \begin{table}[h]
 	\centering
-	\caption[Características del servicio en la nube]{Características en la nube para el \emph{software} de monitoreo.}
+	\caption[Características del servicio en la nube]{Características del servicio en la nube.}
 	\begin{tabular}{p{7cm} p{5cm} }    
 		\toprule
 		\textbf{Característica} 	 & \textbf{Detalle}  \\
@@ -180,11 +180,11 @@ MQTT  (\textit{Message Queue Telemetry Transport}) es un protocolo de red ligero
 Para construir una red usando MQTT es necesario entender los conceptos que se utilizan para crear una red IoT: 
 
 \begin{itemize}
-\item El broker MQTT: el servidor o broker es el programa que se encarga de recepcionar los mensajes enviados por los clientes y distribuirlos entre sí en un sistema publicador-suscriptor. Los clientes envían periódicamente paquetes y esperan la respuesta del broker, como se ilustra con la figura \ref{fig:broker}: 
+\item El broker MQTT: el servidor o broker es el programa que se encarga de recepcionar los mensajes enviados por los clientes y distribuirlos entre sí en un sistema publicador-suscriptor. Los clientes envían periódicamente paquetes y esperan la respuesta del broker, como se ilustra con la figura \ref{fig:broker}. 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.8\textwidth]{./Figures/broker.jpg}
+	\includegraphics[width=.75\textwidth]{./Figures/broker.jpg}
 	\caption{Funcionamiento del broker MQTT \protect\footnotemark.}
 
 	\label{fig:broker}
@@ -196,9 +196,13 @@ El broker MQTT usado en el trabajo es Eclipse Mosquitto, por ser de código abie
 
 %\vspace{1cm}
 %\vspace{1cm}
-\item Comunicación MQTT: es la función de transporte de mensajes entre dispositivos IoT. El protocolo generalmente se ejecuta sobre TCP / IP ; sin embargo, cualquier protocolo de red que proporcione conexiones bidireccionales ordenadas y sin pérdidas puede admitir MQTT. Está diseñado para conexiones con ubicaciones remotas donde existen restricciones de recursos o el ancho de banda de la red es limitado \citep{WEBSITE:3}. Su modelo de comunicación se puede ver en la figura \ref{fig:mqtt}:
+\item Comunicación MQTT: es la función de transporte de mensajes entre dispositivos IoT. El protocolo generalmente se ejecuta sobre TCP / IP ; sin embargo, cualquier protocolo de red que proporcione conexiones bidireccionales ordenadas y sin pérdidas puede admitir MQTT. Está diseñado para conexiones con ubicaciones remotas donde existen restricciones de recursos o el ancho de banda de la red es limitado \citep{WEBSITE:3}. Su modelo de comunicación se puede ver en la figura \ref{fig:mqtt}.
 
-\vspace{0.5cm}
+%\vspace{0.5cm}
+
+
+
+La comunicación MQTT puede estar cifrada mediante TLS (\emph{Transport Layer Security}) y contar con credenciales de acceso para el control de los canales de envío y recepción. Al broker se le puede conectar un sinfín de dispositivos como teléfonos móviles, computadoras, sensores, actuadores, lámparas, relojes, bombas de agua, refrigeradores, cocinas y mucho más. 
 
 \begin{figure}[htbp]
 	\centering
@@ -208,8 +212,6 @@ El broker MQTT usado en el trabajo es Eclipse Mosquitto, por ser de código abie
 \end{figure}
 
 \footnotetext{Imagen tomada de \url{https://mqtt.org/}}
-
-La comunicación MQTT puede estar cifrada mediante TLS (\emph{Transport Layer Security}) y contar con credenciales de acceso para el control de los canales de envío y recepción. Al broker se le puede conectar un sinfín de dispositivos como teléfonos móviles, computadoras, sensores, actuadores, lámparas, relojes, bombas de agua, refrigeradores, cocinas y mucho más. 
 
 \end{itemize}
 
@@ -235,14 +237,14 @@ Mosquitto es parte de la Fundación Eclipse \citep{WEBSITE:5}, es un proyecto de
 
 El hardware del módulo principal integra la placa raspberry Pi 4 modelo B de 8 GB como placa base. La Raspberry Pi es una serie de ordenador de placa reducida, ordenador de placa única u ordenador de placa simple (SBC) de bajo costo desarrollado en el Reino Unido por la Raspberry Pi Foundation \citep{WEBSITE:6}.
 
-La placa Raspberry Pi 4 es una pequeña computadora de escritorio de doble pantalla con opciones de salida en 4K, se puede usar para cerebro de robot, centro de hogar inteligente, centro multimedia, núcleo de IA (inteligencia artificial) en red y mucho más. La figura \ref{fig:rpi4} muestra sus principales especificaciones.
+La placa Raspberry Pi 4 es una pequeña computadora de escritorio de doble pantalla con opciones de salida en 4K, se puede usar como cerebro de robot, centro de hogar inteligente, centro multimedia, núcleo de IA (inteligencia artificial) en red y mucho más. La figura \ref{fig:rpi4} muestra sus principales especificaciones.
 
 Las especificaciones técnicas de la computadora Raspberry Pi 4 son \citep{WEBSITE:7}:
 
 \begin{itemize}
 \item Broadcom BCM2711, SoC de 64 bits Cortex-A72 de cuatro núcleos (ARM V8) a 1,5 GHz.
 \item SDRAM LPDDR4-3200 de 2 GB, 4 GB u 8 GB (según el modelo).
-\item 2.4 GHz y 5.0 GHz IEEE 802.11ac inalámbrica, Bluetooth 5.0.
+\item 2,4 GHz y 5,0 GHz IEEE 802.11ac inalámbrica, Bluetooth 5.0.
 \item Gigabit Ethernet, 2 puertos USB 3.0 y 2 puertos USB 2.0.
 \item Cabecera GPIO estándar Raspberry Pi de 40 pines (totalmente compatible con las placas anteriores).
 \item Puertos micro-HDMI (hasta 4kp 60 compatible).
@@ -327,7 +329,7 @@ Los componentes principales usados en el desarrollo de cada módulo están forma
 
 \subsection{Placa NodeMCU ESP8266}
 
-La tarjeta NodeMCU es de bajo costo y está basada en el procesador ESP8266, que está utilizándose mucho para la realización de proyectos IoT, ya que dispone de Wi-Fi integrado. El procesador se programa en Lua \citep{WEBSITE:38}, pero también se puede programar con C/C++. Su principal característica es que trabaja a 3,3 V.  Además, ofrece más ventajas como la incorporación de un regulador de tensión integrado, así como un puerto USB de programación. 
+La tarjeta NodeMCU es de bajo costo y está basada en el procesador ESP8266, que es muy utilizado en la realización de proyectos IoT, ya que dispone de Wi-Fi integrado. El procesador se programa en Lua \citep{WEBSITE:38}, pero también se puede programar con C/C++. Su principal característica es que trabaja a 3,3 V.  Además, ofrece más ventajas como la incorporación de un regulador de tensión integrado, así como un puerto USB de programación. 
 
 %En el mercado actual se encuentran dos versiones muy utilizadas de la familia NodeMCU y la forma rápida de diferenciar la V2 de la V3, es fijarnos en el conversor serial que monta y en su tamaño. El CP2102 (V2) que es cuadrado, y el CH340G (V3) que es más alargado respectivamente,.
  
@@ -345,10 +347,10 @@ Las especificaciones técnicas del NodeMCU son:
 
 \begin{itemize}
 \item Utiliza chip CH340G (USB).
-\item Tensión de alimentación: 4.5 V~9 V (10 V max) y/o alimentación por USB.
-\item Tensión de pines I/O: 3.3 V.
+\item Tensión de alimentación: 4,5 V~9 V (10 V max) y/o alimentación por USB.
+\item Tensión de pines I/O: 3,3 V.
 \item Wireless 802.11 b/g/n standard.
-\item Wi-Fi at 2.4 GHz, soporta encriptación WPA/WPA2.
+\item Wi-Fi a 2,4 GHz, soporta encriptación WPA/WPA2.
 \item Soporta tres modos de operación: STA/AP/STA+AP.
 \item Pila de almacenamiento para protocolo TCP/IP (5 conexiones máximo).
 \item Pines: D0~D8, SD1~SD3 pueden ser usados como GPIO, PWM, IIC con capacidad de drenar 15 mA por pin.
@@ -376,13 +378,13 @@ Utilizar el sensor DHT11 con las plataformas Arduino, Raspberry Pi y NodeMCU es 
 	\label{fig:dht11}
 \end{figure}
 
-Sus características más importantes del sensor son:
+Las características más importantes del sensor son:
 
 \begin{itemize}
 \item Tensión de operación: 3 V - 5 V DC.
 \item Rango de medición de temperatura: 0 a 50 °C.
 \item Precisión de medición de temperatura: ±2.0 °C.
-\item Resolución temperatura: 0.1 °C.
+\item Resolución temperatura: 0,1 °C.
 \item Rango de medición de humedad: 20\% a 90\% RH.
 \item Precisión de medición de humedad: 5\% RH.
 \item Resolución humedad: 1\% RH
@@ -462,13 +464,13 @@ Las especificaciones más importantes por las cuales se escogió este instrument
 %\footnotetext{Imagen de \url{https://programarfacil.com/blog/arduino-blog/sct-013-consumo-electrico-arduino/}}
 
 
-A diferencia de los transformadores de tensión, en un transformador de intensidad el circuito secundario nunca debería estar abierto, porque las corrientes inducidas podrían llegar a dañar el componente. Por ese motivo, los sensores de SCT-013 disponen de protecciones (resistencia de Burden en los sensores de salida por tensión, o diodos de protección en los sensores de salida por corriente)\citep{WEBSITE:9}.
+A diferencia de los transformadores de tensión, en un transformador de intensidad el circuito secundario nunca debe estar abierto, porque las corrientes inducidas pueden llegar a dañar el componente. Por este motivo, los sensores SCT-013 disponen de protecciones (resistencia de Burden en los sensores de salida por tensión, o diodos de protección en los sensores de salida por corriente)\citep{WEBSITE:9}.
 
 Para el trabajo se consideró el módulo SCT-013 de 30 A y con soporte para 250 VAC.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sensor de tensión eléctrica AC - ZMPT101B}
 
-El sensor transformador de tensión alterno ZMPT101B permite medir tensión alterna como la que se dispone en la red hogareña. Esta tensión AC no puede ser medida directamente por el ADC del circuito o placa debido a que escapa del rango de entrada (0 V a 5 V). El módulo ZMPT101B soluciona el problema reduciendo la tensión AC de entrada a una tensión menor que pueda ser leída por el Arduino, NodeMCU o cualquier otro microcontrolador. La figura \ref{fig:sensortension} ilustra la forma de conexión del módulo sensor a la línea eléctrica doméstica.
+El sensor transformador de tensión ZMPT101B permite medir tensión alterna como la que se dispone en la red hogareña. Esta tensión AC no puede ser medida directamente por el ADC del circuito o placa debido a que escapa del rango de entrada (0 V a 5 V). El módulo ZMPT101B soluciona el problema reduciendo la tensión AC de entrada a una tensión menor que pueda ser leída por el Arduino, NodeMCU o cualquier otro microcontrolador. La figura \ref{fig:sensortension} ilustra la forma de conexión del módulo sensor a la línea eléctrica doméstica.
 
 El sensor está integrado por un transformador que cumple la función de aislador galvánico para mayor seguridad en el uso. El lado primario del transformador se conecta a la tensión alterna que se desea medir, por ejemplo la red eléctrica de un hogar de 220 VAC. En el lado secundario del transformador se encuentra un divisor de tensión y un circuito con amplificador operacional (OPAMP LM358) para adicionar un desplazamiento (\emph{offset}) a la salida análoga \citep{WEBSITE:22}. 
 
@@ -480,7 +482,7 @@ El sensor está integrado por un transformador que cumple la función de aislado
 \end{figure}
 
 
-Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que la onda no tenga tensiones negativas y así poder leer la onda completamente con el ADC. El desplazamiento depende de la tensión con la que se alimenta el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2.5 V y si se alimenta el módulo con 3.3 V el desplazamiento será de 1.65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC). De esta forma, es posible leer la tensión instantánea y realizar cálculos de energía como tensión pico a pico (Vpp) y tensión eficaz (Vrms). 
+Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda senoidal de amplitud regulable por un potenciómetro en placa. La onda senoidal de salida está desplazada positivamente para que no tenga tensiones negativas y así poder leerla completamente con el ADC. El desplazamiento depende de la tensión con la que se alimenta el módulo sensor: si la tensión de alimentación es de 5 V el desplazamiento será de 2,5 V y si se alimenta el módulo con 3,3 V el desplazamiento será de 1,65 V \citep{WEBSITE:23}. Su circuito de acondicionamiento de señal interno permite que la tensión de salida del módulo sensor pueda ser leído por cualquier microcontrolador con entrada analógica (ADC). De esta forma, es posible leer la tensión instantánea y realizar cálculos de energía como tensión pico a pico (Vpp) y tensión eficaz (Vrms). 
 
 %Debido a la naturaleza de los transformadores, solo puede medir tensión AC \citep{WEBSITE:22} \citep{ARTICLE:1}. Para su uso con la tarjeta NodeMCU ESP8266, los extremos son 0 y 3.3 V con una compensación de 1.65 V. La figura \ref{fig:ondas} muestra el desplazamiento de onda senoidal.
 
@@ -500,7 +502,7 @@ Este sensor soporta una tensión de entrada de hasta 250 VAC y entrega una onda 
 
 \subsection{Relé Actuador}
 
-Un relé es un interruptor que se puede activar mediante una señal eléctrica. En su versión más simple es un pequeño electro-imán que cuando se lo excita mueve la posición de un contacto eléctrico de conectado a desconectado o viceversa. Un relé es un interruptor, que utiliza una pequeña corriente para accionar un circuito mayor. Se aplica una señal en la entrada que enciende otro circuito conectado en la salida, sin necesidad de supervisión humana.
+Un relé es un interruptor que se puede activar mediante una señal eléctrica. En su versión más simple es un pequeño electro-imán que cuando se lo excita mueve la posición de un contacto eléctrico de conectado a desconectado o viceversa para accionar un circuito mayor. 
 
 Los relés más utilizados son módulos capaces de activarse mediante la entrada de 5 V. La elección de un módulo relé adecuado dependerá de la tensión y amperaje que debe gestionar. En la figura \ref{fig:rele} se aprecian dos modelos de módulos relé con capacidad de activación 5 V y con soporte para 10 A - 250 VAC y 30 A – 250 VAC respectivamente.
 

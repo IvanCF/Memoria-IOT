@@ -84,11 +84,11 @@ Las figuras \ref{fig:software1} y \ref{fig:software2} muestran los resultados re
 
 \vspace{1.5cm}
 
-El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo poseer los derechos de \emph{Copyright} y por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. 
+El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo de poseer los derechos de \emph{Copyright}. Por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. 
 
 El software ha sido nombrado como Cenergy IoT System y hace referencia al control de energía eléctrica mediante un sistema IoT.  
 
-La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Las credenciales utilizadas son el número de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
+La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Las credenciales utilizadas son el número de documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
 \vspace{0.5cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{landscape} % esto es para rotar la pagina e imagen
@@ -100,9 +100,10 @@ La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui
 \end{figure}
 %\end{landscape} %
 \vspace{0.5cm}
-La interfaz de monitoreo para sensores o actuadores permite mostrar en tiempo real su comportamiento que tiene en el sistema, así como su estado actual. Si un sensor o actuador esta con su estado CONECTADO se podrán observar sus detalles desde la opción ``ver detalles''. Esta opción permite acceder a una vista gráfica más detallada del mismo. 
 
-El software actualmente presenta interfaces para cuatro tipos de consultas, lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra como consumo en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aún no completan las horas, podrán ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formato excel o pdf y, si se desea, ser impresos directamente. %La figura \ref{fig:gui5} muestra la interfaz de consultas.
+La interfaz de monitoreo para sensores o actuadores permite mostrar en tiempo real el comportamiento que tienen en el sistema, así como su estado actual. Si un sensor o actuador posee el estado CONECTADO se podrán observar sus detalles desde la opción ``ver detalles''. Esta opción permite acceder a una vista gráfica más detallada del mismo. 
+
+El software actualmente presenta interfaces para cuatro tipos de consultas, lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra como consumo en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aún no completan las horas, podrán ser consultados desde las opciones lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formato excel o pdf o, si se desea, ser impresos directamente. %La figura \ref{fig:gui5} muestra la interfaz de consultas.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{landscape} % esto es para rotar la pagina e imagen
@@ -207,7 +208,7 @@ Para las pruebas y análisis de las señales inalámbricas se utilizó el softwa
 
 %Los fundamentos y consideraciones para la elección del canal y ancho de banda de la señal Wi-Fi que se utilizó, se describieron en el capítulo 3. La elección dependió de las señales circundantes vecinas a la red doméstica donde se instaló el sistema prototipo IoT. 
 
-La figura \ref{fig:test04} muestra el resultado del primer escaneo de las señales y el uso de los canales respectivos así como el solapamiento existente entre ellos y se describe lo siguiente:
+La figura \ref{fig:test04} muestra el resultado del primer escaneo de las señales y el uso de los canales respectivos así como el solapamiento existente entre ellos. Las señales importantes son:
 
 \keyword{Señal WLAN IoT} 
 \begin{itemize}
@@ -227,10 +228,10 @@ La figura \ref{fig:test04} muestra el resultado del primer escaneo de las señal
 \item Ancho de canal: 20 MHz (configuración automática).
 \item Potencia señal: 64\%.
 \item Seguridad: WPA2 (PSK).
-\item Tasa Máxima de transferencia: 144.4 Mbps.
+\item Tasa Máxima de transferencia: 144,4 Mbps.
 \end{itemize}
 
-El procedimiento de mejora de la configuración de la señal IoT consistió en modificar la configuración por defecto del router/AP al cambiar el canal y reducir el ancho de banda, verificando en cada cambio el comportamiento de las señales en el ambiente y la reducción de solapamiento de los mismos.
+El procedimiento de mejora de la señal IoT consistió en modificar la configuración por defecto del router/AP al cambiar el canal y reducir el ancho de banda. En cada cambio se verificó el comportamiento de las señales en el ambiente y la reducción de solapamiento de los mismos.
 
 %La figura \ref{fig:test02} muestra el ancho de banda que ocupa el canal de comunicación de la señal del router sin configurar. Esta configuración por defecto demuestra no ser la más adecuada para el ambiente IoT debido a que produce interferencias a las señales circundantes.
 
@@ -667,7 +668,7 @@ Se mencionó en los capítulos anteriores que el replicador está constantemente
 
 \section{Pruebas del funcionamiento del sistema sin Internet}
 
-El módulo replicador contiene un subproceso que se ejecuta de forma continua y verifica el estado del servicio de Internet. Al estar sin Internet en la red, el sistema detecta la falta de conectividad y muestra un mensaje en la parte superior del \emph{software} de monitoreo y control. La figura \ref{fig:inter1} muestra la salida por el terminal de los procesos del replicador al detectar la ausencia del servicio de Internet y la figura \ref{fig:inter3} muestran la alerta en el \emph{software}. 
+El módulo replicador contiene un subproceso que se ejecuta de forma continua y verifica el estado del servicio de Internet. Al estar sin Internet en la red, el sistema detecta la falta de conectividad y muestra un mensaje en la parte superior del \emph{software} de monitoreo y control. La figura \ref{fig:inter1} muestra la salida por la terminal de los procesos del replicador al detectar la ausencia del servicio de Internet y la figura \ref{fig:inter3} muestran la alerta en el \emph{software}. 
 
 
 
@@ -697,7 +698,7 @@ El módulo replicador contiene un subproceso que se ejecuta de forma continua y 
 
 \section{Comparativa del resultado con soluciones similares}
 
-Una vez expuestos los resultados obtenidos para cada módulo, se presenta a continuación el análisis de los resultados comparativos entre los tres tipos de soluciones descritos en el capítulo 1. La tabla \ref{tab:tabla-resultado} permite determinar las diferencias significativas con el uso y el tipo de servidor contra cada una de las diferentes soluciones.
+Una vez expuestos los resultados obtenidos para cada módulo, se presenta a continuación el análisis de los resultados comparativos entre los tres tipos de soluciones descritas en el capítulo 1. La tabla \ref{tab:tabla-resultado} permite determinar las diferencias significativas con el uso y el tipo de servidor contra cada una de las diferentes soluciones.
 
 \begin{table}[h]
 	\centering
