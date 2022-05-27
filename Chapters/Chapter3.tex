@@ -25,9 +25,12 @@ Para el diseño e implementación de \emph{firmware} se utilizó Arduino teniend
 Como se eligió el protocolo MQTT para la comunicación entre módulos y el conjunto de servicios, se definió tres tipos de tópicos para poder comunicarse entre sí. Estos tópicos fueron:
 
 \begin{itemize}
-\item Tópico de sincronización: permite que un módulo envíe un dato JSON para actualizar información en todos los módulos suscriptos al tópico. Solamente utilizado mediante comunicación bidireccional entre los actuadores y el servidor local.
 
-\item Tópico de envió de valores: permite que un módulo envíe un dato JSON con valores de su sensor hacia el servidor. Solamente utilizado mediante comunicación unidireccional.
+\item Tópico de envió de valores: permite que un módulo envíe un dato JSON con valores de su sensor hacia el servidor local.  La figura \ref{fig:comunica1} muestra la lógica de su aplicación en la comunicación.
+%Solamente utilizado mediante comunicación unidireccional.
+
+\item Tópico de comunicación de estados: es utilizado por todos los módulos y permite el envió de un dato JSON con valores de su estado actual desde el sensor o actuador hacia el servidor local. La figura \ref{fig:comunica1} muestra la lógica de su aplicación en la comunicación.
+%Solamente utilizado mediante comunicación unidireccional.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% imagen horizontal%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape} % esto es para rotar la pagina e imagen
@@ -40,15 +43,30 @@ Como se eligió el protocolo MQTT para la comunicación entre módulos y el conj
 \end{landscape} % esto es para rotar
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\item Tópico de comunicación de estados: es utilizado por todos los módulos y permite el envió de un dato JSON con valores de su estado actual desde el sensor hacia el servidor local. Solamente utilizado mediante comunicación unidireccional.
+%\vspace{1cm}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.6\textwidth]{./Figures/sensores.png}
+\caption{Lógica de comunicación MQTT del módulo sensor.}
+\label{fig:comunica1}
+\end{figure}
+
+
+\item Tópico de sincronización: permite que un módulo envíe un dato JSON para actualizar información en todos los módulos suscriptos al tópico. Es utilizado en la comunicación entre el \emph{software} de monitoreo, los actuadores y el broker del servidor local. La figura \ref{fig:comunica2} muestra la lógica de su aplicación en la comunicación.
 \end{itemize}
 
-%\vspace{1cm}
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=0.6\textwidth]{./Figures/actuadores.png}
+\caption{Lógica de comunicación MQTT del módulo actuador.}
+\label{fig:comunica2}
+\end{figure}
 
 
 
 
-El software de monitoreo de tipo web local y remoto fue diseñado y desarrollado a medida para garantizar dominio total de la plataforma usada. Utiliza el \emph{framework bootstrap} para lograr interfaces graficas de usuario que cumplan con los principios de experiencia de usuario (UX) y compatibilidad de dispositivos. Para la recepción de mensajes se usó web sockets mediante \emph{JavaScript} teniendo configurado los tres tópicos de comunicación antes mencionados para el intercambio de mensajes con los módulos.
+El software de monitoreo de tipo web local y remoto fue diseñado y desarrollado a medida para garantizar dominio total de la plataforma usada. Utiliza el \emph{framework bootstrap} para lograr interfaces gráficas de usuario que cumplan con los principios de experiencia de usuario (UX) y compatibilidad de dispositivos. Para la recepción de mensajes se usó web sockets mediante \emph{JavaScript} teniendo configurado los tres tópicos de comunicación antes mencionados para el intercambio de mensajes con los módulos.
 
 La figura \ref{fig:diagrama_general} muestra el diagrama general del funcionamiento del sistema desde la perspectiva conceptual. El desarrollo, consideraciones de construcción y fabricación para cada módulo del sistema se describen a detalle en las siguientes secciones de este capítulo.
 
@@ -208,6 +226,7 @@ El diseño de integración de componentes electrónicos se realizó en una Placa
 \label{fig:citemp}
 \end{figure}
 
+\vspace{0.5cm}
 El proceso de integración se puede ver en la figura \ref{fig:entemp}.
 
 \begin{figure}[htpb]
@@ -396,29 +415,42 @@ Este módulo es una copia del software de monitoreo y control local y esta ubica
 \section{Diseño de la red IoT}
 
 Para el diseño de la red se agregó un router inalámbrico como punto de acceso adicional a la red local, sirviendo como medio de comunicación exclusivo de los sensores y actuadores del sistema dentro de la red interna del hogar o edificio. La figura \ref{fig:diagramared} ilustra el diseño físico de la red utilizada.
-
+\vspace{0.5cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=1.3\textwidth]{./Figures/rediot.png}
-\caption{Diseño físico de la red WLAN para el sistema IoT.}
+\includegraphics[width=1.0\textwidth]{./Figures/rediot2.png}
+\caption{Diseño físico de la red IoT para el sistema.}
 \label{fig:diagramared}
 \end{figure}
-\end{landscape} % 
+%\end{landscape} % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % se retira la seccion de configuración wlan
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diseño del software para monitoreo y control}
 
-El software desarrollado para este trabajo fue diseñado e implementado a medida por ser parte fundamental dentro de los objetivos planteados al inicio. El software es de tipo web y cumple con la característica de ser un diseño responsivo para garantizar la correcta visualización en los distintos dispositivos del mercado actual. 
-
-La figura \ref{fig:patrondiseniosoftware} muestra el patrón a seguir en el desarrollo de las interfaces gráficas de usuario (GUI) del software.
+El software desarrollado para este trabajo fue diseñado e implementado a medida por ser parte fundamental dentro de los objetivos planteados al inicio. El software es de tipo web y cumple con la característica de ser un diseño responsivo para garantizar la correcta visualización en los distintos dispositivos del mercado actual. La figura \ref{fig:patrondiseniosoftware} muestra el patrón a seguir en el desarrollo de las interfaces gráficas de usuario (GUI) del software.
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/responsive3.png}
+\includegraphics[width=0.7\textwidth]{./Figures/responsive3.png}
 \caption{Patrón del diseño web responsivo para el \emph{software} \protect\footnotemark.}
 \label{fig:patrondiseniosoftware}
 \end{figure}
+
 \footnotetext{Imagen tomada de \url{https://www.genbeta.com/desarrollo/responsive-design-introduccion}}
+
+
+\section{Almacenamiento de los datos}
+
+El sistema de monitoreo utiliza una base de datos para almacenar los valores de sensores y consumos. Por consiguiente, para este trabajo fue necesario la creación de una base de datos para almacenar los valores que se generan por todos los módulos de sensores y actuadores. 
+
+El gestor de base de datos elegido fue MySQL por ser de característica \emph{software} libre y ofrecer alta compatibilidad de conexión con el lenguaje \emph{backend} utilizado. El modelo entidad relación implementado en la base de datos se muestra en la figura \ref{fig:entidadrelacion}:
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=1.0\textwidth]{./Figures/entidad-relacion.png}
+\caption{Modelo entidad relación de la base de datos.}
+\label{fig:entidadrelacion}
+\end{figure}

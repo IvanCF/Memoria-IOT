@@ -62,11 +62,11 @@ En esta sección se muestran las imágenes reales de los resultados obtenidos de
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Resultados del diseño responsivo del software}
+\section{Resultados del software de monitoreo y control}
 
 Las figuras \ref{fig:software1} y \ref{fig:software2} muestran los resultados responsivos para cada tipo de dispositivo considerado en el desarrollo.
 
-
+\vspace{0.5cm}
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.62 \textwidth]{./Figures/responsive1.png}
@@ -82,130 +82,114 @@ Las figuras \ref{fig:software1} y \ref{fig:software2} muestran los resultados re
 \label{fig:software2}
 \end{figure}
 
-\section{Resultados del software de monitoreo y control}
+\vspace{1.5cm}
 
 El software de monitoreo y control fue diseñado y desarrollado a medida con el objetivo poseer los derechos de \emph{Copyright} y por ser de tipo web requiere solo un navegador web y conexión a la red local o a Internet para poder ser utilizado. 
 
 El software ha sido nombrado como Cenergy IoT System y hace referencia al control de energía eléctrica mediante un sistema IoT.  
 
-%Las principales interfaces gráficas de usuario (GUI) que se muestran a %continuación son el resultado de lo logrado en esta primera versión del %software hasta la fecha de presentación de este trabajo. Las GUIs son:
-
-\begin{itemize}
-\item La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Las credenciales utilizadas son el número de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
-
-\item La interfaz de presentación inicial al ingresar al sistema (\emph{dashboard}) se muestra en la figura \ref{fig:gui1}. Esta interfaz muestra el resumen de lo que actualmente está almacenado en la base de datos del sistema. Resalta el consumo facturado y el no facturado a la fecha actual de acceso considerando intervalos de un mes.
-
-\item La interfaz de monitoreo para sensores se muestra en la figura \ref{fig:gui2}. Esta interfaz permite mostrar en tiempo real los sensores que tiene el sistema IoT, así como el estado de los mismos. Si un sensor tiene un estado CONECTADO se podrán observar sus detalles desde la opción ``ver detalles''. Esta opción permite acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui2-1}.
-
-\item La interfaz de monitoreo y control para sensores de consumo y sus actuadores se muestran el figura \ref{fig:gui3}. Esta interfaz permite visualizar en tiempo real los módulos registrados y conectados al sistema IoT. Cada módulo en estado CONECTADO muestra el dispositivo que está realizando un consumo mediante una señal de onda, junto a su interruptor actuador cuya función es el control del paso o bloqueo de energía eléctrica en el módulo. Si el módulo se encuentra en el estado CONECTADO se podrá observar sus detalles desde la opción ``ver detalles''. Esta opción permite acceder a una vista gráfica más detallada del mismo, tal como se muestra en la figura \ref{fig:gui3-1}.
-
-\item La interfaz de registro o agregado de módulos al sistema IoT se muestra en la figura \ref{fig:gui4}. Para el registro cada módulo cuenta con un código y número de módelo que los identifica dentro del sistema.
-
-\item El software actualmente presenta interfaces para cuatro tipos de consultas, lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra como consumo en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aún no completan las horas, podrán ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formato excel o pdf y, si se desea, ser impresos directamente. La figura \ref{fig:gui5} muestra la interfaz de consultas.
-
-%\item El software cuenta con una interfaz que muestra un grafo que permite visualizar en tiempo real la comunicación de los módulos así como los mensajes entre canales. El grafo se muestra en la figura \ref{fig:grafo}.
-
-
-\end{itemize}
-
-
-
-
-
-
+La interfaz de control de acceso al sistema se muestra en la figura \ref{fig:gui0}. Las credenciales utilizadas son el número de su documento nacional de identidad (DNI) y una contraseña de longitud mínima de 8 caracteres.
+\vspace{0.5cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/0.png}
-\caption{Interfaz gráfica de usuario de acceso al software de monitoreo y control.}
+\includegraphics[width=1.0\textwidth]{./Figures/gui/0.png}
+\caption{Interfaz gráfica de acceso al  \emph{software} de monitoreo y control.}
 \label{fig:gui0}
 \end{figure}
-\end{landscape} %
+%\end{landscape} %
+\vspace{0.5cm}
+La interfaz de monitoreo para sensores o actuadores permite mostrar en tiempo real su comportamiento que tiene en el sistema, así como su estado actual. Si un sensor o actuador esta con su estado CONECTADO se podrán observar sus detalles desde la opción ``ver detalles''. Esta opción permite acceder a una vista gráfica más detallada del mismo. 
+
+El software actualmente presenta interfaces para cuatro tipos de consultas, lecturas de temperatura, historial de temperatura, consumo sin facturar y consumo facturado. Cada lectura que se registra como consumo en la base de datos se respalda en agrupaciones de intervalos de horas y los registros que aún no completan las horas, podrán ser consultados desde las opciones: lectura de temperatura y consumos sin facturar. Los resultados de las consultas podrán ser exportados en formato excel o pdf y, si se desea, ser impresos directamente. %La figura \ref{fig:gui5} muestra la interfaz de consultas.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=0.8\textwidth]{./Figures/gui/5.png}
+%\caption{Interfaz gráfica de consultas y reportes de la base de datos.}
+%\label{fig:gui5}
+%\end{figure}
+%\end{landscape} %
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/1.png}
-\caption{Dashboard inicial del software de monitoreo y control.}
-\label{fig:gui1}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.55\textwidth]{./Figures/gui/1.png}
+%\caption{Dashboard inicial del  \emph{software} de monitoreo y control.}
+%\label{fig:gui1}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/2.png}
-\caption{Interfaz gráfica de usuario donde se listan los sensores del sistema.}
-\label{fig:gui2}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.55\textwidth]{./Figures/gui/2.png}
+%\caption{Interfaz gráfica de lista de sensores del sistema.}
+%\label{fig:gui2}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/2-1.png}
-\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor.}
-\label{fig:gui2-1}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.5\textwidth]{./Figures/gui/2-1.png}
+%\caption{Interfaz gráfica donde se muestran todos los detalles de un sensor.}
+%\label{fig:gui2-1}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.52\textwidth]{./Figures/gui/3.png}
-\caption{Interfaz gráfica de usuario donde se listan los sensores de consumo junto a su función de actuador.}
-\label{fig:gui3}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.52\textwidth]{./Figures/gui/3.png}
+%\caption{Interfaz gráfica de la lista de sensores de consumo junto a su actuador.}
+%\label{fig:gui3}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.52\textwidth]{./Figures/gui/3-1.png}
-\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor de consumo.}
-\label{fig:gui3-1}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.52\textwidth]{./Figures/gui/3-1.png}
+%\caption{Interfaz gráfica de usuario donde se muestran todos los detalles de un sensor de consumo.}
+%\label{fig:gui3-1}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.55\textwidth]{./Figures/gui/4.png}
-\caption{Interfaz gráfica de usuario para agregar un nuevo dispositivo al sistema.}
-\label{fig:gui4}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.55\textwidth]{./Figures/gui/4.png}
+%\caption{Interfaz gráfica para agregar un nuevo dispositivo al sistema.}
+%\label{fig:gui4}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/gui/5.png}
-\caption{Interfaz gráfica de usuario donde se muestran las consultas y reportes de la base de datos.}
-\label{fig:gui5}
-\end{figure}
-\end{landscape} %
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{landscape} % esto es para rotar la pagina e imagen
@@ -217,13 +201,13 @@ El software ha sido nombrado como Cenergy IoT System y hace referencia al contro
 %\end{figure}
 %\end{landscape} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{1.0cm}
 \section{Pruebas de elección de canal y ancho de banda}
 Para las pruebas y análisis de las señales inalámbricas se utilizó el software WiFi Explorer Lite. Es una herramienta de descubrimiento de redes inalámbricas que ayuda a identificar conflictos de canales y problemas de configuración que puedan afectar la conectividad o el rendimiento de la red Wi-Fi de un hogar u oficina \citep{WEBSITE:24}. 
 
 %Los fundamentos y consideraciones para la elección del canal y ancho de banda de la señal Wi-Fi que se utilizó, se describieron en el capítulo 3. La elección dependió de las señales circundantes vecinas a la red doméstica donde se instaló el sistema prototipo IoT. 
 
-La figura \ref{fig:test01} muestra el resultado del primer escaneo de las señales y el uso de los canales respectivos así como el solapamiento existente entre ellos y se describe lo siguiente:
+La figura \ref{fig:test04} muestra el resultado del primer escaneo de las señales y el uso de los canales respectivos así como el solapamiento existente entre ellos y se describe lo siguiente:
 
 \keyword{Señal WLAN IoT} 
 \begin{itemize}
@@ -265,14 +249,14 @@ El análisis de las imágenes de señales que genera el \emph{software} de explo
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape} % esto es para rotar la pagina e imagen
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=1.5\textwidth]{./Figures/wifi/01.png}
-\caption{Estado inicial de las señales Wi-Fi local y circundantes en el ambiente donde se implementó el sistema IoT.}
-\label{fig:test01}
-\end{figure}
-\end{landscape} %
+%\begin{landscape} % esto es para rotar la pagina e imagen
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=1.5\textwidth]{./Figures/wifi/01.png}
+%\caption{Estado inicial de las señales Wi-Fi local y circundantes en el ambiente donde se implementó el sistema IoT.}
+%\label{fig:test01}
+%\end{figure}
+%\end{landscape} %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -304,7 +288,7 @@ El análisis de las imágenes de señales que genera el \emph{software} de explo
 \begin{landscape} % esto es para rotar la pagina e imagen
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=1.5\textwidth]{./Figures/wifi/04.png}
+\includegraphics[width=1.5\textwidth]{./Figures/04.png}
 \caption{Zona crítica con mayor interferencia entre los canales de las redes inalámbricas.}
 \label{fig:test04}
 \end{figure}
@@ -317,7 +301,7 @@ El análisis de las imágenes de señales que genera el \emph{software} de explo
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=1.5\textwidth]{./Figures/wifi/05.png}
-\caption{Ancho de banda y nuevo canal de funcionamiento para las señales IoT y doméstica.}
+\caption{Resultado final de ancho de banda y canal sin interferencias críticas.}
 \label{fig:test05}
 \end{figure}
 \end{landscape} %
@@ -629,44 +613,45 @@ El proceso de envío de valores a la nube esta dividido en dos subprocesos. El p
 \begin{figure}[htpb]
 \centering 
 \includegraphics[width=0.9\textwidth]{./Figures/test/replicador/enviaAPI.png}
-\caption{Salida de replicación a la nube usando la API.}
+\caption{Salida del proceso de replicación a la nube utilizando la API.}
 \label{fig:envia1}
 \end{figure}
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.9\textwidth]{./Figures/test/replicador/enviabroker.png}
-\caption{Salida de replicación al broker remoto.}
+\includegraphics[width=1.0\textwidth]{./Figures/test/replicador/enviabroker.png}
+\caption{Salida del proceso de replicación al broker remoto.}
 \label{fig:envia2}
 \end{figure}
 
-Se mencionó en los capítulos anteriores que el replicador está constantemente verificando si existen registros que no han sido replicados a la nube, de ser así automáticamente llama a los subprocesos P5 y P8 para enviar los registros detectados mediante la API. La figura \ref{fig:r1} muestra la salida del subproceso  P5 sin registros por enviar a la nube y la figura \ref{fig:r2} muestra la salida del subproceso P5 al replicar registros usando la API.
+Se mencionó en los capítulos anteriores que el replicador está constantemente verificando si existen registros que no han sido replicados a la nube, de ser así automáticamente llama a los subprocesos P5 y P8 para enviar los registros detectados mediante la API. La figura \ref{fig:r2} muestra la salida del subproceso P5 al replicar registros usando la API.
 
+%La figura \ref{fig:r1} muestra la salida del subproceso  P5 sin registros por enviar a la nube y l
+
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=0.8\textwidth]{./Figures/test/replicador/sinReplicar1.png}
+%\caption{Salida del proceso cuando no existen registros pendientes por replicar.}
+%\label{fig:r1}
+%\end{figure}
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.8\textwidth]{./Figures/test/replicador/sinReplicar1.png}
-\caption{Salida del proceso cuando no existen registros pendientes por replicar.}
-\label{fig:r1}
-\end{figure}
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.9\textwidth]{./Figures/test/replicador/sinReplicar2.png}
-\caption{Salida del proceso de replicación a la nube de registros marcados como pendientes.}
+\includegraphics[width=1.0\textwidth]{./Figures/test/replicador/sinReplicar2.png}
+\caption{Salida del proceso de replicación a la nube de registros marcados como no replicado.}
 \label{fig:r2}
 \end{figure}
 
-\section{Pruebas del sistema desde acceso remoto}
+%\section{Pruebas del sistema desde acceso remoto}
 
-Para visualizar la comunicación entre el módulo replicador y el módulo principal local se muestra el grafo del funcionamiento del sistema de monitoreo y control. El software permite visualizar en tiempo real el comportamiento y el envío de mensajes entre canales como se muestra en la figura \ref{fig:graforemoto}. Los puntos de colores en la figura significan:
+%Para visualizar la comunicación entre el módulo replicador y el módulo principal local se muestra el grafo del funcionamiento del sistema de monitoreo y control. El software permite visualizar en tiempo real el comportamiento y el envío de mensajes entre canales como se muestra en la figura \ref{fig:graforemoto}. Los puntos de colores en la figura significan:
 
-\begin{itemize}
-\item Punto negro: mensaje enviado.
-\item Punto rojo: cliente remoto conectado al sistema IoT.
-\item Punto azul: cliente conectado al broker remoto en modo escucha.
-\item Punto naranja: mensaje de un cliente remoto conectado temporalmente para enviar sincronización de estados desde el remoto al modulo principal local. 
-\end{itemize}
+%\begin{itemize}
+%\item Punto negro: mensaje enviado.
+%\item Punto rojo: cliente remoto conectado al sistema IoT.
+%\item Punto azul: cliente conectado al broker remoto en modo escucha.
+%\item Punto naranja: mensaje de un cliente remoto conectado temporalmente para enviar sincronización de estados desde el remoto al modulo principal local. 
+%\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{landscape} % esto es para rotar la pagina e imagen
@@ -682,30 +667,30 @@ Para visualizar la comunicación entre el módulo replicador y el módulo princi
 
 \section{Pruebas del funcionamiento del sistema sin Internet}
 
-El módulo replicador contiene un subproceso que se ejecuta de forma continua y verifica el estado del servicio de Internet. La salida del proceso se muestra en la figura \ref{fig:inter1}. 
+El módulo replicador contiene un subproceso que se ejecuta de forma continua y verifica el estado del servicio de Internet. Al estar sin Internet en la red, el sistema detecta la falta de conectividad y muestra un mensaje en la parte superior del \emph{software} de monitoreo y control. La figura \ref{fig:inter1} muestra la salida por el terminal de los procesos del replicador al detectar la ausencia del servicio de Internet y la figura \ref{fig:inter3} muestran la alerta en el \emph{software}. 
 
-Al estar sin Internet en la red, el sistema detecta la falta de conectividad y muestra un mensaje en la parte superior del \emph{software} de monitoreo y control. La figura \ref{fig:inter2} y la figura \ref{fig:inter3} muestran la alerta.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.6\textwidth]{./Figures/test/replicador/desconexion3.png}
+\includegraphics[width=1.0\textwidth]{./Figures/test/replicador/desconexion3.png}
 \caption{Salida del proceso al detectar corte de Internet.}
 \label{fig:inter1}
 \end{figure}
 \vspace{0.25cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=0.7\textwidth]{./Figures/test/replicador/desconexion1.png}
-\caption{Estado del software con Internet activo.}
-\label{fig:inter2}
-\end{figure}
+%\begin{figure}[htpb]
+%\centering 
+%\includegraphics[width=0.65\textwidth]{./Figures/test/replicador/desconexion1.png}
+%\caption{Estado del software con Internet activo.}
+%\label{fig:inter2}
+%\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.7\textwidth]{./Figures/test/replicador/desconexion2.png}
-\caption{Estado del software sin Internet.}
+\includegraphics[width=1.0\textwidth]{./Figures/test/replicador/desconexion2.png}
+\caption{Estado del \emph{software} sin Internet.}
 \label{fig:inter3}
 \end{figure}
 
