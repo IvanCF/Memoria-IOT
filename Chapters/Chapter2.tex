@@ -31,6 +31,7 @@ Los componentes claves dentro de la solución propuesta y que se integran en la 
 \begin{itemize}
 \item Dispositivos IoT: son los módulos diseñados a partir de la integración de \emph{software}, \emph{firmware} y \emph{hardware}; es posible conectarlos de forma inalámbrica a una red más amplia.
 \item Redes: los routers domésticos, puntos de acceso y las configuraciones de las redes o las puertas de enlaces son los responsables de conectar varios dispositivos IoT a la nube.
+\item Servidor local: es aquel servidor instalado con el fin de trabajar \emph{offline} y \emph{online}. Es una alternativa útil cuando existe corte del servicio de Internet. El servidor local es el módulo que contiene el broker MQTT. 
 \item Nube: servidores remotos en centros de datos que consolidan y almacenan la información con seguridad. Son servicios utilizados en el trabajo para garantizar el acceso remoto de usuarios al sistema.
 \end{itemize}
 
@@ -88,7 +89,7 @@ En la figura \ref{fig:servicios} se muestra una representación gráfica para di
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.9\textwidth]{./Figures/servicios.png}
+	\includegraphics[width=0.8\textwidth]{./Figures/servicios.png}
 	\caption{Tipos de servicio y orientación por rol \protect\footnotemark.}
 
 	\label{fig:servicios}
@@ -125,8 +126,7 @@ Las principales características  del servicio contratado para la implementació
 		Seguridad - Firewall	  & sí\\
 		Certificados SSL/TLS	  & sí\\
 		PHP	  & V7 y V8\\
-		MySQL	  & sí\\
-		phpMyAdmin	  & sí\\
+		MySQL y	phpMyAdmin  & sí\\
 		Cron Jobs	  & sí\\
 		\bottomrule
 		\hline
@@ -182,19 +182,16 @@ Para construir una red usando MQTT es necesario entender los conceptos que se ut
 \begin{itemize}
 \item El broker MQTT: el servidor o broker es el programa que se encarga de recepcionar los mensajes enviados por los clientes y distribuirlos entre sí en un sistema publicador-suscriptor. Los clientes envían periódicamente paquetes y esperan la respuesta del broker, como se ilustra con la figura \ref{fig:broker}. 
 
+El broker MQTT usado en el trabajo es Eclipse Mosquitto, por ser de código abierto.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.75\textwidth]{./Figures/broker.jpg}
-	\caption{Funcionamiento del broker MQTT \protect\footnotemark.}
-
+	\caption{Funcionamiento del broker MQTT \protect\footnotemark..}
 	\label{fig:broker}
 \end{figure}
-
 \footnotetext{Imagen tomada de \url{https://www.factor.mx/portal/base-de-conocimiento/mqtt/}}
 
-El broker MQTT usado en el trabajo es Eclipse Mosquitto, por ser de código abierto.
-
-%\vspace{1cm}
 %\vspace{1cm}
 \item Comunicación MQTT: es la función de transporte de mensajes entre dispositivos IoT. El protocolo generalmente se ejecuta sobre TCP / IP ; sin embargo, cualquier protocolo de red que proporcione conexiones bidireccionales ordenadas y sin pérdidas puede admitir MQTT. Está diseñado para conexiones con ubicaciones remotas donde existen restricciones de recursos o el ancho de banda de la red es limitado \citep{WEBSITE:3}. Su modelo de comunicación se puede ver en la figura \ref{fig:mqtt}.
 
@@ -476,7 +473,7 @@ El sensor está integrado por un transformador que cumple la función de aislado
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=0.85\textwidth]{./Figures/sensortension.png}
+\includegraphics[width=0.95\textwidth]{./Figures/sensortension.png}
 \caption{Conexión y partes del sensor de tensión.}
 \label{fig:sensortension}
 \end{figure}
